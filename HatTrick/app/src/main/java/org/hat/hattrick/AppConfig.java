@@ -6,8 +6,8 @@ package org.hat.hattrick;
 
 public class AppConfig {
     // Server user login url
-    public static String URL_LOGIN = "http://192.168.200.112/hattrick_db/login.php";
+    public static String URL_LOGIN = "http://192.168.0.12/hattrick_db/login.php";
 
     // Server user register url
-    public static String URL_REGISTER = "http://192.168.200.112/hattrick_db/register.php";
+    public static String URL_REGISTER = "http://192.168.0.12/hattrick_db/register.php";
 }
