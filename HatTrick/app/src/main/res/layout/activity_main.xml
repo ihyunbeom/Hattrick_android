@@ -11,72 +11,43 @@
     tools:context="org.hat.hattrick.MainActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical"
-        >
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/lbl_name"
+            android:textSize="24dp" />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13dp" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:id="@+id/btnLogout"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:text="매치찾기"
-            android:textAlignment="center"
-            android:id="@+id/findmatchButton"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:text="용병찾기"
-            android:textAlignment="center"
-            android:id="@+id/findplayerButton"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:text="구장대관"
-            android:textAlignment="center"
-            android:id="@+id/reserveButton"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:text="리그대회"
-            android:textAlignment="center"
-            android:id="@+id/contestButton"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:text="팀관리"
-            android:textAlignment="center"
-            android:id="@+id/teamButton"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            />
-
+            android:layout_marginTop="40dip"
+            android:background="@color/btn_logut_bg"
+            android:text="@string/btn_logout"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
     </LinearLayout>
 </RelativeLayout>
