@@ -40,14 +40,27 @@
             android:textSize="13dp" />
 
         <Button
-            android:id="@+id/btnLogout"
+            android:id="@+id/btnMatchlist"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dip"
-            android:background="@color/btn_logut_bg"
-            android:text="@string/btn_logout"
+            android:background="#FFFFFF"
+            android:text="Match_List"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="#000000"
             android:textSize="15dp" />
+
+        <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dip"
+        android:background="@color/btn_logut_bg"
+        android:text="@string/btn_logout"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="15dp" />
+
+
     </LinearLayout>
 </RelativeLayout>

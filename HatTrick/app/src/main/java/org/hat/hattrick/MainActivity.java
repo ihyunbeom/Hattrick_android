@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView txtName;
     private TextView txtEmail;
     private Button btnLogout;
+    private Button btnMatchlist;
 
     private SQLiteHandler db;
     private SessionManager session;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         txtName = (TextView) findViewById(R.id.name);
         txtEmail = (TextView) findViewById(R.id.email);
         btnLogout = (Button) findViewById(R.id.btnLogout);
+        btnMatchlist = (Button) findViewById(R.id.btnMatchlist);
 
         // SqLite database handler
         db = new SQLiteHandler(getApplicationContext());
@@ -54,6 +56,17 @@ public class MainActivity extends AppCompatActivity {
                 logoutUser();
             }
         });
+
+        btnMatchlist.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),
+                        MatchListActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
     }
 
     /**
