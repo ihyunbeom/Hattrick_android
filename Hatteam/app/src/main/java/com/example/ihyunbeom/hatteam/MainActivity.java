@@ -2,6 +2,7 @@ package com.example.ihyunbeom.hatteam;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -47,6 +48,14 @@ public class MainActivity extends AppCompatActivity {
                 playerName = playerNameInput.getText().toString();
                 playerPosition = playerPositionInput.getText().toString();
                 insertPlayer(playerName, playerPosition);
+            }
+        });
+
+        //selectPlayerBtn
+        Button selectPlayerBtn = (Button) findViewById(R.id.selectPlayerBtn);
+        selectPlayerBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                selectDatabase();
             }
         });
 
@@ -108,5 +117,30 @@ public class MainActivity extends AppCompatActivity {
             ex.printStackTrace();
             System.out.println("database is not created.");
         }
+    }
+
+    //데이터 조회
+    private void selectDatabase(){
+        System.out.println("show player information");
+
+        String sql = "select * from player_info ";
+        Cursor cursor = db.rawQuery(sql, null);
+
+        int count = cursor.getCount();
+        System.out.println("cursor count : "+ count);
+
+        for(int i=0;i<count;i++){
+            cursor.moveToNext();
+
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            String position = cursor.getString(2);
+            int goal = cursor.getInt(3);
+            int outing = cursor.getInt(4);
+
+            System.out.println(id + "번째 Player " + name + " " + position + " " + goal + " " + outing);
+        }
+
+        cursor.close();
     }
 }

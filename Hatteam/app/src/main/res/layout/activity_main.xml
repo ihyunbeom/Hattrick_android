@@ -45,17 +45,19 @@
             android:id="@+id/insertPlayerBtn"
             android:text="Player +"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/selectPlayerBtn"
+            android:text="Player view"/>
 
-
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/status"
-                android:text="State :"/>
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:id="@+id/status"
+            android:text="State :"/>
+
+
     </LinearLayout>
 
 
