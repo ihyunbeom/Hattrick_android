@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_summary"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="팀정보" />
+        <item
+            android:id="@+id/nav_players"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="팀원 관리" />
+        <item
+            android:id="@+id/nav_games"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="경기 관리" />
+        <item
+            android:id="@+id/nav_score"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="전적 보기" />
+        <item
+            android:id="@+id/nav_fee"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="회비 관리" />
+
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_contest"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="대회 정보" />
+            <item
+                android:id="@+id/nav_stadium"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="구장 찾기" />
+        </menu>
+    </item>
+
+</menu>

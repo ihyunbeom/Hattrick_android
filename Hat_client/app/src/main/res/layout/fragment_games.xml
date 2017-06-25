@@ -1,0 +1,225 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.hattrick.ihyunbeom.hat_client.GamesFragment">
+
+    <LinearLayout
+        android:id="@+id/fl_activity_main_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#FFFFFF" >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="등록"
+            android:textColor="#FFFFFF"
+            android:textSize="18dp"
+            android:layout_margin="10dp"
+            android:background="#16a085"
+            android:layout_gravity="right"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="상대팀"
+                android:textSize="18dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="날   짜"
+                android:textSize="18dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="참가 선수"
+            android:textSize="18dp"
+            android:layout_margin="10dp"/>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*">
+
+            <TableRow>
+                <TextView
+                    android:text="이름"
+                    android:textSize="14dp"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal"
+                    android:background="#dddddd"/>
+                <TextView
+                    android:text="포지션"
+                    android:textSize="14dp"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal"
+                    android:background="#dddddd"/>
+                <TextView
+                    android:text="출전"
+                    android:textSize="14dp"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal"
+                    android:background="#dddddd"/>
+                <TextView
+                    android:text="참가"
+                    android:textSize="14dp"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal"
+                    android:background="#dddddd"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/name"
+                    android:text="우지훈"
+                    android:textSize="14dp"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal"
+                    android:background="#ffffff"/>
+                <TextView
+                    android:id="@+id/position"
+                    android:text="FW"
+                    android:textSize="14dp"
+                    android:textColor="#ff3f3f"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal"
+                    android:background="#ffffff"/>
+                <TextView
+                    android:id="@+id/goal"
+                    android:text="6"
+                    android:textSize="14dp"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal"
+                    android:background="#ffffff"/>
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_gravity="center" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="박대원"
+                    android:textSize="14dp"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal"
+                    android:background="#ffffff"/>
+                <TextView
+                    android:text="MF"
+                    android:textSize="14dp"
+                    android:textColor="#3f59ff"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal"
+                    android:background="#ffffff"/>
+                <TextView
+                    android:text="5"
+                    android:textSize="14dp"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal"
+                    android:background="#ffffff"/>
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_gravity="center" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="허행찬"
+                    android:textSize="14dp"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal"
+                    android:background="#ffffff"/>
+                <TextView
+                    android:text="CF"
+                    android:textSize="14dp"
+                    android:textColor="#60c130"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal"
+                    android:background="#ffffff"/>
+                <TextView
+                    android:text="5"
+                    android:textSize="14dp"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal"
+                    android:background="#ffffff"/>
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_gravity="center" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="이현범"
+                    android:textSize="14dp"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal"
+                    android:background="#ffffff"/>
+                <TextView
+                    android:text="GK"
+                    android:textSize="14dp"
+                    android:textColor="#8c8600"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal"
+                    android:background="#ffffff"/>
+                <TextView
+                    android:text="6"
+                    android:textSize="14dp"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal"
+                    android:background="#ffffff"/>
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_gravity="center" />
+
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="홍길동"
+                    android:textSize="14dp"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal"
+                    android:background="#ffffff"/>
+                <TextView
+                    android:text="FW"
+                    android:textSize="14dp"
+                    android:textColor="#ff3f3f"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal"
+                    android:background="#ffffff"/>
+                <TextView
+                    android:text="5"
+                    android:textSize="14dp"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal"
+                    android:background="#ffffff"/>
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_gravity="center" />
+
+            </TableRow>
+
+        </TableLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>
