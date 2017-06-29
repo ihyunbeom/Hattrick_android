@@ -17,12 +17,49 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static SQLiteHelper sqLiteHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        sqLiteHelper= new SQLiteHelper(this,"TeamDB.sqlite", null,1);
+
+        //팀 정보
+        sqLiteHelper.queryDate("create table if not exists team_info( " +
+                "team text, " +
+                "manager text, " +
+                "created text);");
+        //선수 명단
+        sqLiteHelper.queryDate("create table if not exists player(" +
+                "id integer PRIMARY KEY autoincrement, " +
+                "name text, " +
+                "position integer, " +
+                "goal integer, " +
+                "outing integer);");
+        //포지션당 인원 수
+        sqLiteHelper.queryDate("create table if not exists position(" +
+                "fw integer, " +
+                "mf integer, " +
+                "cf integer, " +
+                "gk integer, " +
+                "total integer);");
+        //전적
+        sqLiteHelper.queryDate("create table if not exists score( " +
+                "season integer, " +
+                "goals integer, " +
+                "lostpoint integer, " +
+                "win integer, " +
+                "draw integer, " +
+                "lose integer);");
+        //회비내역
+        //sqLiteHelper.queryDate("create table if not exists fee( ... );");
+
+        //팀정보 db 테스트
+        sqLiteHelper.queryDate("insert into team_info(team, manager, created) values('해트트릭FC', '우지훈', '2017.06.29');");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -36,7 +73,6 @@ public class MainActivity extends AppCompatActivity
         SummaryFragment summaryFragment = new SummaryFragment();
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction(); transaction.add(R.id.relativelayout_for_fragment, summaryFragment); transaction.addToBackStack(null); transaction.commit();
-
 
     }
 

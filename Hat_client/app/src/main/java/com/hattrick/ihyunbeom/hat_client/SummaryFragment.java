@@ -1,11 +1,13 @@
 package com.hattrick.ihyunbeom.hat_client;
 
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 /**
@@ -22,6 +24,10 @@ public class SummaryFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private TextView txtTeamName;
+    private TextView txtManager;
+    private TextView txtCreated;
 
 
     public SummaryFragment() {
@@ -59,7 +65,48 @@ public class SummaryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        final View view = inflater.inflate(R.layout.fragment_summary,container,false);
+
+        txtTeamName = (TextView) view.findViewById(R.id.teamName);
+        txtManager = (TextView) view.findViewById(R.id.managerName);
+        txtCreated = (TextView) view.findViewById(R.id.created);
+
+        Cursor cursor =MainActivity.sqLiteHelper.getData("SELECT * FROM team_info");
+
+        while(cursor.moveToNext()){
+            String teamName = cursor.getString(0);
+            String managerName = cursor.getString(1);
+            String created =cursor.getString(2);
+
+            txtTeamName.append(teamName);
+            txtManager.append(managerName);
+            txtCreated.append(created);
+
+            System.out.println("팀정보 입력 완료");
+        }
+
         return inflater.inflate(R.layout.fragment_summary, container, false);
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

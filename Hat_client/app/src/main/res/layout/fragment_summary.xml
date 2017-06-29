@@ -22,15 +22,16 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="HatTrickFC"
             android:textSize="24dp"
             android:gravity="center"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp"
+            android:id="@+id/teamName"/>
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:stretchColumns="*"
+            android:id="@+id/team_info"
             >
 
             <TableRow>
@@ -41,10 +42,10 @@
                     android:gravity="center_horizontal"
                     android:background="#dddddd" />
                 <TextView
-                    android:text="WooJiHoon"
                     android:textSize="14dp"
                     android:padding="10dp"
-                    android:gravity="center_horizontal"/>
+                    android:gravity="center_horizontal"
+                    android:id="@+id/managerName"/>
             </TableRow>
 
             <TableRow>
@@ -55,10 +56,10 @@
                     android:gravity="center_horizontal"
                     android:background="#dddddd"/>
                 <TextView
-                    android:text="2017.06.22"
                     android:textSize="14dp"
                     android:padding="10dp"
-                    android:gravity="center_horizontal"/>
+                    android:gravity="center_horizontal"
+                    android:id="@+id/created"/>
             </TableRow>
 
             <TableRow>
