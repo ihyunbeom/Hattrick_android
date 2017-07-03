@@ -78,14 +78,18 @@ public class SummaryFragment extends Fragment {
             String managerName = cursor.getString(1);
             String created =cursor.getString(2);
 
-            txtTeamName.append(teamName);
-            txtManager.append(managerName);
-            txtCreated.append(created);
+            System.out.println("팀명 : " + teamName);
+            System.out.println("매니저 : " + managerName);
+            System.out.println("창단일 : " + created);
+
+            txtTeamName.setText(teamName);
+            txtManager.setText(managerName);
+            txtCreated.setText(created);
 
             System.out.println("팀정보 입력 완료");
         }
 
-        return inflater.inflate(R.layout.fragment_summary, container, false);
+        return view;
     }
 
 }
