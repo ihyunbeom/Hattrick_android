@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -28,6 +29,7 @@ public class SummaryFragment extends Fragment {
     private TextView txtTeamName;
     private TextView txtManager;
     private TextView txtCreated;
+    private Button teamSetting;
 
 
     public SummaryFragment() {
@@ -70,6 +72,7 @@ public class SummaryFragment extends Fragment {
         txtTeamName = (TextView) view.findViewById(R.id.teamName);
         txtManager = (TextView) view.findViewById(R.id.managerName);
         txtCreated = (TextView) view.findViewById(R.id.created);
+        teamSetting = (Button) view.findViewById(R.id.team_info_setting); // activity 호출 버튼(팝업창)
 
         Cursor cursor =MainActivity.sqLiteHelper.getData("SELECT * FROM team_info");
 
