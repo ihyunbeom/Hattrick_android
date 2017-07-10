@@ -1,6 +1,7 @@
 package com.hattrick.ihyunbeom.hat_client;
 
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -61,6 +62,7 @@ public class SummaryFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -72,9 +74,19 @@ public class SummaryFragment extends Fragment {
         txtTeamName = (TextView) view.findViewById(R.id.teamName);
         txtManager = (TextView) view.findViewById(R.id.managerName);
         txtCreated = (TextView) view.findViewById(R.id.created);
+
         teamSetting = (Button) view.findViewById(R.id.team_info_setting); // activity 호출 버튼(팝업창)
 
         Cursor cursor =MainActivity.sqLiteHelper.getData("SELECT * FROM team_info");
+
+        teamSetting.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent setting = new Intent(getActivity(), teamSettingActivity.class);
+                getActivity().startActivity(setting);
+            }
+        });
 
         while(cursor.moveToNext()){
             String teamName = cursor.getString(0);

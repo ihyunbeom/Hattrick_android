@@ -4,83 +4,87 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView txtName;
-    private TextView txtEmail;
-    private Button btnLogout;
-    private Button btnMatchlist;
 
     private SQLiteHandler db;
-    private SessionManager session;
+
+    //슬라이드 열기/닫기 플래그
+    boolean isPageOpen = false;
+    //슬라이드 열기 애니메이션
+    Animation translateLeftAnim;
+    //슬라이드 닫기 애니메이션
+    Animation translateRightAnim;
+    //슬라이드 레이아웃
+    LinearLayout slidingPage01;
+
+    Button button1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        txtName = (TextView) findViewById(R.id.name);
-        txtEmail = (TextView) findViewById(R.id.email);
-        btnLogout = (Button) findViewById(R.id.btnLogout);
-        btnMatchlist = (Button) findViewById(R.id.btnMatchlist);
+        //UI
+        slidingPage01 = (LinearLayout)findViewById(R.id.slidingPage01);
+        button1 = (Button)findViewById(R.id.buton1);
 
-        // SqLite database handler
-        db = new SQLiteHandler(getApplicationContext());
+        //애니메이션
+        translateLeftAnim = AnimationUtils.loadAnimation(this, R.anim.trans_left);
+        translateRightAnim = AnimationUtils.loadAnimation(this, R.anim.trans_right);
 
-        // session manager
-        session = new SessionManager(getApplicationContext());
+        //애니메이션 리스너 설정
+        SlidingPageAnimationListener animationListener = new SlidingPageAnimationListener();
+        translateLeftAnim.setAnimationListener(animationListener);
+        translateRightAnim.setAnimationListener(animationListener);
 
-        if (!session.isLoggedIn()) {
-            logoutUser();
+    }
+
+    //버튼
+    public void onButton1Clicked(View v){
+        //닫기
+        if(isPageOpen){
+            //애니메이션 시작
+            slidingPage01.startAnimation(translateLeftAnim);
         }
-
-        // Fetching user details from SQLite
-        HashMap<String, String> user = db.getUserDetails();
-
-        String name = user.get("name");
-        String email = user.get("email");
-
-        // Displaying the user details on the screen
-        txtName.setText(name);
-        txtEmail.setText(email);
-
-        // Logout button click event
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                logoutUser();
-            }
-        });
-
-        btnMatchlist.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),
-                        MatchListActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-
+        //열기
+        else{
+            slidingPage01.setVisibility(View.VISIBLE);
+            slidingPage01.startAnimation(translateRightAnim);
+        }
     }
 
-    /**
-     * Logging out the user. Will set isLoggedIn flag to false in shared
-     * preferences Clears the user data from sqlite users table
-     * */
-    private void logoutUser() {
-        session.setLogin(false);
+    //애니메이션 리스너
+    private class SlidingPageAnimationListener implements Animation.AnimationListener {
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            //슬라이드 열기->닫기
+            if(isPageOpen){
+                slidingPage01.setVisibility(View.INVISIBLE);
+                button1.setText("Open");
+                isPageOpen = false;
+            }
+            //슬라이드 닫기->열기
+            else{
+                button1.setText("Close");
+                isPageOpen = true;
+            }
+        }
+        @Override
+        public void onAnimationRepeat(Animation animation) {
 
-        db.deleteUsers();
+        }
+        @Override
+        public void onAnimationStart(Animation animation) {
 
-        // Launching the login activity
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
-        finish();
+        }
     }
+
 }

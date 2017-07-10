@@ -30,19 +30,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     }
 
-    public void insertData(String topic, String contents){
-        SQLiteDatabase database =getWritableDatabase();
-        String sql= "INSERT INTO MEMO VALUES(NULL, ?, ?)";
-        SQLiteStatement statement = database.compileStatement(sql);
-        statement.clearBindings();
-
-        statement.bindString(1, topic);
-        statement.bindString(2, contents);
-
-
-        statement.executeInsert();
-    }
-
     public Cursor getData(String sql){
         SQLiteDatabase database = getReadableDatabase();
         return database.rawQuery(sql, null);

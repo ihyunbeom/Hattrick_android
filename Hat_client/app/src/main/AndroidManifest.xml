@@ -8,7 +8,8 @@
         android:label="해트트릭"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.hattrick.ihyunbeom.hat_client.IntroActivity"
+        <activity
+            android:name=".IntroActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,11 +18,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.hattrick.ihyunbeom.hat_client.MainActivity"
+            android:name=".MainActivity"
             android:label="해트트릭"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".teamSettingActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

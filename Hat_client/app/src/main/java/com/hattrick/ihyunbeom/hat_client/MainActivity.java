@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity
         //sqLiteHelper.queryDate("create table if not exists fee( ... );");
 
         //팀정보 db 테스트
-        sqLiteHelper.queryDate("insert into team_info(team, manager, created) values('해트트릭FC', '우지훈', '2017.06.29');");
+        //sqLiteHelper.queryDate("insert into team_info(team, manager, created) values('해트트릭FC', '우지훈', '2017.06.29');");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
