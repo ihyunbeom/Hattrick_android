@@ -239,31 +239,31 @@
 
             <TableRow>
                 <TextView
-                    android:text="2"
+                    android:id="@+id/playerFW"
                     android:textSize="14dp"
                     android:padding="10dp"
                     android:gravity="center_horizontal"
                     android:background="#ffffff"/>
                 <TextView
-                    android:text="1"
+                    android:id="@+id/playerMF"
                     android:textSize="14dp"
                     android:padding="10dp"
                     android:gravity="center_horizontal"
                     android:background="#ffffff"/>
                 <TextView
-                    android:text="1"
+                    android:id="@+id/playerCF"
                     android:textSize="14dp"
                     android:padding="10dp"
                     android:gravity="center_horizontal"
                     android:background="#ffffff"/>
                 <TextView
-                    android:text="1"
+                    android:id="@+id/playerGK"
                     android:textSize="14dp"
                     android:padding="10dp"
                     android:gravity="center_horizontal"
                     android:background="#ffffff"/>
                 <TextView
-                    android:text="5"
+                    android:id="@+id/playerTotal"
                     android:textSize="14dp"
                     android:padding="10dp"
                     android:gravity="center_horizontal"

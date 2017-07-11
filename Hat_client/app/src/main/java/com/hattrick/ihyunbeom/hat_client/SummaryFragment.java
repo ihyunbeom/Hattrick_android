@@ -32,6 +32,12 @@ public class SummaryFragment extends Fragment {
     private TextView txtCreated;
     private Button teamSetting;
 
+    private TextView txtplayerMF;
+    private TextView txtplayerCF;
+    private TextView txtplayerFW;
+    private TextView txtplayerGK;
+    private TextView txtplayerTotal;
+
 
     public SummaryFragment() {
         // Required empty public constructor
@@ -103,6 +109,32 @@ public class SummaryFragment extends Fragment {
 
             System.out.println("팀정보 입력 완료");
         }
+
+        Cursor cursorPosition =MainActivity.sqLiteHelper.getData("SELECT * FROM position");
+
+        txtplayerFW = (TextView) view.findViewById(R.id.playerFW);
+        txtplayerMF = (TextView) view.findViewById(R.id.playerMF);
+        txtplayerCF = (TextView) view.findViewById(R.id.playerCF);
+        txtplayerGK = (TextView) view.findViewById(R.id.playerGK);
+        txtplayerTotal = (TextView) view.findViewById(R.id.playerTotal);
+
+        while(cursorPosition.moveToNext()){
+            int playerFW = cursorPosition.getInt(0);
+            int playerMF = cursorPosition.getInt(1);
+            int playerCF = cursorPosition.getInt(2);
+            int playerGK = cursorPosition.getInt(3);
+            int playerTotal = cursorPosition.getInt(4);
+
+            System.out.println("FW : " + playerFW + " MF : " + playerMF + " CF : " + playerCF + " GK : " + playerGK + "total : " + playerTotal);
+
+            txtplayerFW.setText(Integer.toString(playerFW));
+            txtplayerMF.setText(Integer.toString(playerMF));
+            txtplayerCF.setText(Integer.toString(playerCF));
+            txtplayerGK.setText(Integer.toString(playerGK));
+            txtplayerTotal.setText(Integer.toString(playerTotal));
+
+        }
+
 
         return view;
     }

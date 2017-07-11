@@ -64,31 +64,31 @@
 
             <TableRow>
                 <TextView
-                    android:text="2"
+                    android:id="@+id/playerFW"
                     android:textSize="14dp"
                     android:padding="10dp"
                     android:gravity="center_horizontal"
                     android:background="#ffffff"/>
                 <TextView
-                    android:text="1"
+                    android:id="@+id/playerMF"
                     android:textSize="14dp"
                     android:padding="10dp"
                     android:gravity="center_horizontal"
                     android:background="#ffffff"/>
                 <TextView
-                    android:text="1"
+                    android:id="@+id/playerCF"
                     android:textSize="14dp"
                     android:padding="10dp"
                     android:gravity="center_horizontal"
                     android:background="#ffffff"/>
                 <TextView
-                    android:text="1"
+                    android:id="@+id/playerGK"
                     android:textSize="14dp"
                     android:padding="10dp"
                     android:gravity="center_horizontal"
                     android:background="#ffffff"/>
                 <TextView
-                    android:text="5"
+                    android:id="@+id/playerTotal"
                     android:textSize="14dp"
                     android:padding="10dp"
                     android:gravity="center_horizontal"
@@ -100,20 +100,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+            android:gravity="right"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#16a085"
-                android:background="#dddddd"
-                android:text="정보 수정" />
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="15dp">
 
             <Button
+                android:id="@+id/addPlayer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="120dp"
                 android:background="#16a085"
                 android:textColor="#FFFFFF"
                 android:text="선수 추가"/>
@@ -129,171 +124,41 @@
                 <TextView
                     android:text="이름"
                     android:textSize="14dp"
+                    android:textColor="#000000"
                     android:padding="10dp"
                     android:gravity="center_horizontal"
                     android:background="#dddddd"/>
                 <TextView
                     android:text="포지션"
                     android:textSize="14dp"
+                    android:textColor="#000000"
                     android:padding="10dp"
                     android:gravity="center_horizontal"
                     android:background="#dddddd"/>
                 <TextView
                     android:text="득점"
                     android:textSize="14dp"
+                    android:textColor="#000000"
                     android:padding="10dp"
                     android:gravity="center_horizontal"
                     android:background="#dddddd"/>
                 <TextView
                     android:text="출전"
                     android:textSize="14dp"
+                    android:textColor="#000000"
                     android:padding="10dp"
                     android:gravity="center_horizontal"
                     android:background="#dddddd"/>
             </TableRow>
 
-            <TableRow>
-                <TextView
-                    android:id="@+id/name"
-                    android:text="우지훈"
-                    android:textSize="14dp"
-                    android:padding="10dp"
-                    android:gravity="center_horizontal"
-                    android:background="#ffffff"/>
-                <TextView
-                    android:id="@+id/position"
-                    android:text="FW"
-                    android:textSize="14dp"
-                    android:textColor="#ff3f3f"
-                    android:padding="10dp"
-                    android:gravity="center_horizontal"
-                    android:background="#ffffff"/>
-                <TextView
-                    android:id="@+id/goal"
-                    android:text="30"
-                    android:textSize="14dp"
-                    android:padding="10dp"
-                    android:gravity="center_horizontal"
-                    android:background="#ffffff"/>
-                <TextView
-                    android:id="@+id/play"
-                    android:text="6"
-                    android:textSize="14dp"
-                    android:padding="10dp"
-                    android:gravity="center_horizontal"
-                    android:background="#ffffff"/>
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:text="박대원"
-                    android:textSize="14dp"
-                    android:padding="10dp"
-                    android:gravity="center_horizontal"
-                    android:background="#ffffff"/>
-                <TextView
-                    android:text="MF"
-                    android:textSize="14dp"
-                    android:textColor="#3f59ff"
-                    android:padding="10dp"
-                    android:gravity="center_horizontal"
-                    android:background="#ffffff"/>
-                <TextView
-                    android:text="11"
-                    android:textSize="14dp"
-                    android:padding="10dp"
-                    android:gravity="center_horizontal"
-                    android:background="#ffffff"/>
-                <TextView
-                    android:text="5"
-                    android:textSize="14dp"
-                    android:padding="10dp"
-                    android:gravity="center_horizontal"
-                    android:background="#ffffff"/>
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:text="허행찬"
-                    android:textSize="14dp"
-                    android:padding="10dp"
-                    android:gravity="center_horizontal"
-                    android:background="#ffffff"/>
-                <TextView
-                    android:text="CF"
-                    android:textSize="14dp"
-                    android:textColor="#60c130"
-                    android:padding="10dp"
-                    android:gravity="center_horizontal"
-                    android:background="#ffffff"/>
-                <TextView
-                    android:text="1"
-                    android:textSize="14dp"
-                    android:padding="10dp"
-                    android:gravity="center_horizontal"
-                    android:background="#ffffff"/>
-                <TextView
-                    android:text="5"
-                    android:textSize="14dp"
-                    android:padding="10dp"
-                    android:gravity="center_horizontal"
-                    android:background="#ffffff"/>
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:text="이현범"
-                    android:textSize="14dp"
-                    android:padding="10dp"
-                    android:gravity="center_horizontal"
-                    android:background="#ffffff"/>
-                <TextView
-                    android:text="GK"
-                    android:textSize="14dp"
-                    android:textColor="#8c8600"
-                    android:padding="10dp"
-                    android:gravity="center_horizontal"
-                    android:background="#ffffff"/>
-                <TextView
-                    android:text="31"
-                    android:textSize="14dp"
-                    android:padding="10dp"
-                    android:gravity="center_horizontal"
-                    android:background="#ffffff"/>
-                <TextView
-                    android:text="6"
-                    android:textSize="14dp"
-                    android:padding="10dp"
-                    android:gravity="center_horizontal"
-                    android:background="#ffffff"/>
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:text="홍길동"
-                    android:textSize="14dp"
-                    android:padding="10dp"
-                    android:gravity="center_horizontal"
-                    android:background="#ffffff"/>
-                <TextView
-                    android:text="FW"
-                    android:textSize="14dp"
-                    android:textColor="#ff3f3f"
-                    android:padding="10dp"
-                    android:gravity="center_horizontal"
-                    android:background="#ffffff"/>
-                <TextView
-                    android:text="32"
-                    android:textSize="14dp"
-                    android:padding="10dp"
-                    android:gravity="center_horizontal"
-                    android:background="#ffffff"/>
-                <TextView
-                    android:text="5"
-                    android:textSize="14dp"
-                    android:padding="10dp"
-                    android:gravity="center_horizontal"
-                    android:background="#ffffff"/>
-            </TableRow>
-
-
         </TableLayout>
+
+        <ListView
+            android:id="@+id/playerList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
 
     </LinearLayout>
 

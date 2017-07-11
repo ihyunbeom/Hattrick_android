@@ -1,5 +1,6 @@
 package com.hattrick.ihyunbeom.hat_client;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -37,16 +38,20 @@ public class MainActivity extends AppCompatActivity
         sqLiteHelper.queryDate("create table if not exists player(" +
                 "id integer PRIMARY KEY autoincrement, " +
                 "name text, " +
-                "position integer, " +
+                "position text, " +
                 "goal integer, " +
                 "outing integer);");
         //포지션당 인원 수
         sqLiteHelper.queryDate("create table if not exists position(" +
-                "fw integer, " +
-                "mf integer, " +
-                "cf integer, " +
-                "gk integer, " +
+                "FW integer, " +
+                "MF integer, " +
+                "CF integer, " +
+                "GK integer, " +
                 "total integer);");
+
+        if (isFirstTime()) {
+            sqLiteHelper.queryDate("insert into position(fw, mf, cf, gk, total) values(0,0,0,0,0);");
+        }
         //전적
         sqLiteHelper.queryDate("create table if not exists score( " +
                 "season integer, " +
@@ -60,6 +65,7 @@ public class MainActivity extends AppCompatActivity
 
         //팀정보 db 테스트
         //sqLiteHelper.queryDate("insert into team_info(team, manager, created) values('해트트릭FC', '우지훈', '2017.06.29');");
+        //sqLiteHelper.queryDate("insert into position(fw, mf, cf, gk, total) values(0,0,0,0,0);");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -214,5 +220,18 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private boolean isFirstTime()
+    {
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        boolean ranBefore = preferences.getBoolean("RanBefore", false);
+        if (!ranBefore) {
+            // first time
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("RanBefore", true);
+            editor.commit();
+        }
+        return !ranBefore;
     }
 }
