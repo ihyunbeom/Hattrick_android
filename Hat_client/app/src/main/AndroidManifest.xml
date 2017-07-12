@@ -22,7 +22,8 @@
             android:label="해트트릭"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".teamSettingActivity" />
-        <activity android:name=".playerSettingActivity"></activity>
+        <activity android:name=".playerSettingActivity" />
+        <activity android:name=".gameAddingActivity"></activity>
     </application>
 
 </manifest>

@@ -60,6 +60,15 @@ public class MainActivity extends AppCompatActivity
                 "win integer, " +
                 "draw integer, " +
                 "lose integer);");
+
+        sqLiteHelper.queryDate("create table if not exists games( " +
+                "id integer PRIMARY KEY autoincrement, " +
+                "date integer, " +
+                "opponent integer, " +
+                "myscore integer, " +
+                "oppscore integer, " +
+                "result integer);");
+
         //회비내역
         //sqLiteHelper.queryDate("create table if not exists fee( ... );");
 

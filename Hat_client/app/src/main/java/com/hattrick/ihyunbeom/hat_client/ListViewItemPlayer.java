@@ -14,13 +14,10 @@ public class ListViewItemPlayer {
     public void setName(String name) {
         txtname = name ;
     }
-
     public void setPosition(String position){
         txtposition = position;
     }
-    public void setGoal(int goal){
-        txtgoal = Integer.toString(goal);
-    }
+    public void setGoal(int goal){ txtgoal = Integer.toString(goal); }
     public void setOuting(int outing){
         txtouting = Integer.toString(outing);
     }
