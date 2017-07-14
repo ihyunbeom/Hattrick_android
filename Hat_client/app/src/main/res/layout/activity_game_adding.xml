@@ -4,10 +4,6 @@
     android:id="@+id/activity_game_adding"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.hattrick.ihyunbeom.hat_client.gameAddingActivity">
 
     <LinearLayout
@@ -31,15 +27,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp">
+            android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Opponent "
                 android:textSize="18dp"/>
             <EditText
-                android:id="@+id/nameAdd"
+                android:id="@+id/oppName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName" />
@@ -48,26 +43,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp">
+            android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Position "
+                android:text="Date : "
                 android:textSize="18dp"/>
-            <DatePicker
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/datePicker"
-                android:layout_gravity="center_horizontal"
-                android:datePickerMode="spinner"
-                android:calendarViewShown="false"/>
-        </LinearLayout>
+                android:id="@+id/dateText"
+                android:text=""
+                android:textSize="18dp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        </LinearLayout>
+        <DatePicker
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:id="@+id/datePicker"
+            android:layout_gravity="center_horizontal"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,11 +73,11 @@
             <ListView
                 android:id="@+id/selectPlayerList"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:choiceMode="multipleChoice">
 
             </ListView>
 
-        </LinearLayout>
 
 
     </LinearLayout>

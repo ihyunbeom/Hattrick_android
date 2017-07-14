@@ -15,8 +15,12 @@ import java.util.ArrayList;
 
 public class ListViewAdapter extends BaseAdapter {
 
+    private static final int ITEM_VIEW_TYPE_PLAYER = 0;
+    private static final int ITEM_VIEW_TYPE_GAMES = 1;
+    private static final int ITEM_VIEW_TYPE_MAX = 2;
 
-    private ArrayList<ListViewItemPlayer> listViewItemList = new ArrayList<ListViewItemPlayer>() ;
+
+    private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>() ;
 
     // ListViewAdapter의 생성자
     public ListViewAdapter() {
@@ -29,33 +33,61 @@ public class ListViewAdapter extends BaseAdapter {
         return listViewItemList.size() ;
     }
 
+    @Override
+    public int getViewTypeCount(){
+        return ITEM_VIEW_TYPE_MAX;
+    }
+
+    @Override
+    public int getItemViewType(int position){
+        return listViewItemList.get(position).getType() ;
+    }
+
     // position에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴. : 필수 구현
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final int pos = position;
         final Context context = parent.getContext();
+        int viewType = getItemViewType(position) ;
+
 
         // "listview_item" Layout을 inflate하여 convertView 참조 획득.
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.listview_item_player, parent, false);
+
+            ListViewItem listViewItem = listViewItemList.get(position);
+
+            switch (viewType){
+                case ITEM_VIEW_TYPE_PLAYER:
+                    convertView = inflater.inflate(R.layout.listview_item_player, parent, false);
+
+                    TextView nameTextView = (TextView) convertView.findViewById(R.id.textName) ;
+                    TextView positionTextView = (TextView) convertView.findViewById(R.id.textPosition) ;
+                    TextView goalTextView = (TextView) convertView.findViewById(R.id.textGoal) ;
+                    TextView outingTextView = (TextView) convertView.findViewById(R.id.textOuting) ;
+
+                    nameTextView.setText(listViewItem.getPlayerName());
+                    positionTextView.setText(listViewItem.getPlayerPosition());
+                    goalTextView.setText(listViewItem.getPlayerGoal());
+                    outingTextView.setText(listViewItem.getPlayerOuting());
+                    break;
+                case ITEM_VIEW_TYPE_GAMES:
+                    convertView= inflater.inflate(R.layout.listview_item_game, parent, false);
+
+                    TextView dateTextView = (TextView)convertView.findViewById(R.id.textDate);
+                    TextView oppTextView = (TextView)convertView.findViewById(R.id.textOpp);
+                    TextView scoreTextView = (TextView)convertView.findViewById(R.id.textScore);
+                    TextView resultTextView = (TextView)convertView.findViewById(R.id.textResult);
+
+                    dateTextView.setText(listViewItem.getGameDate());
+                    oppTextView.setText(listViewItem.getGameOpp());
+                    scoreTextView.setText(listViewItem.getGameScore());
+                    resultTextView.setText(listViewItem.getGameResult());
+                    break;
+            }
+
         }
-
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
-        TextView nameTextView = (TextView) convertView.findViewById(R.id.textName) ;
-        TextView positionTextView = (TextView) convertView.findViewById(R.id.textPosition) ;
-        TextView goalTextView = (TextView) convertView.findViewById(R.id.textGoal) ;
-        TextView outingTextView = (TextView) convertView.findViewById(R.id.textOuting) ;
-
-
-        // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
-        ListViewItemPlayer listViewItem = listViewItemList.get(position);
-
         // 아이템 내 각 위젯에 데이터 반영
-        nameTextView.setText(listViewItem.getName());
-        positionTextView.setText(listViewItem.getPosition());
-        goalTextView.setText(listViewItem.getGoal());
-        outingTextView.setText(listViewItem.getOuting());
 
         return convertView;
     }
@@ -73,13 +105,27 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String name, String position, int goal, int outing) {
-        ListViewItemPlayer item = new ListViewItemPlayer();
+    public void addItem(String name, String position, String goal, String outing) {
+        ListViewItem item = new ListViewItem();
 
-        item.setName(name);
-        item.setPosition(position);
-        item.setGoal(goal);
-        item.setOuting(outing);
+        item.setType(ITEM_VIEW_TYPE_PLAYER) ;
+        item.setPlayerName(name);
+        item.setPlayerPosition(position);
+        item.setPlayerGoal(goal);
+        item.setPlayerOuting(outing);
+
+        listViewItemList.add(item);
+    }
+
+    public void addItem2(String date, String opp, String score, String result) {
+        ListViewItem item = new ListViewItem();
+
+        item.setType(ITEM_VIEW_TYPE_GAMES) ;
+        item.setGameDate(date);
+        item.setGameOpp(opp);
+        item.setGameScore(score);
+        item.setGameResult(result);
+        //result => 0:패 1:무 2:승
 
         listViewItemList.add(item);
     }

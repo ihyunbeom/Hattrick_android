@@ -129,13 +129,14 @@ public class PlayersFragment extends Fragment {
             int goal = cursorPlayer.getInt(3);
             int outing = cursorPlayer.getInt(4);
 
-            System.out.println("ID :"+ id +" 이름 : " + name + " 포지션 : " + position + " 득점 : " + goal + " 출전 : " + outing);
+            String txtGoal = Integer.toString(goal);
+            String txtOuting = Integer.toString(outing);
 
-            adapter.addItem(name, position, goal, outing);
+            System.out.println("ID :"+ id +" 이름 : " + name + " 포지션 : " + position + " 득점 : " + txtGoal + " 출전 : " + txtOuting);
+
+            adapter.addItem(name, position, txtGoal, txtOuting);
         }
         listView.setAdapter(adapter);
-
-
 
         return view;
     }

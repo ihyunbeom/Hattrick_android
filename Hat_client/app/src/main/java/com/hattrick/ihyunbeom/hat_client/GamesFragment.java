@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 
 
 /**
@@ -23,6 +24,8 @@ public class GamesFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private Button addGame;
+
+    private ListViewAdapter adapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -67,9 +70,39 @@ public class GamesFragment extends Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_games,container,false);
 
+        adapter = new ListViewAdapter();
+
         addGame = (Button) view.findViewById(R.id.addGame); // activity 호출 버튼(팝업창)
 
-        Cursor cursor =MainActivity.sqLiteHelper.getData("SELECT * FROM games");
+        Cursor cursorGames =MainActivity.sqLiteHelper.getData("SELECT * FROM games");
+
+        ListView listView = (ListView) view.findViewById(R.id.gameList);
+
+        while(cursorGames.moveToNext()){
+            int id = cursorGames.getInt(0);
+            int year = cursorGames.getInt(1);
+            int month = cursorGames.getInt(2);
+            int day = cursorGames.getInt(3);
+            String opponent = cursorGames.getString(4);
+            int myscore = cursorGames.getInt(5);
+            int oppscore = cursorGames.getInt(6);
+            int result = cursorGames.getInt(7);
+
+            String txtDate = Integer.toString(year) +"/"+ Integer.toString(month) +"/"+ Integer.toString(day);
+            String txtResult;
+            if(result == 0)
+                txtResult = "패";
+            else if(result == 2)
+                txtResult = "승";
+            else
+                txtResult = "무";
+            String txtScore = Integer.toString(myscore) + " : " + Integer.toString(oppscore);
+
+            System.out.println("날짜 :"+ txtDate +" 상대팀 : " + opponent + " 점수 : " + txtScore + " 결과 : " + txtResult);
+
+            adapter.addItem2(txtDate, opponent, txtScore, txtResult);
+        }
+        listView.setAdapter(adapter);
 
         addGame.setOnClickListener(new View.OnClickListener(){
 

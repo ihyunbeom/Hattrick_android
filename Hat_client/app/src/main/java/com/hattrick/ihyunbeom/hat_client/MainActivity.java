@@ -63,8 +63,10 @@ public class MainActivity extends AppCompatActivity
 
         sqLiteHelper.queryDate("create table if not exists games( " +
                 "id integer PRIMARY KEY autoincrement, " +
-                "date integer, " +
-                "opponent integer, " +
+                "year integer, " +
+                "month integer, " +
+                "day integer, " +
+                "opponent text, " +
                 "myscore integer, " +
                 "oppscore integer, " +
                 "result integer);");
