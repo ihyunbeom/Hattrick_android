@@ -3,6 +3,7 @@ package com.hattrick.ihyunbeom.hat_client;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -41,9 +42,6 @@ public class playerSettingActivity extends AppCompatActivity {
                 String name = nameAdd.getText().toString();
                 String position = spinner.getSelectedItem().toString();
 
-                Fragment fragment = null;
-                String title = getString(R.string.app_name);
-
                 System.out.println("선수 등록 전");
                 sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('"+ name +"', '"+ position + "', 0" + ", 0" +");");
 
@@ -51,9 +49,12 @@ public class playerSettingActivity extends AppCompatActivity {
 
                 System.out.println("선수 등록 완료");
 
-                Intent next = new Intent(playerSettingActivity.this, MainActivity.class);
-                playerSettingActivity.this.startActivity(next);
+                //Intent next = new Intent(playerSettingActivity.this, MainActivity.class);
+                //playerSettingActivity.this.startActivity(next);
 
+                Intent notiIconClickIntent = new Intent(playerSettingActivity.this, MainActivity.class);
+                notiIconClickIntent.putExtra("fragment", "player");
+                playerSettingActivity.this.startActivity(notiIconClickIntent);
             }
         });
     }

@@ -17,7 +17,7 @@
             android:id="@+id/adding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="(-_-)"
+            android:text="완료"
             android:textColor="#FFFFFF"
             android:textSize="18dp"
             android:layout_margin="10dp"

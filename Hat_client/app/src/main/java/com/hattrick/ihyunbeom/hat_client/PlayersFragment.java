@@ -33,7 +33,7 @@ public class PlayersFragment extends Fragment {
     private String mParam2;
 
     private TextView txtplayerMF;
-    private TextView txtplayerCF;
+    private TextView txtplayerDF;
     private TextView txtplayerFW;
     private TextView txtplayerGK;
     private TextView txtplayerTotal;
@@ -84,7 +84,7 @@ public class PlayersFragment extends Fragment {
 
         txtplayerFW = (TextView) view.findViewById(R.id.playerFW);
         txtplayerMF = (TextView) view.findViewById(R.id.playerMF);
-        txtplayerCF = (TextView) view.findViewById(R.id.playerCF);
+        txtplayerDF = (TextView) view.findViewById(R.id.playerDF);
         txtplayerGK = (TextView) view.findViewById(R.id.playerGK);
         txtplayerTotal = (TextView) view.findViewById(R.id.playerTotal);
 
@@ -105,15 +105,15 @@ public class PlayersFragment extends Fragment {
         while(cursor.moveToNext()){
             int playerFW = cursor.getInt(0);
             int playerMF = cursor.getInt(1);
-            int playerCF = cursor.getInt(2);
+            int playerDF = cursor.getInt(2);
             int playerGK = cursor.getInt(3);
             int playerTotal = cursor.getInt(4);
 
-            System.out.println("FW : " + playerFW + " MF : " + playerMF + " CF : " + playerCF + " GK : " + playerGK + "total : " + playerTotal);
+            System.out.println("FW : " + playerFW + " MF : " + playerMF + " DF : " + playerDF + " GK : " + playerGK + "total : " + playerTotal);
 
             txtplayerFW.setText(Integer.toString(playerFW));
             txtplayerMF.setText(Integer.toString(playerMF));
-            txtplayerCF.setText(Integer.toString(playerCF));
+            txtplayerDF.setText(Integer.toString(playerDF));
             txtplayerGK.setText(Integer.toString(playerGK));
             txtplayerTotal.setText(Integer.toString(playerTotal));
 

@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="해트트릭"
+        android:text="풋살 매니저"
         android:textSize="32dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 

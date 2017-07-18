@@ -45,22 +45,24 @@ public class MainActivity extends AppCompatActivity
         sqLiteHelper.queryDate("create table if not exists position(" +
                 "FW integer, " +
                 "MF integer, " +
-                "CF integer, " +
+                "DF integer, " +
                 "GK integer, " +
                 "total integer);");
 
-        if (isFirstTime()) {
-            sqLiteHelper.queryDate("insert into position(fw, mf, cf, gk, total) values(0,0,0,0,0);");
-        }
         //전적
         sqLiteHelper.queryDate("create table if not exists score( " +
-                "season integer, " +
+                "games integer, " +
                 "goals integer, " +
-                "lostpoint integer, " +
+                "lost integer, " +
                 "win integer, " +
                 "draw integer, " +
                 "lose integer);");
 
+        if (isFirstTime()) {
+            sqLiteHelper.queryDate("insert into position(fw, mf, df, gk, total) values(0,0,0,0,0);");
+            sqLiteHelper.queryDate("insert into score(games, goals, lost, win, draw, lose) values(0,0,0,0,0,0);");
+        }
+        //경기
         sqLiteHelper.queryDate("create table if not exists games( " +
                 "id integer PRIMARY KEY autoincrement, " +
                 "year integer, " +
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity
 
         //팀정보 db 테스트
         //sqLiteHelper.queryDate("insert into team_info(team, manager, created) values('해트트릭FC', '우지훈', '2017.06.29');");
-        //sqLiteHelper.queryDate("insert into position(fw, mf, cf, gk, total) values(0,0,0,0,0);");
+        //sqLiteHelper.queryDate("insert into position(fw, mf, df, gk, total) values(0,0,0,0,0);");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -87,9 +89,39 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        SummaryFragment summaryFragment = new SummaryFragment();
+        Fragment fragment = null;
+        String title = getString(R.string.app_name);
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction(); transaction.add(R.id.relativelayout_for_fragment, summaryFragment); transaction.addToBackStack(null); transaction.commit();
+        String str = getIntent().getStringExtra("fragment");
+        if(str !=null) {
+            if(str.equals("player")) {
+                PlayersFragment playersFragment = PlayersFragment.newInstance("some1","some2");
+                fragment = new PlayersFragment();
+                title = "팀원 관리";
+                FragmentManager manager = getSupportFragmentManager();
+                manager.beginTransaction().replace(
+                        R.id.relativelayout_for_fragment,
+                        playersFragment,
+                        playersFragment.getTag()
+                ).commit();
+            }else if(str.equals("games")) {
+                GamesFragment gamesFragment = GamesFragment.newInstance("some1","some2");
+                fragment = new GamesFragment();
+                title = "경기 관리";
+                FragmentManager manager = getSupportFragmentManager();
+                manager.beginTransaction().replace(
+                        R.id.relativelayout_for_fragment,
+                        gamesFragment,
+                        gamesFragment.getTag()
+                ).commit();
+            }
+        }else{
+            SummaryFragment summaryFragment = new SummaryFragment();
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction(); transaction.add(R.id.relativelayout_for_fragment, summaryFragment); transaction.addToBackStack(null); transaction.commit();
+
+        }
+
 
     }
 
@@ -169,18 +201,6 @@ public class MainActivity extends AppCompatActivity
                     gamesFragment.getTag()
             ).commit();
 
-        } else if (id == R.id.nav_score) {
-            //Toast.makeText(this, "전적 보기", Toast.LENGTH_SHORT).show();
-            ScoreFragment scoreFragment = ScoreFragment.newInstance("some1","some2");
-            fragment = new ScoreFragment();
-            title = "전적 보기";
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(
-                    R.id.relativelayout_for_fragment,
-                    scoreFragment,
-                    scoreFragment.getTag()
-            ).commit();
-
         } else if (id == R.id.nav_fee) {
             //Toast.makeText(this, "회비 관리", Toast.LENGTH_SHORT).show();
             FeeFragment feeFragment = FeeFragment.newInstance("some1","some2");
@@ -193,29 +213,6 @@ public class MainActivity extends AppCompatActivity
                     feeFragment.getTag()
             ).commit();
 
-        } else if (id == R.id.nav_contest) {
-            //Toast.makeText(this, "대회 정보", Toast.LENGTH_SHORT).show();
-            ContestFragment contestFragment = ContestFragment.newInstance("some1","some2");
-            fragment = new ContestFragment();
-            title = "대회 정보";
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(
-                    R.id.relativelayout_for_fragment,
-                    contestFragment,
-                    contestFragment.getTag()
-            ).commit();
-
-        } else if (id == R.id.nav_stadium) {
-            //Toast.makeText(this, "구장 찾기", Toast.LENGTH_SHORT).show();
-            StadiumFragment stadiumFragment = StadiumFragment.newInstance("some1","some2");
-            fragment = new StadiumFragment();
-            title = "구장 찾기";
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(
-                    R.id.relativelayout_for_fragment,
-                    stadiumFragment,
-                    stadiumFragment.getTag()
-            ).commit();
         }
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

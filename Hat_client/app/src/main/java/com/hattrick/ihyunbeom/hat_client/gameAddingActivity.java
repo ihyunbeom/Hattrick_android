@@ -85,14 +85,20 @@ public class gameAddingActivity extends AppCompatActivity {
                         "values("+syear+", "+smonth+", "+sday+", '"+opp+"', 0, 0, 1);");
                 //sqLiteHelper.queryDate("insert into games(year, month, day, opponent, myscore, oppscore, result) values(2017, 8, 12, 'opp1', 0, 0, 0);");
 
+                sqLiteHelper.queryDate("update score set games = games + 1, draw = draw + 1");
+
                 //시즌별 경기전적 테이블 생성 또는 수정
                 //저장된 시즌 정보 table 생성
 
                 System.out.println("날짜 : " + syear + "." + smonth + "." + sday + " 상대팀 : " + oppName);
                 System.out.println("경기 등록 완료");
 
-                Intent next = new Intent(gameAddingActivity.this, MainActivity.class);
-                gameAddingActivity.this.startActivity(next);
+                //Intent next = new Intent(gameAddingActivity.this, MainActivity.class);
+                //gameAddingActivity.this.startActivity(next);
+
+                Intent notiIconClickIntent = new Intent(gameAddingActivity.this, MainActivity.class);
+                notiIconClickIntent.putExtra("fragment", "games");
+                gameAddingActivity.this.startActivity(notiIconClickIntent);
 
 
             }

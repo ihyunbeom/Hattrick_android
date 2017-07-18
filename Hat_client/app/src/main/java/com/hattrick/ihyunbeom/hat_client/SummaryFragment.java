@@ -33,10 +33,18 @@ public class SummaryFragment extends Fragment {
     private Button teamSetting;
 
     private TextView txtplayerMF;
-    private TextView txtplayerCF;
+    private TextView txtplayerDF;
     private TextView txtplayerFW;
     private TextView txtplayerGK;
     private TextView txtplayerTotal;
+
+    private TextView txtscoreGame;
+    private TextView txtscoreGoals;
+    private TextView txtscoreLost;
+    private TextView txtscoreWin;
+    private TextView txtscoreDraw;
+    private TextView txtscoreLose;
+
 
 
     public SummaryFragment() {
@@ -114,24 +122,57 @@ public class SummaryFragment extends Fragment {
 
         txtplayerFW = (TextView) view.findViewById(R.id.playerFW);
         txtplayerMF = (TextView) view.findViewById(R.id.playerMF);
-        txtplayerCF = (TextView) view.findViewById(R.id.playerCF);
+        txtplayerDF = (TextView) view.findViewById(R.id.playerDF);
         txtplayerGK = (TextView) view.findViewById(R.id.playerGK);
         txtplayerTotal = (TextView) view.findViewById(R.id.playerTotal);
 
         while(cursorPosition.moveToNext()){
             int playerFW = cursorPosition.getInt(0);
             int playerMF = cursorPosition.getInt(1);
-            int playerCF = cursorPosition.getInt(2);
+            int playerDF = cursorPosition.getInt(2);
             int playerGK = cursorPosition.getInt(3);
             int playerTotal = cursorPosition.getInt(4);
 
-            System.out.println("FW : " + playerFW + " MF : " + playerMF + " CF : " + playerCF + " GK : " + playerGK + "total : " + playerTotal);
+            System.out.println("FW : " + playerFW + " MF : " + playerMF + " CF : " + playerDF + " GK : " + playerGK + "total : " + playerTotal);
 
             txtplayerFW.setText(Integer.toString(playerFW));
             txtplayerMF.setText(Integer.toString(playerMF));
-            txtplayerCF.setText(Integer.toString(playerCF));
+            txtplayerDF.setText(Integer.toString(playerDF));
             txtplayerGK.setText(Integer.toString(playerGK));
             txtplayerTotal.setText(Integer.toString(playerTotal));
+
+        }
+
+        Cursor cursorScore =MainActivity.sqLiteHelper.getData("SELECT * FROM score");
+
+        //games, goals, lost, win, draw, lose
+
+        txtscoreGame = (TextView) view.findViewById(R.id.scoreGame);
+        txtscoreGoals = (TextView) view.findViewById(R.id.scoreGoals);
+        txtscoreLost = (TextView) view.findViewById(R.id.scoreLost);
+        txtscoreWin = (TextView) view.findViewById(R.id.scoreWin);
+        txtscoreDraw = (TextView) view.findViewById(R.id.scoreDraw);
+        txtscoreLose = (TextView) view.findViewById(R.id.scoreLose);
+
+
+        while(cursorScore.moveToNext()){
+            int scoreGame = cursorScore.getInt(0);
+            int scoreGoals = cursorScore.getInt(1);
+            int scoreLost = cursorScore.getInt(2);
+            int scoreWin = cursorScore.getInt(3);
+            int scoreDraw = cursorScore.getInt(4);
+            int scoreLose = cursorScore.getInt(5);
+
+
+            System.out.println("Games : " + scoreGame + " Goals : " + scoreGoals + " Lost : " + scoreLost + " Win : " + scoreWin + " Draw : " + scoreDraw + " Lose : " + scoreLose );
+
+            txtscoreGame.setText(Integer.toString(scoreGame));
+            txtscoreGoals.setText(Integer.toString(scoreGoals));
+            txtscoreLost.setText(Integer.toString(scoreLost));
+            txtscoreWin.setText(Integer.toString(scoreWin));
+            txtscoreDraw.setText(Integer.toString(scoreDraw));
+            txtscoreLose.setText(Integer.toString(scoreLose));
+
 
         }
 

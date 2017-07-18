@@ -11,22 +11,13 @@
         android:orientation="vertical"
         android:background="#FFFFFF" >
 
-
-
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_security_black_24dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"/>
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="24dp"
             android:gravity="center"
             android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp"
             android:id="@+id/teamName"/>
         <Button
             android:text="수정"
@@ -145,39 +136,39 @@
 
             <TableRow>
                 <TextView
-                    android:text="0"
+                    android:id="@+id/scoreGame"
                     android:textSize="14dp"
                     android:padding="10dp"
                     android:gravity="center_horizontal"
                     android:background="#ffffff"/>
                 <TextView
-                    android:text="0"
+                    android:id="@+id/scoreWin"
                     android:textSize="14dp"
                     android:textColor="#3f59ff"
                     android:padding="10dp"
                     android:gravity="center_horizontal"
                     android:background="#ffffff"/>
                 <TextView
-                    android:text="0"
+                    android:id="@+id/scoreDraw"
                     android:textSize="14dp"
                     android:padding="10dp"
                     android:gravity="center_horizontal"
                     android:background="#ffffff"/>
                 <TextView
-                    android:text="0"
+                    android:id="@+id/scoreLose"
                     android:textSize="14dp"
                     android:textColor="#ff3f3f"
                     android:padding="10dp"
                     android:gravity="center_horizontal"
                     android:background="#ffffff"/>
                 <TextView
-                    android:text="0"
+                    android:id="@+id/scoreGoals"
                     android:textSize="14dp"
                     android:padding="10dp"
                     android:gravity="center_horizontal"
                     android:background="#ffffff"/>
                 <TextView
-                    android:text="0"
+                    android:id="@+id/scoreLost"
                     android:textSize="14dp"
                     android:padding="10dp"
                     android:gravity="center_horizontal"
@@ -216,7 +207,7 @@
                     android:gravity="center_horizontal"
                     android:background="#dddddd"/>
                 <TextView
-                    android:text="CF"
+                    android:text="DF"
                     android:textSize="14dp"
                     android:textColor="#60c130"
                     android:padding="10dp"
@@ -251,7 +242,7 @@
                     android:gravity="center_horizontal"
                     android:background="#ffffff"/>
                 <TextView
-                    android:id="@+id/playerCF"
+                    android:id="@+id/playerDF"
                     android:textSize="14dp"
                     android:padding="10dp"
                     android:gravity="center_horizontal"

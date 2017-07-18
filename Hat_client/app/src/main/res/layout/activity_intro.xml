@@ -9,12 +9,12 @@
 
 
     <TextView
-        android:text="해트트릭"
+        android:text="풋살 매니저"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:textSize="70sp"
+        android:textSize="30sp"
         android:textColor="#FFFFFF"
         android:textStyle="bold"/>
 </RelativeLayout>

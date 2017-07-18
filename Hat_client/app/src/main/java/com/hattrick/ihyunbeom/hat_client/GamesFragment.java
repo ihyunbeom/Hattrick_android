@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 /**
@@ -26,6 +27,13 @@ public class GamesFragment extends Fragment {
     private Button addGame;
 
     private ListViewAdapter adapter;
+
+    private TextView txtscoreGame;
+    private TextView txtscoreGoals;
+    private TextView txtscoreLost;
+    private TextView txtscoreWin;
+    private TextView txtscoreDraw;
+    private TextView txtscoreLose;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -112,6 +120,39 @@ public class GamesFragment extends Fragment {
                 getActivity().startActivity(adding);
             }
         });
+
+        Cursor cursorScore =MainActivity.sqLiteHelper.getData("SELECT * FROM score");
+
+        //games, goals, lost, win, draw, lose
+
+        txtscoreGame = (TextView) view.findViewById(R.id.scoreGame);
+        txtscoreGoals = (TextView) view.findViewById(R.id.scoreGoals);
+        txtscoreLost = (TextView) view.findViewById(R.id.scoreLost);
+        txtscoreWin = (TextView) view.findViewById(R.id.scoreWin);
+        txtscoreDraw = (TextView) view.findViewById(R.id.scoreDraw);
+        txtscoreLose = (TextView) view.findViewById(R.id.scoreLose);
+
+
+        while(cursorScore.moveToNext()){
+            int scoreGame = cursorScore.getInt(0);
+            int scoreGoals = cursorScore.getInt(1);
+            int scoreLost = cursorScore.getInt(2);
+            int scoreWin = cursorScore.getInt(3);
+            int scoreDraw = cursorScore.getInt(4);
+            int scoreLose = cursorScore.getInt(5);
+
+
+            System.out.println("Games : " + scoreGame + " Goals : " + scoreGoals + " Lost : " + scoreLost + " Win : " + scoreWin + " Draw : " + scoreDraw + " Lose : " + scoreLose );
+
+            txtscoreGame.setText(Integer.toString(scoreGame));
+            txtscoreGoals.setText(Integer.toString(scoreGoals));
+            txtscoreLost.setText(Integer.toString(scoreLost));
+            txtscoreWin.setText(Integer.toString(scoreWin));
+            txtscoreDraw.setText(Integer.toString(scoreDraw));
+            txtscoreLose.setText(Integer.toString(scoreLose));
+
+
+        }
 
         return view;
     }

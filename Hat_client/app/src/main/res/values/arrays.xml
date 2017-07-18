@@ -3,7 +3,7 @@
     <string-array name="player">
         <item>FW</item>
         <item>MF</item>
-        <item>CF</item>
+        <item>DF</item>
         <item>GK</item>
     </string-array>
 </resources>
