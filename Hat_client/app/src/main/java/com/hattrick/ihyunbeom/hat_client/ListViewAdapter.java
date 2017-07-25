@@ -1,6 +1,7 @@
 package com.hattrick.ihyunbeom.hat_client;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,14 @@ public class ListViewAdapter extends BaseAdapter {
 
                     nameTextView.setText(listViewItem.getPlayerName());
                     positionTextView.setText(listViewItem.getPlayerPosition());
+                    if(listViewItem.getPlayerPosition().equals("FW"))
+                        positionTextView.setTextColor(Color.rgb(231,76,60));
+                    else if(listViewItem.getPlayerPosition().equals("MF"))
+                        positionTextView.setTextColor(Color.rgb(41,128,185));
+                    else if(listViewItem.getPlayerPosition().equals("DF"))
+                        positionTextView.setTextColor(Color.rgb(52,152,291));
+                    else if(listViewItem.getPlayerPosition().equals("GK"))
+                        positionTextView.setTextColor(Color.rgb(241,196,15));
                     goalTextView.setText(listViewItem.getPlayerGoal());
                     outingTextView.setText(listViewItem.getPlayerOuting());
                     break;
