@@ -23,7 +23,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".teamSettingActivity" />
         <activity android:name=".playerSettingActivity" />
-        <activity android:name=".gameAddingActivity"></activity>
+        <activity android:name=".gameAddingActivity" />
+        <activity android:name=".gameDetailActivity"></activity>
     </application>
 
 </manifest>

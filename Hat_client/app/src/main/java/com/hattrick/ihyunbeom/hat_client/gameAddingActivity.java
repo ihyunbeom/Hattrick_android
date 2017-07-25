@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -74,18 +75,38 @@ public class gameAddingActivity extends AppCompatActivity {
         }
 
         sqLiteHelper= new SQLiteHelper(this,"TeamDB.sqlite", null,1);
+        final Cursor cursorGames =MainActivity.sqLiteHelper.getData("SELECT * FROM games");
 
         adding = (Button)findViewById(R.id.adding);
         adding.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+
                 String opp = oppName.getText().toString();
 
                 System.out.println("경기 등록 전");
                 sqLiteHelper.queryDate("insert into games(year, month, day, opponent, myscore, oppscore, result) " +
                         "values("+syear+", "+smonth+", "+sday+", '"+opp+"', 0, 0, 1);");
                 //sqLiteHelper.queryDate("insert into games(year, month, day, opponent, myscore, oppscore, result) values(2017, 8, 12, 'opp1', 0, 0, 0);");
-
+                // listid 값 추가
                 sqLiteHelper.queryDate("update score set games = games + 1, draw = draw + 1");
+
+                int gameid = 0;
+
+                while(cursorGames.moveToNext()) {
+                    gameid = cursorGames.getInt(0);
+                }
+
+                SparseBooleanArray checkedItems = listview.getCheckedItemPositions(); int count = arrayAdapter.getCount() ;
+                for (int i = count-1; i >= 0; i--) {
+                    if (checkedItems.get(i)) {
+                        sqLiteHelper.queryDate("insert into list(gameid, playerid)" +
+                                "values(" + gameid + "," + (i+1) + ");");
+                        System.out.println("gameid = " + gameid + " playerid = " + (i+1) );
+                    }
+                }
+
+                //sqLiteHelper.queryDate("insert into list(gameid, playerid)" +
+                //        "values(" + gameid + "," + i+1 + ");");
 
                 //시즌별 경기전적 테이블 생성 또는 수정
                 //저장된 시즌 정보 table 생성

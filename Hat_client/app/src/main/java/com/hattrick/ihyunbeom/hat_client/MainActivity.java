@@ -73,6 +73,11 @@ public class MainActivity extends AppCompatActivity
                 "oppscore integer, " +
                 "result integer);");
 
+        //명단
+        sqLiteHelper.queryDate("create table if not exists list( " +
+                "gameid integer, " +
+                "playerid  integer);"); // 선수 id값
+
         //회비내역
         //sqLiteHelper.queryDate("create table if not exists fee( ... );");
 
