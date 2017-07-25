@@ -102,6 +102,7 @@ public class gameAddingActivity extends AppCompatActivity {
                         sqLiteHelper.queryDate("insert into list(gameid, playerid)" +
                                 "values(" + gameid + "," + (i+1) + ");");
                         System.out.println("gameid = " + gameid + " playerid = " + (i+1) );
+                        sqLiteHelper.queryDate("update player set outing = outing + 1 where id = "+ (i+1));
                     }
                 }
 

@@ -19,7 +19,7 @@ public class gameDetailActivity extends AppCompatActivity {
     private TextView myScore;
     private TextView oppScore;
     private TextView date;
-    
+
 
     private Button save;
     private Button myAdd;

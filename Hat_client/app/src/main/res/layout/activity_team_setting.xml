@@ -38,7 +38,7 @@
                 android:id="@+id/teamSetting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName" />
+                android:inputType="text" />
         </LinearLayout>
 
         <LinearLayout
@@ -55,7 +55,7 @@
                 android:id="@+id/managerSetting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName" />
+                android:inputType="text" />
         </LinearLayout>
 
         <LinearLayout
