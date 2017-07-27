@@ -47,6 +47,7 @@
 
                 <TableRow>
                     <TextView
+                        android:id="@+id/teamName"
                         android:text="My team"
                         android:textSize="20dp"
                         android:padding="10dp"
@@ -58,6 +59,7 @@
                         android:padding="10dp"
                         android:gravity="center_horizontal"/>
                     <TextView
+                        android:id="@+id/oppName"
                         android:text="Opponant"
                         android:textSize="20dp"
                         android:padding="10dp"
@@ -69,7 +71,7 @@
                     <TextView
                         android:text="5"
                         android:textColor="#3f59ff"
-                        android:id="@+id/scoreGame"
+                        android:id="@+id/myScore"
                         android:textSize="40dp"
                         android:padding="10dp"
                         android:gravity="center_horizontal"/>
@@ -81,7 +83,7 @@
                     <TextView
                         android:text="3"
                         android:textColor="#ff3f3f"
-                        android:id="@+id/scoreDraw"
+                        android:id="@+id/oppScore"
                         android:textSize="40dp"
                         android:padding="10dp"
                         android:gravity="center_horizontal"/>
@@ -104,14 +106,14 @@
                 android:layout_height="wrap_content"
                 android:textColor="#3f59ff"
                 android:text="goal+"
-                android:id="@+id/AddMyGoal"/>
+                android:id="@+id/addMyGoal"/>
 
             <Button
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:textColor="#ff3f3f"
                 android:text="Goal-"
-                android:id="@+id/DeleteMyGoal"
+                android:id="@+id/deleteMyGoal"
                 android:layout_marginRight="100dp"/>
 
             <Button
@@ -119,14 +121,14 @@
                 android:layout_height="wrap_content"
                 android:textColor="#3f59ff"
                 android:text="Goal+"
-                android:id="@+id/AddOppGoal"/>
+                android:id="@+id/addOppGoal"/>
 
             <Button
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:textColor="#ff3f3f"
                 android:text="Goal-"
-                android:id="@+id/DeleteOppGoal"/>
+                android:id="@+id/deleteOppGoal"/>
 
         </LinearLayout>
 

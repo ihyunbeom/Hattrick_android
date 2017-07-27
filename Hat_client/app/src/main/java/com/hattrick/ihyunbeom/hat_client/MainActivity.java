@@ -75,8 +75,9 @@ public class MainActivity extends AppCompatActivity
 
         //명단
         sqLiteHelper.queryDate("create table if not exists list( " +
-                "gameid integer, " +
-                "playerid  integer);"); // 선수 id값
+                "gameid integer, " + // 경기 id값
+                "playerid  integer" + // 선수 id값
+                "goal integer);"); // 해당 경기 득점 수
 
         //회비내역
         //sqLiteHelper.queryDate("create table if not exists fee( ... );");

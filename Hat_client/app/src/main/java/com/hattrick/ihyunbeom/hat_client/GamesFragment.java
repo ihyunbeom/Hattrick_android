@@ -8,9 +8,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 /**
@@ -34,6 +37,8 @@ public class GamesFragment extends Fragment {
     private TextView txtscoreWin;
     private TextView txtscoreDraw;
     private TextView txtscoreLose;
+
+    ArrayList<Game> gameArray = new ArrayList<Game>();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -86,6 +91,7 @@ public class GamesFragment extends Fragment {
 
         ListView listView = (ListView) view.findViewById(R.id.gameList);
 
+
         while(cursorGames.moveToNext()){
             int id = cursorGames.getInt(0);
             int year = cursorGames.getInt(1);
@@ -106,11 +112,33 @@ public class GamesFragment extends Fragment {
                 txtResult = "무";
             String txtScore = Integer.toString(myscore) + " : " + Integer.toString(oppscore);
 
-            System.out.println("날짜 :"+ txtDate +" 상대팀 : " + opponent + " 점수 : " + txtScore + " 결과 : " + txtResult);
+            System.out.println("ID :"+ id +" 날짜 :"+ txtDate +" 상대팀 : " + opponent + " 점수 : " + txtScore + " 결과 : " + txtResult);
 
             adapter.addItem2(txtDate, opponent, txtScore, txtResult);
+            gameArray.add(new Game(id,txtDate, opponent, txtScore, txtResult));
         }
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // 상세정보 화면으로 이동하기(인텐트 날리기)
+                // 1. 다음화면을 만든다
+                // 2. AndroidManifest.xml 에 화면을 등록한다
+                // 3. Intent 객체를 생성하여 날린다
+                Intent intent = new Intent(
+                        getActivity(), // 현재화면의 제어권자
+                        gameDetailActivity.class); // 다음넘어갈 화면
+
+                // intent 객체에 데이터를 실어서 보내기
+                // 리스트뷰 클릭시 인텐트 (Intent) 생성하고 position 값을 이용하여 인텐트로 넘길값들을 넘긴다
+                intent.putExtra("id", gameArray.get(position).id);
+
+                startActivity(intent);
+            }
+
+        });
 
         addGame.setOnClickListener(new View.OnClickListener(){
 
@@ -155,6 +183,30 @@ public class GamesFragment extends Fragment {
         }
 
         return view;
+    }
+
+    //System.out.println("ID :"+ id +" 날짜 :"+ txtDate +" 상대팀 : " + opponent + " 점수 : " + txtScore + " 결과 : " + txtResult);
+
+    class Game { // 경기리스트
+
+        int id; //경기 ID
+        String date = ""; // 날짜
+        String opponent; // 상대팀
+        String score = ""; // 점수
+        String result =""; // 결과
+
+        public Game(int id, String date, String opponent, String score, String result) {
+            super();
+            this.id = id;
+            this.date = date;
+            this.opponent = opponent;
+            this.score = score;
+            this.result = result;
+        }
+
+        public Game() {
+        }
+
     }
 
 }
