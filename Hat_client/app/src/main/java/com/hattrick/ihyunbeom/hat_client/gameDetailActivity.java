@@ -34,13 +34,19 @@ public class gameDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_detail);
 
-        TextView date = (TextView)findViewById(R.id.textDate);
+        date = (TextView)findViewById(R.id.textDate);
+        myName = (TextView)findViewById(R.id.textDate);
+        myScore = (TextView)findViewById(R.id.textDate);
+        oppName = (TextView)findViewById(R.id.textDate);
+        oppScore = (TextView)findViewById(R.id.textDate);
 
 
         Intent intent = getIntent(); // 보내온 Intent를 얻는다
         date.setText(Integer.toString(intent.getIntExtra("id",0)));
 
         System.out.println("********Intent ID : " + intent.getIntExtra("id",0));
+
+
 
 
     }
