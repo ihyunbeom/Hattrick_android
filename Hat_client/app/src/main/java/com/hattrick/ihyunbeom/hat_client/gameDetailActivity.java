@@ -1,6 +1,7 @@
 package com.hattrick.ihyunbeom.hat_client;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -28,6 +29,8 @@ public class gameDetailActivity extends AppCompatActivity {
     private Button deleteMyGoal;
     private Button deleteOppGoal;
 
+    private int id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +45,21 @@ public class gameDetailActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent(); // 보내온 Intent를 얻는다
-        date.setText(Integer.toString(intent.getIntExtra("id",0)));
+        id=intent.getIntExtra("id",0);
+        date.setText(Integer.toString(id));
 
-        System.out.println("********Intent ID : " + intent.getIntExtra("id",0));
+
+
+        System.out.println("********Intent ID : " + id);
+
+        final Cursor cursorList =MainActivity.sqLiteHelper.getData("SELECT * FROM list");
+        while(cursorList.moveToNext()) {
+            int gameid = cursorList.getInt(0);
+            int playerid = cursorList.getInt(1);
+
+            if(gameid == id)
+                System.out.println("gameid = " + gameid + " playerid = " + playerid);
+        }
 
 
 
