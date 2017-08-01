@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -24,6 +25,8 @@ public class gameDetailActivity extends AppCompatActivity {
     private Button addMyGoal;
     private Button addOppGoal;
     private Button deleteOppGoal;
+
+    private Button adding;
 
     private int intentId;
 
@@ -152,6 +155,18 @@ public class gameDetailActivity extends AppCompatActivity {
                 }
             }
         });
+
+        adding = (Button)findViewById(R.id.adding);
+        adding.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+
+                Intent notiIconClickIntent = new Intent(gameDetailActivity.this, MainActivity.class);
+                notiIconClickIntent.putExtra("fragment", "games");
+                gameDetailActivity.this.startActivity(notiIconClickIntent);
+
+
+            }
+        }) ;
 
     }
 }
