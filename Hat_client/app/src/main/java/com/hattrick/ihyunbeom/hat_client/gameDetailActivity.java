@@ -55,12 +55,13 @@ public class gameDetailActivity extends AppCompatActivity {
         final Intent intent = getIntent(); // 보내온 Intent를 얻는다
         intentId=intent.getIntExtra("id",0);
 
-        //현재 경기 결과를 저장
-        //+,- 버튼 클릭 후 현재 결과와 비교 후 수정(만약 무=>승 : score => draw-1, win+1, games => result 1+>2 )
-        //현재 결과 count - 1 , 바뀐 결과 count + 1
+        // Score DB의 기본 셋팅값 (무)을 없이 빈공간으로 초기화
+        // 처음 경기결과 입력하면 초기값 입력
+        // Detail activity 불러올때, 기존의 경기결과 값 temp로 저장 후
+        // 저장할때 결과 값과 비교 후 처리
 
 
-        System.out.println("********Intent ID : " + intentId);
+       System.out.println("********Intent ID : " + intentId);
 
         final Cursor cursorList =MainActivity.sqLiteHelper.getData("SELECT * FROM list where gameid = "+intentId);
         while(cursorList.moveToNext()) {
@@ -104,11 +105,11 @@ public class gameDetailActivity extends AppCompatActivity {
                     int oppscore = cursorGames.getInt(6);
 
                     if(myscore > oppscore){
-                        sqLiteHelper.queryDate("update games set result = 2 where id = "+intentId +";");
+                        sqLiteHelper.queryDate("update games set result = 2 where id = "+intentId +";");//승
                     }else if(myscore < oppscore){
-                        sqLiteHelper.queryDate("update games set result = 0 where id = "+intentId +";");
+                        sqLiteHelper.queryDate("update games set result = 0 where id = "+intentId +";");//패
                     }else if(myscore == oppscore){
-                        sqLiteHelper.queryDate("update games set result = 1 where id = "+intentId +";");
+                        sqLiteHelper.queryDate("update games set result = 1 where id = "+intentId +";");//무
                     }
 
                     int result = cursorGames.getInt(7);

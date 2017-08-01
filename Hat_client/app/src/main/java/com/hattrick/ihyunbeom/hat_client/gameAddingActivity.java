@@ -85,10 +85,10 @@ public class gameAddingActivity extends AppCompatActivity {
 
                 System.out.println("경기 등록 전");
                 sqLiteHelper.queryDate("insert into games(year, month, day, opponent, myscore, oppscore, result) " +
-                        "values("+syear+", "+smonth+", "+sday+", '"+opp+"', 0, 0, 1);");
+                        "values("+syear+", "+smonth+", "+sday+", '"+opp+"', 0, 0, -1);");
                 //sqLiteHelper.queryDate("insert into games(year, month, day, opponent, myscore, oppscore, result) values(2017, 8, 12, 'opp1', 0, 0, 0);");
                 // listid 값 추가
-                sqLiteHelper.queryDate("update score set games = games + 1, draw = draw + 1");
+                sqLiteHelper.queryDate("update score set games = games + 1");
 
                 int gameid = 0;
 

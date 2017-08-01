@@ -103,13 +103,16 @@ public class GamesFragment extends Fragment {
             int result = cursorGames.getInt(7);
 
             String txtDate = Integer.toString(year) +"/"+ Integer.toString(month) +"/"+ Integer.toString(day);
-            String txtResult;
+            String txtResult = "";
             if(result == 0)
                 txtResult = "패";
             else if(result == 2)
                 txtResult = "승";
-            else
+            else if(result == 1)
                 txtResult = "무";
+            else if(result == -1)
+                txtResult = "미정";
+
             String txtScore = Integer.toString(myscore) + " : " + Integer.toString(oppscore);
 
             System.out.println("ID :"+ id +" 날짜 :"+ txtDate +" 상대팀 : " + opponent + " 점수 : " + txtScore + " 결과 : " + txtResult);
