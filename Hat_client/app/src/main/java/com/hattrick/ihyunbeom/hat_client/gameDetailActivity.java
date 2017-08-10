@@ -1,7 +1,10 @@
 package com.hattrick.ihyunbeom.hat_client;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
@@ -9,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class gameDetailActivity extends AppCompatActivity {
 
@@ -32,6 +36,10 @@ public class gameDetailActivity extends AppCompatActivity {
 
     private int pResult;
     private int rResult;
+
+    public static CustomDialog cumtomdialog;
+    private Activity activity;
+    private ListViewAdapter adapter;
 
 
     @Override
@@ -198,8 +206,24 @@ public class gameDetailActivity extends AppCompatActivity {
             }
         }) ;
 
-        //addMyGoal => selectPlayerList => goalPlayerList
+        activity = this;
 
+        //addMyGoal => selectPlayerList => goalPlayerList
+        addMyGoal = (Button)findViewById(R.id.addMyGoal);
+        addMyGoal.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                // Custom Dialog
+                cumtomdialog = new CustomDialog(activity, "DiaLog ListView", adapter, mClickCloseListener);
+                cumtomdialog.show();
+            }
+        }) ;
 
     }
+    Button.OnClickListener mClickCloseListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // Custom Dialog 종료
+            cumtomdialog.dismiss();
+        }
+    };
 }
