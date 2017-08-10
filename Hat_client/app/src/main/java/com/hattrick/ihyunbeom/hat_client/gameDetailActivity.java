@@ -30,6 +30,9 @@ public class gameDetailActivity extends AppCompatActivity {
 
     private int intentId;
 
+    private int pResult;
+    private int rResult;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +87,7 @@ public class gameDetailActivity extends AppCompatActivity {
             int myscore = cursorGames.getInt(5);
             int oppscore = cursorGames.getInt(6);
             int result = cursorGames.getInt(7);
+            pResult = result;
 
             date.setText(Integer.toString(year) + "/" + Integer.toString(month) + "/" + Integer.toString(day));
             oppName.setText(opponent);
@@ -101,6 +105,7 @@ public class gameDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sqLiteHelper.queryDate("update games set oppscore = oppscore + 1 where id = "+intentId +";");
+                sqLiteHelper.queryDate("update score set lost = lost + 1;");
 
                 final Cursor cursorGames =MainActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
                 while(cursorGames.moveToNext()){
@@ -109,10 +114,13 @@ public class gameDetailActivity extends AppCompatActivity {
 
                     if(myscore > oppscore){
                         sqLiteHelper.queryDate("update games set result = 2 where id = "+intentId +";");//승
+                        rResult = 2;
                     }else if(myscore < oppscore){
                         sqLiteHelper.queryDate("update games set result = 0 where id = "+intentId +";");//패
+                        rResult = 0;
                     }else if(myscore == oppscore){
                         sqLiteHelper.queryDate("update games set result = 1 where id = "+intentId +";");//무
+                        rResult = 1;
                     }
 
                     int result = cursorGames.getInt(7);
@@ -132,6 +140,7 @@ public class gameDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sqLiteHelper.queryDate("update games set oppscore = oppscore - 1 where id = "+intentId +";");
+                sqLiteHelper.queryDate("update score set lost = lost - 1;");
 
                 final Cursor cursorGames =MainActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
                 while(cursorGames.moveToNext()){
@@ -140,10 +149,13 @@ public class gameDetailActivity extends AppCompatActivity {
 
                     if(myscore > oppscore){
                         sqLiteHelper.queryDate("update games set result = 2 where id = "+intentId +";");
+                        rResult = 2;
                     }else if(myscore < oppscore){
                         sqLiteHelper.queryDate("update games set result = 0 where id = "+intentId +";");
+                        rResult = 0;
                     }else if(myscore == oppscore){
                         sqLiteHelper.queryDate("update games set result = 1 where id = "+intentId +";");
+                        rResult = 1;
                     }
 
                     int result = cursorGames.getInt(7);
@@ -160,6 +172,24 @@ public class gameDetailActivity extends AppCompatActivity {
         adding.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
 
+                if(rResult != pResult) {
+                    if (pResult == 0) {
+                        sqLiteHelper.queryDate("update score set lose = lose - 1;");
+                    } else if (pResult == 1) {
+                        sqLiteHelper.queryDate("update score set draw = draw - 1;");
+                    } else if (pResult == 2) {
+                        sqLiteHelper.queryDate("update score set win = win - 1;");
+                    }
+                    if (rResult == 0) {
+                        sqLiteHelper.queryDate("update score set lose = lose + 1;");
+                    } else if (rResult == 1) {
+                        sqLiteHelper.queryDate("update score set draw = draw + 1;");
+                    } else if (rResult == 2) {
+                        sqLiteHelper.queryDate("update score set win = win + 1;");
+                    }
+                }
+
+
                 Intent notiIconClickIntent = new Intent(gameDetailActivity.this, MainActivity.class);
                 notiIconClickIntent.putExtra("fragment", "games");
                 gameDetailActivity.this.startActivity(notiIconClickIntent);
@@ -167,6 +197,9 @@ public class gameDetailActivity extends AppCompatActivity {
 
             }
         }) ;
+
+        //addMyGoal => selectPlayerList => goalPlayerList
+
 
     }
 }

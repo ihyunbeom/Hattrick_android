@@ -88,7 +88,7 @@ public class gameAddingActivity extends AppCompatActivity {
                         "values("+syear+", "+smonth+", "+sday+", '"+opp+"', 0, 0, -1);");
                 //sqLiteHelper.queryDate("insert into games(year, month, day, opponent, myscore, oppscore, result) values(2017, 8, 12, 'opp1', 0, 0, 0);");
                 // listid 값 추가
-                sqLiteHelper.queryDate("update score set games = games + 1");
+                //sqLiteHelper.queryDate("update score set games = games + 1");
 
                 int gameid = 0;
 
@@ -105,6 +105,8 @@ public class gameAddingActivity extends AppCompatActivity {
                         sqLiteHelper.queryDate("update player set outing = outing + 1 where id = "+ (i+1));
                     }
                 }
+
+                sqLiteHelper.queryDate("update score set games = games + 1;");
 
                 //sqLiteHelper.queryDate("insert into list(gameid, playerid)" +
                 //        "values(" + gameid + "," + i+1 + ");");
