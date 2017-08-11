@@ -9,10 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class gameDetailActivity extends AppCompatActivity {
 
@@ -37,17 +40,24 @@ public class gameDetailActivity extends AppCompatActivity {
     private int pResult;
     private int rResult;
 
-    public static CustomDialog cumtomdialog;
-    private Activity activity;
-    private ListViewAdapter adapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_detail);
 
+
         sqLiteHelper= new SQLiteHelper(this,"TeamDB.sqlite", null,1);
+
+        // 빈 데이터 리스트 생성.
+        final ArrayList<String> items = new ArrayList<String>() ;
+        // ArrayAdapter 생성. 아이템 View를 선택(multiple choice)가능하도록.
+        final ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, items) ;
+        //simple_list_item_multiple_choice
+
+        listview = (ListView)findViewById(R.id.goalPlayerList);
+        listview.setAdapter(arrayAdapter);
+        listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
         date = (TextView)findViewById(R.id.textDate);
         myName = (TextView)findViewById(R.id.teamName);
@@ -83,7 +93,20 @@ public class gameDetailActivity extends AppCompatActivity {
             int playerid = cursorList.getInt(1);
 
             System.out.println("gameid = " + gameid + " playerid = " + playerid);
+
+            final Cursor cursorPlayer =MainActivity.sqLiteHelper.getData("SELECT * FROM player where id = "+playerid);
+            while(cursorPlayer.moveToNext()){
+                int id = cursorPlayer.getInt(0);
+                String name = cursorPlayer.getString(1);
+                String position = cursorPlayer.getString(2);
+                int outing = cursorPlayer.getInt(4);
+
+                items.add(name + " " + position + " " + outing);
+
+            }
         }
+
+
 
         final Cursor cursorGames =MainActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
         while(cursorGames.moveToNext()){
@@ -96,6 +119,7 @@ public class gameDetailActivity extends AppCompatActivity {
             int oppscore = cursorGames.getInt(6);
             int result = cursorGames.getInt(7);
             pResult = result;
+            rResult = pResult;
 
             date.setText(Integer.toString(year) + "/" + Integer.toString(month) + "/" + Integer.toString(day));
             oppName.setText(opponent);
@@ -206,24 +230,5 @@ public class gameDetailActivity extends AppCompatActivity {
             }
         }) ;
 
-        activity = this;
-
-        //addMyGoal => selectPlayerList => goalPlayerList
-        addMyGoal = (Button)findViewById(R.id.addMyGoal);
-        addMyGoal.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                // Custom Dialog
-                cumtomdialog = new CustomDialog(activity, "DiaLog ListView", adapter, mClickCloseListener);
-                cumtomdialog.show();
-            }
-        }) ;
-
     }
-    Button.OnClickListener mClickCloseListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            // Custom Dialog 종료
-            cumtomdialog.dismiss();
-        }
-    };
 }

@@ -96,8 +96,9 @@ public class gameAddingActivity extends AppCompatActivity {
                     gameid = cursorGames.getInt(0);
                 }
 
-                SparseBooleanArray checkedItems = listview.getCheckedItemPositions(); int count = arrayAdapter.getCount() ;
-                for (int i = count-1; i >= 0; i--) {
+                SparseBooleanArray checkedItems = listview.getCheckedItemPositions();
+                int count = arrayAdapter.getCount() ;
+                for (int i = 0; i < count; i++) {
                     if (checkedItems.get(i)) {
                         sqLiteHelper.queryDate("insert into list(gameid, playerid)" +
                                 "values(" + gameid + "," + (i+1) + ");");
