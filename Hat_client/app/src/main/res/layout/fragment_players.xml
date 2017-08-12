@@ -132,9 +132,10 @@
             <Button
                 android:id="@+id/addPlayer"
                 android:textSize="12dp"
+                android:textStyle="bold"
                 android:textColor="#ffffff"
-                android:layout_width="50dp"
-                android:layout_height="20dp"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
                 android:layout_gravity="right"
                 android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"

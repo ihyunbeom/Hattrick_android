@@ -4,6 +4,19 @@
     android:layout_height="match_parent"
     tools:context="com.hattrick.ihyunbeom.hat_client.FeeFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:text="준비중"
+            android:textColor="#8ebcb9"
+            />
+    </LinearLayout>
+
 
 
 </RelativeLayout>
