@@ -96,6 +96,7 @@ public class gameAddingActivity extends AppCompatActivity {
                     gameid = cursorGames.getInt(0);
                 }
 
+                // 출전선수 선택 리스트 (다중 체크리스트)
                 SparseBooleanArray checkedItems = listview.getCheckedItemPositions();
                 int count = arrayAdapter.getCount() ;
                 for (int i = 0; i < count; i++) {
