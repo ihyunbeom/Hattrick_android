@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_margin="10dp"
         android:background="#FFFFFF" >
 
         <Button
@@ -32,7 +33,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Opponent "
+                android:text="상대팀 "
                 android:textSize="18dp"/>
             <EditText
                 android:id="@+id/oppName"
@@ -48,7 +49,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Date : "
+                android:text="경기 날짜 : "
                 android:textSize="18dp"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -69,7 +70,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select outing Player "
+                android:text="출전 선수를 선택하세요 "
                 android:textSize="18dp"/>
             <ListView
                 android:id="@+id/selectPlayerList"

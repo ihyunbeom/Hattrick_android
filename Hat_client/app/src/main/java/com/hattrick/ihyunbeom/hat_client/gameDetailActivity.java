@@ -21,7 +21,7 @@ public class gameDetailActivity extends AppCompatActivity {
 
     public static SQLiteHelper sqLiteHelper;
 
-    private ListView listview ; //득점자 리스트
+    private ListView listview ;
 
     private TextView oppName;
     private TextView myName;
@@ -87,6 +87,7 @@ public class gameDetailActivity extends AppCompatActivity {
 
        System.out.println("********Intent ID : " + intentId);
 
+        // 2017.8.14 // 출전 선수 리스트 (한명 선택 => [+]버튼 => 해당선수 디비 수정, 해당경기 디비 수정, 스코어 비디 수정
         final Cursor cursorList =MainActivity.sqLiteHelper.getData("SELECT * FROM list where gameid = "+intentId);
         while(cursorList.moveToNext()) {
             int gameid = cursorList.getInt(0);
@@ -99,9 +100,10 @@ public class gameDetailActivity extends AppCompatActivity {
                 int id = cursorPlayer.getInt(0);
                 String name = cursorPlayer.getString(1);
                 String position = cursorPlayer.getString(2);
+                int goal = cursorPlayer.getInt(3);
                 int outing = cursorPlayer.getInt(4);
 
-                items.add(name + " " + position + " " + outing);
+                items.add(name + " " + position + " " + goal);
 
             }
         }
