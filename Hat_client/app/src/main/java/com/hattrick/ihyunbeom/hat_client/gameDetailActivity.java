@@ -166,6 +166,38 @@ public class gameDetailActivity extends AppCompatActivity {
                 }
             }
         });
+        addMyGoal.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                sqLiteHelper.queryDate("update games set myscore = myscore + 1 where id = "+intentId +";");
+                sqLiteHelper.queryDate("update score set goals = goals + 1;");
+
+                final Cursor cursorGames =MainActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
+                while(cursorGames.moveToNext()){
+                    int myscore = cursorGames.getInt(5);
+                    int oppscore = cursorGames.getInt(6);
+
+                    if(myscore > oppscore){
+                        sqLiteHelper.queryDate("update games set result = 2 where id = "+intentId +";");//승
+                        rResult = 2;
+                    }else if(myscore < oppscore){
+                        sqLiteHelper.queryDate("update games set result = 0 where id = "+intentId +";");//패
+                        rResult = 0;
+                    }else if(myscore == oppscore){
+                        sqLiteHelper.queryDate("update games set result = 1 where id = "+intentId +";");//무
+                        rResult = 1;
+                    }
+
+                    int result = cursorGames.getInt(7);
+
+                    myScore.setText(Integer.toString(myscore));
+
+                    System.out.println("NEXT => Result = " + result);
+
+                }
+            }
+        });
 
         deleteOppGoal.setOnClickListener(new View.OnClickListener(){
 
