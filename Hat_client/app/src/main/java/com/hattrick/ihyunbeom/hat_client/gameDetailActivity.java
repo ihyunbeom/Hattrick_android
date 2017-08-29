@@ -50,14 +50,14 @@ public class gameDetailActivity extends AppCompatActivity {
         sqLiteHelper= new SQLiteHelper(this,"TeamDB.sqlite", null,1);
 
         // 빈 데이터 리스트 생성.
-        final ArrayList<String> items = new ArrayList<String>() ;
+        //final ArrayList<String> items = new ArrayList<String>() ;
         // ArrayAdapter 생성. 아이템 View를 선택(multiple choice)가능하도록.
-        final ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, items) ;
+        //final ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, items) ;
         //simple_list_item_multiple_choice
 
-        listview = (ListView)findViewById(R.id.goalPlayerList);
-        listview.setAdapter(arrayAdapter);
-        listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        //listview = (ListView)findViewById(R.id.goalPlayerList);
+        //listview.setAdapter(arrayAdapter);
+        //listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
         date = (TextView)findViewById(R.id.textDate);
         myName = (TextView)findViewById(R.id.teamName);
@@ -69,7 +69,7 @@ public class gameDetailActivity extends AppCompatActivity {
         addOppGoal = (Button)findViewById(R.id.addOppGoal);
         deleteOppGoal = (Button)findViewById(R.id.deleteOppGoal);
 
-        Cursor cursor =MainActivity.sqLiteHelper.getData("SELECT * FROM team_info");
+        Cursor cursor =gameDetailActivity.sqLiteHelper.getData("SELECT * FROM team_info");
 
         while(cursor.moveToNext()){
             String teamName = cursor.getString(0);
@@ -85,8 +85,9 @@ public class gameDetailActivity extends AppCompatActivity {
         // 저장할때 결과 값과 비교 후 처리
 
 
-       System.out.println("********Intent ID : " + intentId);
+       System.out.println("********inGamedetail Intent ID : " + intentId);
 
+        /*
         // 2017.8.14 // 출전 선수 리스트 (한명 선택 => [+]버튼 => 해당선수 디비 수정, 해당경기 디비 수정, 스코어 비디 수정
         final Cursor cursorList =MainActivity.sqLiteHelper.getData("SELECT * FROM list where gameid = "+intentId);
         while(cursorList.moveToNext()) {
@@ -107,10 +108,10 @@ public class gameDetailActivity extends AppCompatActivity {
 
             }
         }
+        */
 
 
-
-        final Cursor cursorGames =MainActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
+        final Cursor cursorGames =gameDetailActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
         while(cursorGames.moveToNext()){
             int id = cursorGames.getInt(0);
             int year = cursorGames.getInt(1);
@@ -141,7 +142,7 @@ public class gameDetailActivity extends AppCompatActivity {
                 sqLiteHelper.queryDate("update games set oppscore = oppscore + 1 where id = "+intentId +";");
                 sqLiteHelper.queryDate("update score set lost = lost + 1;");
 
-                final Cursor cursorGames =MainActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
+                final Cursor cursorGames =gameDetailActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
                 while(cursorGames.moveToNext()){
                     int myscore = cursorGames.getInt(5);
                     int oppscore = cursorGames.getInt(6);
@@ -170,32 +171,10 @@ public class gameDetailActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                sqLiteHelper.queryDate("update games set myscore = myscore + 1 where id = "+intentId +";");
-                sqLiteHelper.queryDate("update score set goals = goals + 1;");
+                Intent myIntent =new Intent(gameDetailActivity.this, OutingPlayer.class);
+                myIntent.putExtra("id", intentId);
+                startActivity(myIntent);
 
-                final Cursor cursorGames =MainActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
-                while(cursorGames.moveToNext()){
-                    int myscore = cursorGames.getInt(5);
-                    int oppscore = cursorGames.getInt(6);
-
-                    if(myscore > oppscore){
-                        sqLiteHelper.queryDate("update games set result = 2 where id = "+intentId +";");//승
-                        rResult = 2;
-                    }else if(myscore < oppscore){
-                        sqLiteHelper.queryDate("update games set result = 0 where id = "+intentId +";");//패
-                        rResult = 0;
-                    }else if(myscore == oppscore){
-                        sqLiteHelper.queryDate("update games set result = 1 where id = "+intentId +";");//무
-                        rResult = 1;
-                    }
-
-                    int result = cursorGames.getInt(7);
-
-                    myScore.setText(Integer.toString(myscore));
-
-                    System.out.println("NEXT => Result = " + result);
-
-                }
             }
         });
 
@@ -208,7 +187,7 @@ public class gameDetailActivity extends AppCompatActivity {
                 sqLiteHelper.queryDate("update games set oppscore = oppscore - 1 where id = "+intentId +";");
                 sqLiteHelper.queryDate("update score set lost = lost - 1;");
 
-                final Cursor cursorGames =MainActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
+                final Cursor cursorGames =gameDetailActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
                 while(cursorGames.moveToNext()){
                     int myscore = cursorGames.getInt(5);
                     int oppscore = cursorGames.getInt(6);

@@ -137,13 +137,6 @@
                 android:layout_marginRight="5dp"
                 android:id="@+id/addMyGoal"/>
 
-            <ListView
-                android:id="@+id/goalPlayerList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:choiceMode="multipleChoice">
-
-            </ListView>
         </LinearLayout>
 
 
