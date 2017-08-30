@@ -85,6 +85,8 @@ public class gameDetailActivity extends AppCompatActivity {
         // 저장할때 결과 값과 비교 후 처리
 
 
+
+
        System.out.println("********inGamedetail Intent ID : " + intentId);
 
         /*
@@ -123,6 +125,71 @@ public class gameDetailActivity extends AppCompatActivity {
             int result = cursorGames.getInt(7);
             pResult = result;
             rResult = pResult;
+
+            if(rResult == -1){
+                if (myscore < oppscore) {
+                    sqLiteHelper.queryDate("update games set result = 0 where id = " + intentId + ";");
+                    sqLiteHelper.queryDate("update score set lose = lose + 1;");
+                    pResult = 0;
+                    rResult = pResult;
+                } else if (myscore == oppscore) {
+                    sqLiteHelper.queryDate("update games set result = 1 where id = " + intentId + ";");
+                    sqLiteHelper.queryDate("update score set draw = draw + 1;");
+                    pResult = 1;
+                    rResult = pResult;
+                } else if (myscore > oppscore) {
+                    sqLiteHelper.queryDate("update games set result = 2 where id = " + intentId + ";");
+                    sqLiteHelper.queryDate("update score set win = win + 1;");
+                    pResult = 2;
+                    rResult = pResult;
+                }
+
+            }else if(rResult == 2){
+                if (myscore < oppscore) {
+                    sqLiteHelper.queryDate("update games set result = 0 where id = " + intentId + ";");
+                    sqLiteHelper.queryDate("update score set win = win - 1;");
+                    sqLiteHelper.queryDate("update score set lose = lose + 1;");
+                    pResult = 0;
+                    rResult = pResult;
+                } else if (myscore == oppscore) {
+                    sqLiteHelper.queryDate("update games set result = 1 where id = " + intentId + ";");
+                    sqLiteHelper.queryDate("update score set win = win - 1;");
+                    sqLiteHelper.queryDate("update score set draw = draw + 1;");
+                    pResult = 1;
+                    rResult = pResult;
+                }
+            }else if(rResult == 1){
+                if (myscore < oppscore) {
+                    sqLiteHelper.queryDate("update games set result = 0 where id = " + intentId + ";");
+                    sqLiteHelper.queryDate("update score set draw = draw - 1;");
+                    sqLiteHelper.queryDate("update score set lose = lose + 1;");
+                    pResult = 0;
+                    rResult = pResult;
+                } else if (myscore > oppscore) {
+                    sqLiteHelper.queryDate("update games set result = 2 where id = " + intentId + ";");
+                    sqLiteHelper.queryDate("update score set draw = draw - 1;");
+                    sqLiteHelper.queryDate("update score set win = win + 1;");
+                    pResult = 2;
+                    rResult = pResult;
+                }
+            }else if(rResult == 0){
+                if (myscore > oppscore) {
+                    sqLiteHelper.queryDate("update games set result = 2 where id = " + intentId + ";");
+                    sqLiteHelper.queryDate("update score set lose = lose - 1;");
+                    sqLiteHelper.queryDate("update score set win = win + 1;");
+                    pResult = 2;
+                    rResult = pResult;
+                } else if (myscore == oppscore) {
+                    sqLiteHelper.queryDate("update games set result = 1 where id = " + intentId + ";");
+                    sqLiteHelper.queryDate("update score set lose = lose - 1;");
+                    sqLiteHelper.queryDate("update score set draw = draw + 1;");
+                    pResult = 1;
+                    rResult = pResult;
+                }
+            }
+
+
+
 
             date.setText(Integer.toString(year) + "/" + Integer.toString(month) + "/" + Integer.toString(day));
             oppName.setText(opponent);

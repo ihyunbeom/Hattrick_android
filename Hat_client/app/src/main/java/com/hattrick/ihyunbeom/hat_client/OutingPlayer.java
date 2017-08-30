@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
+import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -16,7 +19,12 @@ public class OutingPlayer extends AppCompatActivity {
 
     private ListView listview ;
 
+    private Button adding;
+    private Button cancel;
+
     private int intentId;
+
+    ArrayList<Player> playerArray = new ArrayList<Player>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +37,7 @@ public class OutingPlayer extends AppCompatActivity {
         final Intent intent = getIntent(); // 보내온 Intent를 얻는다
         intentId=intent.getIntExtra("id",-1);
 
-        System.out.println("********Intent ID : " + intentId);
+        System.out.println("OutingPlayer Intent ID : " + intentId);
 
         final ArrayList<String> items = new ArrayList<String>() ;
         // ArrayAdapter 생성. 아이템 View를 선택(multiple choice)가능하도록.
@@ -49,7 +57,7 @@ public class OutingPlayer extends AppCompatActivity {
             int gameid = cursorList.getInt(0);
             int playerid = cursorList.getInt(1);
 
-            System.out.println("gameid = " + gameid + " playerid = " + playerid);
+            System.out.println("Outing playerid = " + playerid);
 
             final Cursor cursorPlayer =OutingPlayer.sqLiteHelper.getData("SELECT * FROM player where id = "+playerid);
             while(cursorPlayer.moveToNext()){
@@ -59,9 +67,75 @@ public class OutingPlayer extends AppCompatActivity {
                 int goal = cursorPlayer.getInt(3);
                 int outing = cursorPlayer.getInt(4);
 
+                playerArray.add(new Player(id,name, position, goal, outing));
+
                 items.add(name + " " + position + " " + goal);
 
             }
         }
+
+        final Cursor cursorGames =MainActivity.sqLiteHelper.getData("SELECT * FROM games");
+        adding = (Button)findViewById(R.id.adding);
+        adding.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+
+                System.out.println("득점 등록 전");
+
+                // 출전선수 선택 리스트 (다중 체크리스트)
+                //SparseBooleanArray checkedItems = listview.getCheckedItemPositions();
+                //checked = listview.getCheckedItemPositions();
+                //System.out.println("Checked_Item : " + checkedItems);
+                //System.out.println("Checked_PlayerID : ");
+
+                int count, checked ;
+                count = arrayAdapter.getCount() ;
+
+                if (count > 0) {
+                    // 현재 선택된 아이템의 position 획득.
+                    checked = listview.getCheckedItemPosition();
+                    if (checked > -1 && checked < count) {
+                        //System.out.println("Checked_PlayerID : " + items.get(checked));
+                        System.out.println("Checked_PlayerID : " + playerArray.get(checked).id);
+
+                        sqLiteHelper.queryDate("update games set myscore = myscore + 1 where id = "+intentId +";");
+                        sqLiteHelper.queryDate("update score set goals = goals + 1;");
+                        sqLiteHelper.queryDate("update player set goal = goal + 1 where id = "+ playerArray.get(checked).id);
+
+                        // listview 갱신
+                        arrayAdapter.notifyDataSetChanged();
+                    }
+                }
+
+
+
+                Intent myIntent =new Intent(OutingPlayer.this, gameDetailActivity.class);
+                myIntent.putExtra("id", intentId);
+                startActivity(myIntent);
+
+
+            }
+        }) ;
+    }
+
+    class Player {
+
+        int id;
+        String name ="" ;
+        String position;
+        int goal;
+        int outing;
+
+        public Player(int id, String name, String position, int goal, int outing ) {
+            super();
+            this.id = id;
+            this.name = name;
+            this.position = position;
+            this.goal = goal;
+            this.outing = outing;
+        }
+
+        public Player() {
+        }
+
     }
 }
