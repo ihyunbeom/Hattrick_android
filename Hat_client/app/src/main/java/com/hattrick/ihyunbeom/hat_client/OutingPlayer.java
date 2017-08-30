@@ -106,12 +106,21 @@ public class OutingPlayer extends AppCompatActivity {
                     }
                 }
 
-
-
                 Intent myIntent =new Intent(OutingPlayer.this, gameDetailActivity.class);
                 myIntent.putExtra("id", intentId);
                 startActivity(myIntent);
 
+
+            }
+        }) ;
+
+        cancel = (Button)findViewById(R.id.cancel);
+        cancel.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+
+                Intent myIntent =new Intent(OutingPlayer.this, gameDetailActivity.class);
+                myIntent.putExtra("id", intentId);
+                startActivity(myIntent);
 
             }
         }) ;

@@ -52,7 +52,5 @@ public class teamSettingActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 }
