@@ -59,8 +59,34 @@ public class MainActivity extends AppCompatActivity
                 "lose integer);");
 
         if (isFirstTime()) {
-            sqLiteHelper.queryDate("insert into position(fw, mf, df, gk, total) values(0,0,0,0,0);");
+            sqLiteHelper.queryDate("insert into position(fw, mf, df, gk, total) values(3,10,6,3,22);");
             sqLiteHelper.queryDate("insert into score(games, goals, lost, win, draw, lose) values(0,0,0,0,0,0);");
+
+            // 선수등록 테스트
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김승규','GK',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김진현','GK',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김영권','GK',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김진수','DF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('고요한','DF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김민우','DF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김주영','DF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('최철순','DF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김민재','DF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('이근호','MF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('구자철','MF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('손흥민','MF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('염기훈','MF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('장현수','MF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김보경','MF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('이재성','MF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('정우영','MF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('권창훈','MF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('권경원','MF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('이동국','FW',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김신욱','FW',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('황희찬','FW',0,0);");
+
+
         }
         //경기
         sqLiteHelper.queryDate("create table if not exists games( " +
