@@ -240,11 +240,12 @@ public class gameDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // 삭제해야할 테이블
-                // games 해당 id
-                // goals 해당 gameid
                 // player 출전선수들의 득점수, 출전수 -1
+                // goals 해당 gameid
                 // list 해당 gameid
-                
+                // score 결과에 해당하는 값 -1, 경기수 -1, 득점 또는 실점 초기화
+                // games 해당 id
+
                 Intent notiIconClickIntent = new Intent(gameDetailActivity.this, MainActivity.class);
                 notiIconClickIntent.putExtra("fragment", "games");
                 gameDetailActivity.this.startActivity(notiIconClickIntent);
