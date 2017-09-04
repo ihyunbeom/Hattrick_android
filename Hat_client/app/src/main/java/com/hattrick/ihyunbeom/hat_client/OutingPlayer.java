@@ -100,6 +100,8 @@ public class OutingPlayer extends AppCompatActivity {
                         sqLiteHelper.queryDate("update games set myscore = myscore + 1 where id = "+intentId +";");
                         sqLiteHelper.queryDate("update score set goals = goals + 1;");
                         sqLiteHelper.queryDate("update player set goal = goal + 1 where id = "+ playerArray.get(checked).id);
+                        sqLiteHelper.queryDate("insert into goals(gameid, playerid)" +
+                                "values(" + intentId + "," + playerArray.get(checked).id + ");");
 
                         // listview 갱신
                         arrayAdapter.notifyDataSetChanged();

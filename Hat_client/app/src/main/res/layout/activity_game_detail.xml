@@ -14,22 +14,41 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/adding"
-            android:textSize="12dp"
-            android:textStyle="bold"
-            android:textColor="#ffffff"
-            android:layout_width="80dp"
-            android:layout_height="30dp"
-            android:layout_gravity="right"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:background="#8ebcb9"
-            android:text="저 장"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="10"
+        android:orientation="horizontal">
+            <Button
+                android:id="@+id/delete"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="#ff7c7c"
+                android:text="기 록 삭 제"/>
+
+            <Button
+                android:id="@+id/adding"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_weight="9"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="#8ebcb9"
+                android:text="수 정 완 료"/>
+        </LinearLayout>
 
         <TextView
             android:text="Date"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textDate"
@@ -51,19 +70,19 @@
                     <TextView
                         android:id="@+id/teamName"
                         android:text="My team"
-                        android:textSize="20dp"
+                        android:textSize="18dp"
                         android:padding="10dp"
                         android:gravity="center_horizontal"
                         android:textColor="#000000"/>
                     <TextView
                         android:text="VS"
-                        android:textSize="20dp"
+                        android:textSize="18dp"
                         android:padding="10dp"
                         android:gravity="center_horizontal"/>
                     <TextView
                         android:id="@+id/oppName"
                         android:text="Opponant"
-                        android:textSize="20dp"
+                        android:textSize="18dp"
                         android:padding="10dp"
                         android:gravity="center_horizontal"
                         android:textColor="#000000"/>
@@ -74,11 +93,11 @@
                         android:text="5"
                         android:textColor="#3f59ff"
                         android:id="@+id/myScore"
-                        android:textSize="40dp"
+                        android:textSize="30dp"
                         android:padding="10dp"
                         android:gravity="center_horizontal"/>
                     <TextView
-                        android:textSize="20dp"
+                        android:textSize="30dp"
                         android:textColor="#3f59ff"
                         android:padding="10dp"
                         android:gravity="center_horizontal"/>
@@ -86,7 +105,7 @@
                         android:text="3"
                         android:textColor="#ff3f3f"
                         android:id="@+id/oppScore"
-                        android:textSize="40dp"
+                        android:textSize="30dp"
                         android:padding="10dp"
                         android:gravity="center_horizontal"/>
                 </TableRow>
@@ -107,15 +126,20 @@
 
             <Button
                 android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:textColor="#3f59ff"
+                android:layout_height="30dp"
+                android:textColor="#ffffff"
+                android:background="#8ebcb9"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
                 android:text="+"
                 android:id="@+id/addOppGoal"/>
 
             <Button
                 android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:textColor="#ff3f3f"
+                android:layout_height="30dp"
+                android:textColor="#ffffff"
+                android:background="#ffa8a8"
+                android:layout_marginBottom="10dp"
                 android:text="-"
                 android:id="@+id/deleteOppGoal"/>
 
@@ -128,19 +152,46 @@
             android:paddingBottom="10dp"
             android:orientation="vertical">
 
-            <Button
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:textColor="#3f59ff"
-                android:text="+"
-                android:layout_gravity="left"
-                android:layout_marginRight="5dp"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:weightSum="3"
+                android:orientation="horizontal">
+            <Button
+                android:layout_width="160dp"
+                android:layout_height="30dp"
+                android:textColor="#ffffff"
+                android:background="#8ebcb9"
+                android:text="득 점 !"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="2"
                 android:id="@+id/addMyGoal"/>
 
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:textColor="#ffffff"
+                android:background="#ffa8a8"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:text="취 소"
+                android:id="@+id/deleteMyGoal"/>
+                </LinearLayout>
+
+            <ListView
+                android:id="@+id/goalPlayerList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </ListView>
+
         </LinearLayout>
-
-
-
 
     </LinearLayout>
 

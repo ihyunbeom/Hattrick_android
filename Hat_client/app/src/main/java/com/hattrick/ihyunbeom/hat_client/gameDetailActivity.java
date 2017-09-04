@@ -32,12 +32,15 @@ public class gameDetailActivity extends AppCompatActivity {
     private Button addMyGoal;
     private Button addOppGoal;
     private Button deleteOppGoal;
+    private Button deleteMyGoal;
 
     private Button adding;
 
     private int intentId;
 
     private int rResult;
+
+    ArrayList<Player> playerArray = new ArrayList<Player>();
 
 
     @Override
@@ -56,6 +59,12 @@ public class gameDetailActivity extends AppCompatActivity {
         addMyGoal = (Button)findViewById(R.id.addMyGoal);
         addOppGoal = (Button)findViewById(R.id.addOppGoal);
         deleteOppGoal = (Button)findViewById(R.id.deleteOppGoal);
+        deleteMyGoal = (Button)findViewById(R.id.deleteMyGoal);
+
+        final ArrayList<String> items = new ArrayList<String>() ;
+        // ArrayAdapter 생성. 아이템 View를 선택(multiple choice)가능하도록.
+        final ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, items) ;
+        //simple_list_item_multiple_choice
 
         Cursor cursor =gameDetailActivity.sqLiteHelper.getData("SELECT * FROM team_info");
 
@@ -66,6 +75,35 @@ public class gameDetailActivity extends AppCompatActivity {
 
         final Intent intent = getIntent(); // 보내온 Intent를 얻는다
         intentId=intent.getIntExtra("id",0);
+
+        System.out.println("(detail)listview setup start " );
+
+        listview = (ListView)findViewById(R.id.goalPlayerList);
+        listview.setAdapter(arrayAdapter);
+        listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        System.out.println("(detail)listview setup end " );
+
+        // 2017.8.14 // 출전 선수 리스트 (한명 선택 => [+]버튼 => 해당선수 디비 수정, 해당경기 디비 수정, 스코어 비디 수정
+        final Cursor cursorList =gameDetailActivity.sqLiteHelper.getData("SELECT * FROM goals where gameid = "+intentId);
+        while(cursorList.moveToNext()) {
+            int order = cursorList.getInt(0);
+            int gameid = cursorList.getInt(1);
+            int playerid = cursorList.getInt(2);
+
+            System.out.println("Goal playerid = " + playerid);
+
+            final Cursor cursorPlayer =gameDetailActivity.sqLiteHelper.getData("SELECT * FROM player where id = "+playerid);
+            while(cursorPlayer.moveToNext()){
+                int id = cursorPlayer.getInt(0);
+                String name = cursorPlayer.getString(1);
+                String position = cursorPlayer.getString(2);
+
+                playerArray.add(new Player(id,name,position,order));
+
+                items.add(name + "              " + position);
+
+            }
+        }
 
         // 경기 세부사항에서 득점선수 수직으로 보여주기
         // 선수 삭제 기능 추가 >> 가비지테이블에 저장
@@ -96,7 +134,7 @@ public class gameDetailActivity extends AppCompatActivity {
 
             //checkedScore(rResult, myscore, oppscore);
 
-            date.setText(Integer.toString(year) + "/" + Integer.toString(month) + "/" + Integer.toString(day));
+            date.setText(Integer.toString(year) + "년" + Integer.toString(month) + "월" + Integer.toString(day) + "일");
             oppName.setText(opponent);
             myScore.setText(Integer.toString(myscore));
             oppScore.setText(Integer.toString(oppscore));
@@ -191,6 +229,45 @@ public class gameDetailActivity extends AppCompatActivity {
             }
         }) ;
 
+        deleteMyGoal.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+
+                System.out.println("득점 삭제 전");
+
+                // 출전선수 선택 리스트 (다중 체크리스트)
+                //SparseBooleanArray checkedItems = listview.getCheckedItemPositions();
+                //checked = listview.getCheckedItemPositions();
+                //System.out.println("Checked_Item : " + checkedItems);
+                //System.out.println("Checked_PlayerID : ");
+
+                int count, checked ;
+                count = arrayAdapter.getCount() ;
+
+                if (count > 0) {
+                    // 현재 선택된 아이템의 position 획득.
+                    checked = listview.getCheckedItemPosition();
+                    if (checked > -1 && checked < count) {
+                        //System.out.println("Checked_PlayerID : " + items.get(checked));
+                        System.out.println("Checked_PlayerID : " + playerArray.get(checked).id);
+
+                        sqLiteHelper.queryDate("update games set myscore = myscore - 1 where id = "+intentId +";");
+                        sqLiteHelper.queryDate("update score set goals = goals - 1;");
+                        sqLiteHelper.queryDate("update player set goal = goal - 1 where id = "+ playerArray.get(checked).id);
+                        sqLiteHelper.queryDate("delete from goals where id = " + playerArray.get(checked).order + ";");
+                        //delete from mytable where id=2;
+
+                        // listview 갱신
+                        arrayAdapter.notifyDataSetChanged();
+                    }
+                }
+
+                Intent myIntent =new Intent(gameDetailActivity.this, gameDetailActivity.class);
+                myIntent.putExtra("id", intentId);
+                startActivity(myIntent);
+
+            }
+        }) ;
+
     }
     @Override public void onBackPressed() {
          //super.onBackPressed();
@@ -249,6 +326,26 @@ public class gameDetailActivity extends AppCompatActivity {
                 rResult = 1;
             }
         }
+    }
+
+    class Player {
+
+        int id;
+        int order;
+        String name ="" ;
+        String position;
+
+        public Player(int id, String name, String position, int order) {
+            super();
+            this.id = id;
+            this.name = name;
+            this.position = position;
+            this.order = order;
+        }
+
+        public Player() {
+        }
+
     }
 
 }
