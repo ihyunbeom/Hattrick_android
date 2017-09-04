@@ -33,6 +33,7 @@ public class gameDetailActivity extends AppCompatActivity {
     private Button addOppGoal;
     private Button deleteOppGoal;
     private Button deleteMyGoal;
+    private Button delete;
 
     private Button adding;
 
@@ -105,9 +106,7 @@ public class gameDetailActivity extends AppCompatActivity {
             }
         }
 
-        // 경기 세부사항에서 득점선수 수직으로 보여주기
         // 선수 삭제 기능 추가 >> 가비지테이블에 저장
-        // 경기 삭제 기능 추가 >> 삭제 (복구 불가능 메세지 출력) >> 해당경기의 결과,득점,득점선수기록,출전선수기록,실점 원상태로 초기화
         // 경기등록화면에서 선수명단 >> 팝업창으로 전환
         // 현재전적에 맞는 그래프 찾기
         // 선수현황에 맞는 그래프 찾기
@@ -134,7 +133,7 @@ public class gameDetailActivity extends AppCompatActivity {
 
             //checkedScore(rResult, myscore, oppscore);
 
-            date.setText(Integer.toString(year) + "년" + Integer.toString(month) + "월" + Integer.toString(day) + "일");
+            date.setText(Integer.toString(year) + "년 " + Integer.toString(month) + "월 " + Integer.toString(day) + "일");
             oppName.setText(opponent);
             myScore.setText(Integer.toString(myscore));
             oppScore.setText(Integer.toString(oppscore));
@@ -185,8 +184,8 @@ public class gameDetailActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                sqLiteHelper.queryDate("update games set oppscore = oppscore - 1 where id = "+intentId +";");
-                sqLiteHelper.queryDate("update score set lost = lost - 1;");
+
+                boolean check = false;
 
                 final Cursor cursorGames =gameDetailActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
                 while(cursorGames.moveToNext()){
@@ -195,12 +194,20 @@ public class gameDetailActivity extends AppCompatActivity {
 
                     //checkedScore(rResult, myscore, oppscore);
 
+                    if(oppscore > 0)
+                        check = true;
                     int result = cursorGames.getInt(7);
 
-                    oppScore.setText(Integer.toString(oppscore));
+                    if(check)
+                        oppScore.setText(Integer.toString(oppscore-1));
 
                     System.out.println("NEXT => Result = " + result);
 
+                }
+
+                if(check) {
+                    sqLiteHelper.queryDate("update games set oppscore = oppscore - 1 where id = " + intentId + ";");
+                    sqLiteHelper.queryDate("update score set lost = lost - 1;");
                 }
             }
         });
@@ -225,6 +232,22 @@ public class gameDetailActivity extends AppCompatActivity {
                 notiIconClickIntent.putExtra("fragment", "games");
                 gameDetailActivity.this.startActivity(notiIconClickIntent);
 
+
+            }
+        }) ;
+        delete = (Button)findViewById(R.id.delete);
+        delete.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+
+                // 삭제해야할 테이블
+                // games 해당 id
+                // goals 해당 gameid
+                // player 출전선수들의 득점수, 출전수 -1
+                // list 해당 gameid
+                
+                Intent notiIconClickIntent = new Intent(gameDetailActivity.this, MainActivity.class);
+                notiIconClickIntent.putExtra("fragment", "games");
+                gameDetailActivity.this.startActivity(notiIconClickIntent);
 
             }
         }) ;
