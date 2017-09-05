@@ -1,16 +1,15 @@
 package com.hattrick.ihyunbeom.hat_client;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-public class teamSettingActivity extends AppCompatActivity {
+public class TeamSettingActivity extends AppCompatActivity {
 
     public static SQLiteHelper sqLiteHelper;
 
@@ -32,6 +31,27 @@ public class teamSettingActivity extends AppCompatActivity {
 
         sqLiteHelper= new SQLiteHelper(this,"TeamDB.sqlite", null,1);
 
+        Cursor cursor =MainActivity.sqLiteHelper.getData("SELECT * FROM team_info");
+
+        while(cursor.moveToNext()){
+            String teamName = cursor.getString(0);
+            String managerName = cursor.getString(1);
+            String created =cursor.getString(2);
+
+            //System.out.println("팀명 : " + teamName);
+            //System.out.println("매니저 : " + managerName);
+            //System.out.println("창단일 : " + created);
+
+            teamSetting.setText(teamName);
+            managerSetting.setText(managerName);
+            createdSetting.setText(created);
+
+            //System.out.println("팀정보 입력 완료");
+        }
+
+
+
+
         setting.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -44,10 +64,10 @@ public class teamSettingActivity extends AppCompatActivity {
                 String title = getString(R.string.app_name);
 
                 sqLiteHelper.queryDate("insert into team_info(team, manager, created) values('"+ teamName +"', '"+ managerName +"', '"+ created +"');");
-                System.out.println("팀정보 수정 완료");
+                //System.out.println("팀정보 수정 완료");
 
-                Intent signin = new Intent(teamSettingActivity.this, MainActivity.class);
-                teamSettingActivity.this.startActivity(signin);
+                Intent signin = new Intent(TeamSettingActivity.this, MainActivity.class);
+                TeamSettingActivity.this.startActivity(signin);
 
 
             }

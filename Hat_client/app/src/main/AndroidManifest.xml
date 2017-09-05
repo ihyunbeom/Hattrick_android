@@ -21,11 +21,15 @@
             android:name=".MainActivity"
             android:label="풋살 매니저"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".teamSettingActivity" />
-        <activity android:name=".playerSettingActivity" />
-        <activity android:name=".gameAddingActivity" />
-        <activity android:name=".gameDetailActivity" />
-        <activity android:name=".OutingPlayer" android:theme="@style/PopupTheme"></activity>
+        <activity android:name=".TeamSettingActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".PlayerSettingActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".GameAddingActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".GameDetailActivity" />
+        <activity android:name=".OutingPlayer"
+            android:theme="@style/PopupTheme"></activity>
     </application>
 
 </manifest>

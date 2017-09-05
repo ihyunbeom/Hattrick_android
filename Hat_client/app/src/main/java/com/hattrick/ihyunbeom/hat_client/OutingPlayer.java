@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
@@ -37,19 +36,19 @@ public class OutingPlayer extends AppCompatActivity {
         final Intent intent = getIntent(); // 보내온 Intent를 얻는다
         intentId=intent.getIntExtra("id",-1);
 
-        System.out.println("OutingPlayer Intent ID : " + intentId);
+        //System.out.println("OutingPlayer Intent ID : " + intentId);
 
         final ArrayList<String> items = new ArrayList<String>() ;
         // ArrayAdapter 생성. 아이템 View를 선택(multiple choice)가능하도록.
         final ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, items) ;
         //simple_list_item_multiple_choice
 
-        System.out.println("listview setup start " );
+        //System.out.println("listview setup start " );
 
         listview = (ListView)findViewById(R.id.goalPlayerList);
         listview.setAdapter(arrayAdapter);
         listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        System.out.println("listview setup end " );
+        //System.out.println("listview setup end " );
 
         // 2017.8.14 // 출전 선수 리스트 (한명 선택 => [+]버튼 => 해당선수 디비 수정, 해당경기 디비 수정, 스코어 비디 수정
         final Cursor cursorList =OutingPlayer.sqLiteHelper.getData("SELECT * FROM list where gameid = "+intentId);
@@ -57,7 +56,7 @@ public class OutingPlayer extends AppCompatActivity {
             int gameid = cursorList.getInt(0);
             int playerid = cursorList.getInt(1);
 
-            System.out.println("Outing playerid = " + playerid);
+            //System.out.println("Outing playerid = " + playerid);
 
             final Cursor cursorPlayer =OutingPlayer.sqLiteHelper.getData("SELECT * FROM player where id = "+playerid);
             while(cursorPlayer.moveToNext()){
@@ -69,7 +68,7 @@ public class OutingPlayer extends AppCompatActivity {
 
                 playerArray.add(new Player(id,name, position, goal, outing));
 
-                items.add(name + " " + position + " " + goal);
+                items.add(position + "    "+ name);
 
             }
         }
@@ -79,7 +78,7 @@ public class OutingPlayer extends AppCompatActivity {
         adding.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
 
-                System.out.println("득점 등록 전");
+                //System.out.println("득점 등록 전");
 
                 // 출전선수 선택 리스트 (다중 체크리스트)
                 //SparseBooleanArray checkedItems = listview.getCheckedItemPositions();
@@ -95,7 +94,7 @@ public class OutingPlayer extends AppCompatActivity {
                     checked = listview.getCheckedItemPosition();
                     if (checked > -1 && checked < count) {
                         //System.out.println("Checked_PlayerID : " + items.get(checked));
-                        System.out.println("Checked_PlayerID : " + playerArray.get(checked).id);
+                        //System.out.println("Checked_PlayerID : " + playerArray.get(checked).id);
 
                         sqLiteHelper.queryDate("update games set myscore = myscore + 1 where id = "+intentId +";");
                         sqLiteHelper.queryDate("update score set goals = goals + 1;");
@@ -108,9 +107,10 @@ public class OutingPlayer extends AppCompatActivity {
                     }
                 }
 
-                Intent myIntent =new Intent(OutingPlayer.this, gameDetailActivity.class);
+                Intent myIntent =new Intent(OutingPlayer.this, GameDetailActivity.class);
                 myIntent.putExtra("id", intentId);
                 startActivity(myIntent);
+                overridePendingTransition(0, 0);
 
 
             }
@@ -120,9 +120,10 @@ public class OutingPlayer extends AppCompatActivity {
         cancel.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
 
-                Intent myIntent =new Intent(OutingPlayer.this, gameDetailActivity.class);
+                Intent myIntent =new Intent(OutingPlayer.this, GameDetailActivity.class);
                 myIntent.putExtra("id", intentId);
                 startActivity(myIntent);
+                overridePendingTransition(0, 0);
 
             }
         }) ;

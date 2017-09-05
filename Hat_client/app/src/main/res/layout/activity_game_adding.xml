@@ -4,7 +4,7 @@
     android:id="@+id/activity_game_adding"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hattrick.ihyunbeom.hat_client.gameAddingActivity">
+    tools:context="com.hattrick.ihyunbeom.hat_client.GameAddingActivity">
 
     <LinearLayout
         android:id="@+id/fl_activity_main_container"
@@ -19,16 +19,17 @@
             android:textSize="12dp"
             android:textStyle="bold"
             android:textColor="#ffffff"
-            android:layout_width="80dp"
-            android:layout_height="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_gravity="right"
             android:layout_margin="10dp"
-            android:background="#8ebcb9"
+            android:background="@color/colorPrimary"
             android:text="저 장"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
@@ -45,6 +46,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
@@ -55,30 +57,39 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/dateText"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
                 android:text=""
                 android:textSize="18dp"/>
 
         </LinearLayout>
-        <DatePicker
+        <Button
+            android:id="@+id/datepicker"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="#8ebcb9"
+            android:text="날 짜 선 택"/>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/datePicker"
-            android:layout_gravity="center_horizontal"
-            android:datePickerMode="spinner"
-            android:calendarViewShown="false"/>
+            android:text="출전 선수를 선택하세요 "
+            android:layout_marginBottom="10dp"
+            android:textSize="18dp"/>
+        <ListView
+            android:id="@+id/selectPlayerList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:choiceMode="multipleChoice">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="출전 선수를 선택하세요 "
-                android:textSize="18dp"/>
-            <ListView
-                android:id="@+id/selectPlayerList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:choiceMode="multipleChoice">
-
-            </ListView>
+        </ListView>
 
 
 

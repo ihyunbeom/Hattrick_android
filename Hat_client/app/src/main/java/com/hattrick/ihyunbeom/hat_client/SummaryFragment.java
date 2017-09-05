@@ -91,31 +91,33 @@ public class SummaryFragment extends Fragment {
 
         teamSetting = (Button) view.findViewById(R.id.team_info_setting); // activity 호출 버튼(팝업창)
 
-        Cursor cursor =MainActivity.sqLiteHelper.getData("SELECT * FROM team_info");
+
 
         teamSetting.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                Intent setting = new Intent(getActivity(), teamSettingActivity.class);
+                Intent setting = new Intent(getActivity(), TeamSettingActivity.class);
                 getActivity().startActivity(setting);
             }
         });
+
+        Cursor cursor =MainActivity.sqLiteHelper.getData("SELECT * FROM team_info");
 
         while(cursor.moveToNext()){
             String teamName = cursor.getString(0);
             String managerName = cursor.getString(1);
             String created =cursor.getString(2);
 
-            System.out.println("팀명 : " + teamName);
-            System.out.println("매니저 : " + managerName);
-            System.out.println("창단일 : " + created);
+            //System.out.println("팀명 : " + teamName);
+            //System.out.println("매니저 : " + managerName);
+            //System.out.println("창단일 : " + created);
 
             txtTeamName.setText(teamName);
             txtManager.setText(managerName);
             txtCreated.setText(created);
 
-            System.out.println("팀정보 입력 완료");
+            //System.out.println("팀정보 입력 완료");
         }
 
         Cursor cursorPosition =MainActivity.sqLiteHelper.getData("SELECT * FROM position");
@@ -133,7 +135,7 @@ public class SummaryFragment extends Fragment {
             int playerGK = cursorPosition.getInt(3);
             int playerTotal = cursorPosition.getInt(4);
 
-            System.out.println("FW : " + playerFW + " MF : " + playerMF + " CF : " + playerDF + " GK : " + playerGK + "total : " + playerTotal);
+            //System.out.println("FW : " + playerFW + " MF : " + playerMF + " CF : " + playerDF + " GK : " + playerGK + "total : " + playerTotal);
 
             txtplayerFW.setText(Integer.toString(playerFW));
             txtplayerMF.setText(Integer.toString(playerMF));
@@ -164,7 +166,7 @@ public class SummaryFragment extends Fragment {
             int scoreLose = cursorScore.getInt(5);
 
 
-            System.out.println("Games : " + scoreGame + " Goals : " + scoreGoals + " Lost : " + scoreLost + " Win : " + scoreWin + " Draw : " + scoreDraw + " Lose : " + scoreLose );
+            //System.out.println("Games : " + scoreGame + " Goals : " + scoreGoals + " Lost : " + scoreLost + " Win : " + scoreWin + " Draw : " + scoreDraw + " Lose : " + scoreLose );
 
             txtscoreGame.setText(Integer.toString(scoreGame));
             txtscoreGoals.setText(Integer.toString(scoreGoals));

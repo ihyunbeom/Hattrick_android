@@ -1,23 +1,18 @@
 package com.hattrick.ihyunbeom.hat_client;
 
-import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class gameDetailActivity extends AppCompatActivity {
+public class GameDetailActivity extends AppCompatActivity {
 
     public static SQLiteHelper sqLiteHelper;
 
@@ -67,7 +62,7 @@ public class gameDetailActivity extends AppCompatActivity {
         final ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, items) ;
         //simple_list_item_multiple_choice
 
-        Cursor cursor =gameDetailActivity.sqLiteHelper.getData("SELECT * FROM team_info");
+        Cursor cursor = GameDetailActivity.sqLiteHelper.getData("SELECT * FROM team_info");
 
         while(cursor.moveToNext()){
             String teamName = cursor.getString(0);
@@ -77,23 +72,23 @@ public class gameDetailActivity extends AppCompatActivity {
         final Intent intent = getIntent(); // 보내온 Intent를 얻는다
         intentId=intent.getIntExtra("id",0);
 
-        System.out.println("(detail)listview setup start " );
+        //System.out.println("(detail)listview setup start " );
 
         listview = (ListView)findViewById(R.id.goalPlayerList);
         listview.setAdapter(arrayAdapter);
         listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        System.out.println("(detail)listview setup end " );
+        //System.out.println("(detail)listview setup end " );
 
         // 2017.8.14 // 출전 선수 리스트 (한명 선택 => [+]버튼 => 해당선수 디비 수정, 해당경기 디비 수정, 스코어 비디 수정
-        final Cursor cursorList =gameDetailActivity.sqLiteHelper.getData("SELECT * FROM goals where gameid = "+intentId);
+        final Cursor cursorList = GameDetailActivity.sqLiteHelper.getData("SELECT * FROM goals where gameid = "+intentId);
         while(cursorList.moveToNext()) {
             int order = cursorList.getInt(0);
             int gameid = cursorList.getInt(1);
             int playerid = cursorList.getInt(2);
 
-            System.out.println("Goal playerid = " + playerid);
+            //System.out.println("Goal playerid = " + playerid);
 
-            final Cursor cursorPlayer =gameDetailActivity.sqLiteHelper.getData("SELECT * FROM player where id = "+playerid);
+            final Cursor cursorPlayer = GameDetailActivity.sqLiteHelper.getData("SELECT * FROM player where id = "+playerid);
             while(cursorPlayer.moveToNext()){
                 int id = cursorPlayer.getInt(0);
                 String name = cursorPlayer.getString(1);
@@ -101,7 +96,7 @@ public class gameDetailActivity extends AppCompatActivity {
 
                 playerArray.add(new Player(id,name,position,order));
 
-                items.add(name + "              " + position);
+                items.add(position + "    "+ name);
 
             }
         }
@@ -119,7 +114,7 @@ public class gameDetailActivity extends AppCompatActivity {
 
        System.out.println("********inGamedetail Intent ID : " + intentId);
 
-        final Cursor cursorGames =gameDetailActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
+        final Cursor cursorGames = GameDetailActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
         while(cursorGames.moveToNext()){
             int id = cursorGames.getInt(0);
             int year = cursorGames.getInt(1);
@@ -138,7 +133,7 @@ public class gameDetailActivity extends AppCompatActivity {
             myScore.setText(Integer.toString(myscore));
             oppScore.setText(Integer.toString(oppscore));
 
-            System.out.println("#########Result = " + result);
+            //System.out.println("#########Result = " + result);
 
         }
 
@@ -151,7 +146,7 @@ public class gameDetailActivity extends AppCompatActivity {
                 sqLiteHelper.queryDate("update games set oppscore = oppscore + 1 where id = "+intentId +";");
                 sqLiteHelper.queryDate("update score set lost = lost + 1;");
 
-                final Cursor cursorGames =gameDetailActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
+                final Cursor cursorGames = GameDetailActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
                 while(cursorGames.moveToNext()){
                     int myscore = cursorGames.getInt(5);
                     int oppscore = cursorGames.getInt(6);
@@ -162,7 +157,7 @@ public class gameDetailActivity extends AppCompatActivity {
 
                     oppScore.setText(Integer.toString(oppscore));
 
-                    System.out.println("NEXT => Result = " + result);
+                    //System.out.println("NEXT => Result = " + result);
 
                 }
             }
@@ -171,7 +166,7 @@ public class gameDetailActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent myIntent =new Intent(gameDetailActivity.this, OutingPlayer.class);
+                Intent myIntent =new Intent(GameDetailActivity.this, OutingPlayer.class);
                 myIntent.putExtra("id", intentId);
                 startActivity(myIntent);
 
@@ -187,7 +182,7 @@ public class gameDetailActivity extends AppCompatActivity {
 
                 boolean check = false;
 
-                final Cursor cursorGames =gameDetailActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
+                final Cursor cursorGames = GameDetailActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
                 while(cursorGames.moveToNext()){
                     int myscore = cursorGames.getInt(5);
                     int oppscore = cursorGames.getInt(6);
@@ -201,7 +196,7 @@ public class gameDetailActivity extends AppCompatActivity {
                     if(check)
                         oppScore.setText(Integer.toString(oppscore-1));
 
-                    System.out.println("NEXT => Result = " + result);
+                    //System.out.println("NEXT => Result = " + result);
 
                 }
 
@@ -216,7 +211,7 @@ public class gameDetailActivity extends AppCompatActivity {
         adding.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
 
-                final Cursor cursorGames =gameDetailActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
+                final Cursor cursorGames = GameDetailActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
                 while(cursorGames.moveToNext()) {
                     int myscore = cursorGames.getInt(5);
                     int oppscore = cursorGames.getInt(6);
@@ -228,9 +223,9 @@ public class gameDetailActivity extends AppCompatActivity {
                     oppScore.setText(Integer.toString(oppscore));
                 }
 
-                Intent notiIconClickIntent = new Intent(gameDetailActivity.this, MainActivity.class);
+                Intent notiIconClickIntent = new Intent(GameDetailActivity.this, MainActivity.class);
                 notiIconClickIntent.putExtra("fragment", "games");
-                gameDetailActivity.this.startActivity(notiIconClickIntent);
+                GameDetailActivity.this.startActivity(notiIconClickIntent);
 
 
             }
@@ -246,9 +241,9 @@ public class gameDetailActivity extends AppCompatActivity {
                 // score 결과에 해당하는 값 -1, 경기수 -1, 득점 또는 실점 초기화
                 // games 해당 id
 
-                Intent notiIconClickIntent = new Intent(gameDetailActivity.this, MainActivity.class);
+                Intent notiIconClickIntent = new Intent(GameDetailActivity.this, MainActivity.class);
                 notiIconClickIntent.putExtra("fragment", "games");
-                gameDetailActivity.this.startActivity(notiIconClickIntent);
+                GameDetailActivity.this.startActivity(notiIconClickIntent);
 
             }
         }) ;
@@ -272,7 +267,7 @@ public class gameDetailActivity extends AppCompatActivity {
                     checked = listview.getCheckedItemPosition();
                     if (checked > -1 && checked < count) {
                         //System.out.println("Checked_PlayerID : " + items.get(checked));
-                        System.out.println("Checked_PlayerID : " + playerArray.get(checked).id);
+                        //System.out.println("Checked_PlayerID : " + playerArray.get(checked).id);
 
                         sqLiteHelper.queryDate("update games set myscore = myscore - 1 where id = "+intentId +";");
                         sqLiteHelper.queryDate("update score set goals = goals - 1;");
@@ -285,9 +280,10 @@ public class gameDetailActivity extends AppCompatActivity {
                     }
                 }
 
-                Intent myIntent =new Intent(gameDetailActivity.this, gameDetailActivity.class);
+                Intent myIntent =new Intent(GameDetailActivity.this, GameDetailActivity.class);
                 myIntent.putExtra("id", intentId);
                 startActivity(myIntent);
+                overridePendingTransition(0, 0);
 
             }
         }) ;

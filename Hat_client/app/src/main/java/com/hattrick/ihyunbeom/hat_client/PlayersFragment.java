@@ -8,13 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 
 /**
@@ -96,7 +92,7 @@ public class PlayersFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Intent setting = new Intent(getActivity(), playerSettingActivity.class);
+                Intent setting = new Intent(getActivity(), PlayerSettingActivity.class);
                 getActivity().startActivity(setting);
             }
         });
@@ -109,7 +105,7 @@ public class PlayersFragment extends Fragment {
             int playerGK = cursor.getInt(3);
             int playerTotal = cursor.getInt(4);
 
-            System.out.println("FW : " + playerFW + " MF : " + playerMF + " DF : " + playerDF + " GK : " + playerGK + "total : " + playerTotal);
+            //System.out.println("FW : " + playerFW + " MF : " + playerMF + " DF : " + playerDF + " GK : " + playerGK + "total : " + playerTotal);
 
             txtplayerFW.setText(Integer.toString(playerFW));
             txtplayerMF.setText(Integer.toString(playerMF));
@@ -132,7 +128,7 @@ public class PlayersFragment extends Fragment {
             String txtGoal = Integer.toString(goal);
             String txtOuting = Integer.toString(outing);
 
-            System.out.println("ID :"+ id +" 이름 : " + name + " 포지션 : " + position + " 득점 : " + txtGoal + " 출전 : " + txtOuting);
+            //System.out.println("ID :"+ id +" 이름 : " + name + " 포지션 : " + position + " 득점 : " + txtGoal + " 출전 : " + txtOuting);
 
             adapter.addItem(name, position, txtGoal, txtOuting);
         }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="5dp"
     android:background="#eeeeee"
-    tools:context="com.hattrick.ihyunbeom.hat_client.gameDetailActivity">
+    tools:context="com.hattrick.ihyunbeom.hat_client.GameDetailActivity">
 
 
     <LinearLayout

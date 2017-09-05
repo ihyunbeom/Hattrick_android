@@ -1,9 +1,11 @@
 package com.hattrick.ihyunbeom.hat_client;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -12,10 +14,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
-public class gameAddingActivity extends AppCompatActivity {
+public class GameAddingActivity extends AppCompatActivity {
 
     public static SQLiteHelper sqLiteHelper;
 
@@ -23,8 +27,10 @@ public class gameAddingActivity extends AppCompatActivity {
 
     private EditText oppName;
     private Button adding;
+    private Button datepicker;
 
-    DatePicker gDate;// 경기 날짜
+    //DatePicker gDate;// 경기 날짜
+    DatePickerDialog dialog;
     TextView dateText;
 
     int syear;
@@ -36,6 +42,8 @@ public class gameAddingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_adding);
 
+        sqLiteHelper= new SQLiteHelper(this,"TeamDB.sqlite", null,1);
+
         // 빈 데이터 리스트 생성.
         final ArrayList<String> items = new ArrayList<String>() ;
         // ArrayAdapter 생성. 아이템 View를 선택(multiple choice)가능하도록.
@@ -44,25 +52,45 @@ public class gameAddingActivity extends AppCompatActivity {
         listview = (ListView)findViewById(R.id.selectPlayerList);
         listview.setAdapter(arrayAdapter);
 
+        Calendar cal=Calendar.getInstance();
+
+        syear=cal.get(Calendar.YEAR);
+        smonth=cal.get(Calendar.MONTH)+1;
+        sday=cal.get(Calendar.DAY_OF_MONTH);
 
         dateText = (TextView)findViewById(R.id.dateText);
-        gDate = (DatePicker)findViewById(R.id.datePicker);
-        gDate.init(gDate.getYear(),gDate.getMonth(),gDate.getDayOfMonth(),
-                new DatePicker.OnDateChangedListener(){
+        dateText.setText(syear + "년 " + smonth + "월 " + sday +"일");
 
-                    @Override
-                    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        dateText.setText(String.format("%d/%d/%d",year,monthOfYear+1,dayOfMonth));
-                        syear = year;
-                        smonth = monthOfYear+1;
-                        sday = dayOfMonth;
-                    }
-                });
+        dialog = new DatePickerDialog(this, listener, syear, smonth-1, sday);
+
+        datepicker = (Button)findViewById(R.id.datepicker);
+        datepicker.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                dialog.show();
+            }
+        }) ;
+        /*
+        gDate.init(gDate.getYear(),gDate.getMonth(),gDate.getDayOfMonth(),
+                    new DatePicker.OnDateChangedListener(){
+
+                        @Override
+                        public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            dateText.setText(String.format("%d년%d월%d일",year,monthOfYear+1,dayOfMonth));
+                            syear = year;
+                            smonth = monthOfYear+1;
+                            sday = dayOfMonth;
+                        }
+                    });
+        */
+
+        //dateText = (TextView)findViewById(R.id.dateText);
+        //gDate = (DatePicker)findViewById(R.id.datePicker);
+
 
         oppName = (EditText) findViewById(R.id.oppName);
 
 
-        Cursor cursorPlayer =MainActivity.sqLiteHelper.getData("SELECT * FROM player");
+        Cursor cursorPlayer =GameAddingActivity.sqLiteHelper.getData("SELECT * FROM player");
 
         while(cursorPlayer.moveToNext()){
             int id = cursorPlayer.getInt(0);
@@ -70,12 +98,12 @@ public class gameAddingActivity extends AppCompatActivity {
             String position = cursorPlayer.getString(2);
             int outing = cursorPlayer.getInt(4);
 
-            items.add(name + " " + position + " " + outing);
+            items.add(name + "   " + position);
 
         }
 
-        sqLiteHelper= new SQLiteHelper(this,"TeamDB.sqlite", null,1);
-        final Cursor cursorGames =MainActivity.sqLiteHelper.getData("SELECT * FROM games");
+
+        final Cursor cursorGames =GameAddingActivity.sqLiteHelper.getData("SELECT * FROM games");
 
         adding = (Button)findViewById(R.id.adding);
         adding.setOnClickListener(new Button.OnClickListener() {
@@ -83,7 +111,7 @@ public class gameAddingActivity extends AppCompatActivity {
 
                 String opp = oppName.getText().toString();
 
-                System.out.println("경기 등록 전");
+                //System.out.println("경기 등록 전");
                 sqLiteHelper.queryDate("insert into games(year, month, day, opponent, myscore, oppscore, result) " +
                         "values("+syear+", "+smonth+", "+sday+", '"+opp+"', 0, 0, -1);");
                 //sqLiteHelper.queryDate("insert into games(year, month, day, opponent, myscore, oppscore, result) values(2017, 8, 12, 'opp1', 0, 0, 0);");
@@ -116,18 +144,33 @@ public class gameAddingActivity extends AppCompatActivity {
                 //시즌별 경기전적 테이블 생성 또는 수정
                 //저장된 시즌 정보 table 생성
 
-                System.out.println("날짜 : " + syear + "." + smonth + "." + sday + " 상대팀 : " + oppName);
-                System.out.println("경기 등록 완료");
+                //System.out.println("날짜 : " + syear + "." + smonth + "." + sday + " 상대팀 : " + oppName);
+                //System.out.println("경기 등록 완료");
 
-                //Intent next = new Intent(gameAddingActivity.this, MainActivity.class);
-                //gameAddingActivity.this.startActivity(next);
+                //Intent next = new Intent(GameAddingActivity.this, MainActivity.class);
+                //GameAddingActivity.this.startActivity(next);
 
-                Intent notiIconClickIntent = new Intent(gameAddingActivity.this, MainActivity.class);
+                Intent notiIconClickIntent = new Intent(GameAddingActivity.this, MainActivity.class);
                 notiIconClickIntent.putExtra("fragment", "games");
-                gameAddingActivity.this.startActivity(notiIconClickIntent);
+                GameAddingActivity.this.startActivity(notiIconClickIntent);
+                overridePendingTransition(0, 0);
 
 
             }
         }) ;
     }
+
+    private DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            monthOfYear+=1;
+            //Toast.makeText(getApplicationContext(), year + "년" + monthOfYear + "월" + dayOfMonth +"일", Toast.LENGTH_SHORT).show();
+
+            dateText.setText(year + "년 " + monthOfYear + "월 " + dayOfMonth +"일");
+            syear = year;
+            smonth = monthOfYear;
+            sday = dayOfMonth;
+
+        }
+    };
 }

@@ -4,7 +4,7 @@
     android:id="@+id/activity_player_setting"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hattrick.ihyunbeom.hat_client.playerSettingActivity">
+    tools:context="com.hattrick.ihyunbeom.hat_client.PlayerSettingActivity">
 
     <LinearLayout
         android:id="@+id/fl_activity_main_container"
@@ -15,7 +15,7 @@
 
         <Button
             android:id="@+id/adding"
-            android:layout_width="80dp"
+            android:layout_width="match_parent"
             android:layout_height="30dp"
             android:textStyle="bold"
             android:text="완료"
@@ -33,7 +33,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="이름 "
+                android:text="이 름 "
                 android:textSize="18dp"/>
             <EditText
                 android:id="@+id/nameAdd"
@@ -50,7 +50,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="포지션 "
+                android:text="포 지 션 "
                 android:textSize="18dp"/>
             <Spinner
                 android:id="@+id/positionAdd"

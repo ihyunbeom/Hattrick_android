@@ -115,7 +115,7 @@ public class GamesFragment extends Fragment {
 
             String txtScore = Integer.toString(myscore) + " : " + Integer.toString(oppscore);
 
-            System.out.println("ID :"+ id +" 날짜 :"+ txtDate +" 상대팀 : " + opponent + " 점수 : " + txtScore + " 결과 : " + txtResult);
+            //System.out.println("ID :"+ id +" 날짜 :"+ txtDate +" 상대팀 : " + opponent + " 점수 : " + txtScore + " 결과 : " + txtResult);
 
             adapter.addItem2(txtDate, opponent, txtScore, txtResult);
             gameArray.add(new Game(id,txtDate, opponent, txtScore, txtResult));
@@ -132,7 +132,7 @@ public class GamesFragment extends Fragment {
                 // 3. Intent 객체를 생성하여 날린다
                 Intent intent = new Intent(
                         getActivity(), // 현재화면의 제어권자
-                        gameDetailActivity.class); // 다음넘어갈 화면
+                        GameDetailActivity.class); // 다음넘어갈 화면
 
                 // intent 객체에 데이터를 실어서 보내기
                 // 리스트뷰 클릭시 인텐트 (Intent) 생성하고 position 값을 이용하여 인텐트로 넘길값들을 넘긴다
@@ -147,7 +147,7 @@ public class GamesFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Intent adding = new Intent(getActivity(), gameAddingActivity.class);
+                Intent adding = new Intent(getActivity(), GameAddingActivity.class);
                 getActivity().startActivity(adding);
             }
         });
@@ -173,7 +173,7 @@ public class GamesFragment extends Fragment {
             int scoreLose = cursorScore.getInt(5);
 
 
-            System.out.println("Games : " + scoreGame + " Goals : " + scoreGoals + " Lost : " + scoreLost + " Win : " + scoreWin + " Draw : " + scoreDraw + " Lose : " + scoreLose );
+            //System.out.println("Games : " + scoreGame + " Goals : " + scoreGoals + " Lost : " + scoreLost + " Win : " + scoreWin + " Draw : " + scoreDraw + " Lose : " + scoreLose );
 
             txtscoreGame.setText(Integer.toString(scoreGame));
             txtscoreGoals.setText(Integer.toString(scoreGoals));

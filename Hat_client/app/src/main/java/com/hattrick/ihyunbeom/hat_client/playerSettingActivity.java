@@ -1,9 +1,6 @@
 package com.hattrick.ihyunbeom.hat_client;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class playerSettingActivity extends AppCompatActivity {
+public class PlayerSettingActivity extends AppCompatActivity {
 
     public static SQLiteHelper sqLiteHelper;
 
@@ -42,19 +39,19 @@ public class playerSettingActivity extends AppCompatActivity {
                 String name = nameAdd.getText().toString();
                 String position = spinner.getSelectedItem().toString();
 
-                System.out.println("선수 등록 전");
+                //System.out.println("선수 등록 전");
                 sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('"+ name +"', '"+ position + "', 0" + ", 0" +");");
 
                 sqLiteHelper.queryDate("update position set "+ position +" = "+ position +" + 1, total = total + 1");
 
-                System.out.println("선수 등록 완료");
+                //System.out.println("선수 등록 완료");
 
-                //Intent next = new Intent(playerSettingActivity.this, MainActivity.class);
-                //playerSettingActivity.this.startActivity(next);
+                //Intent next = new Intent(PlayerSettingActivity.this, MainActivity.class);
+                //PlayerSettingActivity.this.startActivity(next);
 
-                Intent notiIconClickIntent = new Intent(playerSettingActivity.this, MainActivity.class);
+                Intent notiIconClickIntent = new Intent(PlayerSettingActivity.this, MainActivity.class);
                 notiIconClickIntent.putExtra("fragment", "player");
-                playerSettingActivity.this.startActivity(notiIconClickIntent);
+                PlayerSettingActivity.this.startActivity(notiIconClickIntent);
             }
         });
     }
