@@ -27,7 +27,7 @@
                 android:layout_width="80dp"
                 android:layout_height="20dp"
                 android:layout_weight="1"
-                android:layout_marginRight="60dp"
+                android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp"
                 android:background="#ff7c7c"
                 android:text="기 록 삭 제"/>
@@ -39,11 +39,11 @@
                 android:textStyle="bold"
                 android:textColor="#ffffff"
                 android:layout_width="80dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_weight="9"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                android:background="#8ebcb9"
+                android:background="@color/colorPrimary"
                 android:text="수 정 완 료"/>
         </LinearLayout>
 

@@ -60,21 +60,16 @@ public class MainActivity extends AppCompatActivity
 
         if (isFirstTime()) {
             sqLiteHelper.queryDate("insert into position(fw, mf, df, gk, total) values(0,0,0,0,0);");
+            //sqLiteHelper.queryDate("insert into position(fw, mf, df, gk, total) values(3,10,6,3,22);");
             sqLiteHelper.queryDate("insert into score(games, goals, lost, win, draw, lose) values(0,0,0,0,0,0);");
             sqLiteHelper.queryDate("insert into team_info(team, manager, created) values('팀명을 설정하세요','매니저 이름을 설정하세요','1993.12.24');");
 
             // 선수등록 테스트
 
             /*
-            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김승규','GK',0,0);");
-            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김진현','GK',0,0);");
-            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김영권','GK',0,0);");
-            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김진수','DF',0,0);");
-            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('고요한','DF',0,0);");
-            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김민우','DF',0,0);");
-            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김주영','DF',0,0);");
-            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('최철순','DF',0,0);");
-            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김민재','DF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('이동국','FW',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김신욱','FW',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('황희찬','FW',0,0);");
             sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('이근호','MF',0,0);");
             sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('구자철','MF',0,0);");
             sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('손흥민','MF',0,0);");
@@ -85,10 +80,17 @@ public class MainActivity extends AppCompatActivity
             sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('정우영','MF',0,0);");
             sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('권창훈','MF',0,0);");
             sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('권경원','MF',0,0);");
-            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('이동국','FW',0,0);");
-            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김신욱','FW',0,0);");
-            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('황희찬','FW',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김진수','DF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('고요한','DF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김민우','DF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김주영','DF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('최철순','DF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김민재','DF',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김승규','GK',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김진현','GK',0,0);");
+            sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('김영권','GK',0,0);");
             */
+
 
 
         }
