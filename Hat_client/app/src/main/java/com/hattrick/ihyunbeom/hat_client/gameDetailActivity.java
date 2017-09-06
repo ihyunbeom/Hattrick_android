@@ -241,6 +241,86 @@ public class GameDetailActivity extends AppCompatActivity {
                 // score 결과에 해당하는 값 -1, 경기수 -1, 득점 또는 실점 초기화
                 // games 해당 id
 
+                System.out.println("__________삭제 전__________");
+
+                final Cursor cursorGoals = GameDetailActivity.sqLiteHelper.getData("SELECT * FROM goals where gameid = "+intentId);
+
+                final Cursor cursorList = GameDetailActivity.sqLiteHelper.getData("SELECT * FROM list where gameid = "+intentId);
+
+                final Cursor cursorPlayer = GameDetailActivity.sqLiteHelper.getData("SELECT * FROM player");
+                // list에 해당하는 선수의 outing - 1
+                // goals에 해당하는 선수의 goal - 1
+
+                while(cursorGoals.moveToNext()) { //3
+                    int goalid = cursorGoals.getInt(0);
+                    int gameid = cursorGoals.getInt(1);
+                    int playerid = cursorGoals.getInt(2);
+
+                    System.out.println("득점 제거 선수 ID : " + playerid);
+                    sqLiteHelper.queryDate("update player set goal = goal - 1 where id = " + playerid);
+                }
+
+
+                while(cursorList.moveToNext()) { //4
+                    int listid = cursorList.getInt(0);
+                    int playerid = cursorList.getInt(2);
+
+                    System.out.println("출전수 제거 선수 ID : " + playerid);
+                    sqLiteHelper.queryDate("update player set outing = outing - 1 where id = " + playerid);
+                }
+
+
+                final Cursor cursorScore = GameDetailActivity.sqLiteHelper.getData("SELECT * FROM score");
+
+                final Cursor cursorGames = GameDetailActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
+                // 해당 경기의 득점,실점,결과를 Score에서 차감
+
+                /*
+                "id integer PRIMARY KEY autoincrement, " +
+                "year integer, " +
+                "month integer, " +
+                "day integer, " +
+                "opponent text, " +
+                "myscore integer, " +
+                "oppscore integer, " +
+                "result integer);");
+
+                "games integer, " +
+                "goals integer, " +
+                "lost integer, " +
+                "win integer, " +
+                "draw integer, " +
+                "lose integer);");
+                */
+
+                while(cursorGames.moveToNext()) { //4
+                    int gameid = cursorGames.getInt(0);
+                    int myscore = cursorGames.getInt(5);
+                    int oppscore = cursorGames.getInt(6);
+                    int result = cursorGames.getInt(7);
+
+                    sqLiteHelper.queryDate("update score set games = games - 1;");//경기
+                    if(result == 0) {//패
+                        sqLiteHelper.queryDate("update score set lose = lose - 1;");//결과
+                    }else if(result == 1){//무
+                        sqLiteHelper.queryDate("update score set draw = draw - 1;");//결과
+                    }else if(result == 2){//승
+                        sqLiteHelper.queryDate("update score set win = win - 1;");//결과
+                    }
+
+                    if(myscore > 0)
+                        sqLiteHelper.queryDate("update score set goals = goals - "+ myscore +";");//득점
+                    if(oppscore > 0)
+                        sqLiteHelper.queryDate("update score set lost = lost - "+ oppscore +";");//실점
+
+                }
+                sqLiteHelper.queryDate("delete from goals where gameid = " + intentId + ";");
+                System.out.println("득점 기록 삭제 완료");
+                sqLiteHelper.queryDate("delete from list where gameid = " + intentId + ";");
+                System.out.println("출전수 기록 삭제 완료");
+                sqLiteHelper.queryDate("delete from games where id = " + intentId + ";");
+                System.out.println("__________경기 삭제 완료__________");
+
                 Intent notiIconClickIntent = new Intent(GameDetailActivity.this, MainActivity.class);
                 notiIconClickIntent.putExtra("fragment", "games");
                 GameDetailActivity.this.startActivity(notiIconClickIntent);
@@ -290,7 +370,21 @@ public class GameDetailActivity extends AppCompatActivity {
 
     }
     @Override public void onBackPressed() {
-         //super.onBackPressed();
+        final Cursor cursorGames = GameDetailActivity.sqLiteHelper.getData("SELECT * FROM games where id = "+intentId);
+        while(cursorGames.moveToNext()) {
+            int myscore = cursorGames.getInt(5);
+            int oppscore = cursorGames.getInt(6);
+
+            checkedScore(rResult, myscore, oppscore);
+
+            int result = cursorGames.getInt(7);
+
+            oppScore.setText(Integer.toString(oppscore));
+        }
+
+        Intent notiIconClickIntent = new Intent(GameDetailActivity.this, MainActivity.class);
+        notiIconClickIntent.putExtra("fragment", "games");
+        GameDetailActivity.this.startActivity(notiIconClickIntent);
     }
 
     public void checkedScore(int rResult, int myscore, int oppscore){

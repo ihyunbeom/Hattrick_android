@@ -53,8 +53,8 @@ public class OutingPlayer extends AppCompatActivity {
         // 2017.8.14 // 출전 선수 리스트 (한명 선택 => [+]버튼 => 해당선수 디비 수정, 해당경기 디비 수정, 스코어 비디 수정
         final Cursor cursorList =OutingPlayer.sqLiteHelper.getData("SELECT * FROM list where gameid = "+intentId);
         while(cursorList.moveToNext()) {
-            int gameid = cursorList.getInt(0);
-            int playerid = cursorList.getInt(1);
+            int gameid = cursorList.getInt(1);
+            int playerid = cursorList.getInt(2);
 
             //System.out.println("Outing playerid = " + playerid);
 
