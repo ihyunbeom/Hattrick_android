@@ -33,6 +33,8 @@ public class GameAddingActivity extends AppCompatActivity {
     DatePickerDialog dialog;
     TextView dateText;
 
+    ArrayList<Player> playerArray = new ArrayList<Player>();
+
     int syear;
     int smonth;
     int sday;
@@ -48,6 +50,7 @@ public class GameAddingActivity extends AppCompatActivity {
         final ArrayList<String> items = new ArrayList<String>() ;
         // ArrayAdapter 생성. 아이템 View를 선택(multiple choice)가능하도록.
         final ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_multiple_choice, items) ;
+
 
         listview = (ListView)findViewById(R.id.selectPlayerList);
         listview.setAdapter(arrayAdapter);
@@ -90,15 +93,22 @@ public class GameAddingActivity extends AppCompatActivity {
         oppName = (EditText) findViewById(R.id.oppName);
 
 
+        int cnt=0;
         Cursor cursorPlayer =GameAddingActivity.sqLiteHelper.getData("SELECT * FROM player");
 
         while(cursorPlayer.moveToNext()){
             int id = cursorPlayer.getInt(0);
             String name = cursorPlayer.getString(1);
             String position = cursorPlayer.getString(2);
+            int goal = cursorPlayer.getInt(3);
             int outing = cursorPlayer.getInt(4);
+            int del = cursorPlayer.getInt(5);
+            int list = cnt++;
 
-            items.add(name + "   " + position);
+            if(del == 2) {
+                playerArray.add(new Player(id, name, position, goal, outing, list));
+                items.add(name + "   " + position);
+            }
 
         }
 
@@ -130,9 +140,9 @@ public class GameAddingActivity extends AppCompatActivity {
                 for (int i = 0; i < count; i++) {
                     if (checkedItems.get(i)) {
                         sqLiteHelper.queryDate("insert into list(gameid, playerid)" +
-                                "values(" + gameid + "," + (i+1) + ");");
-                        System.out.println("gameid = " + gameid + " playerid = " + (i+1) );
-                        sqLiteHelper.queryDate("update player set outing = outing + 1 where id = "+ (i+1));
+                                "values(" + gameid + "," + playerArray.get(i).id + ");");
+                        //System.out.println("gameid = " + gameid + " playerid = " + (i+1) );
+                        sqLiteHelper.queryDate("update player set outing = outing + 1 where id = "+ playerArray.get(i).id);
                     }
                 }
 
@@ -158,6 +168,30 @@ public class GameAddingActivity extends AppCompatActivity {
 
             }
         }) ;
+    }
+
+    class Player {
+
+        int id;
+        String name ="" ;
+        String position;
+        int goal;
+        int outing;
+        int list;
+
+        public Player(int id, String name, String position, int goal, int outing, int list) {
+            super();
+            this.id = id;
+            this.name = name;
+            this.position = position;
+            this.goal = goal;
+            this.outing = outing;
+            this.list = list;
+        }
+
+        public Player() {
+        }
+
     }
 
     private DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {

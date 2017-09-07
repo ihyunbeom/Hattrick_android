@@ -63,7 +63,9 @@ public class TeamSettingActivity extends AppCompatActivity {
                 Fragment fragment = null;
                 String title = getString(R.string.app_name);
 
-                sqLiteHelper.queryDate("insert into team_info(team, manager, created) values('"+ teamName +"', '"+ managerName +"', '"+ created +"');");
+                sqLiteHelper.queryDate("update team_info set team = '" + teamName +"';");
+                sqLiteHelper.queryDate("update team_info set manager = '" + managerName +"';");
+                sqLiteHelper.queryDate("update team_info set created = '" + created +"';");
                 //System.out.println("팀정보 수정 완료");
 
                 Intent signin = new Intent(TeamSettingActivity.this, MainActivity.class);

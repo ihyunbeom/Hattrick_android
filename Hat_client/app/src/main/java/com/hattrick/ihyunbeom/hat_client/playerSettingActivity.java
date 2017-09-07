@@ -40,7 +40,8 @@ public class PlayerSettingActivity extends AppCompatActivity {
                 String position = spinner.getSelectedItem().toString();
 
                 //System.out.println("선수 등록 전");
-                sqLiteHelper.queryDate("insert into player(name, position, goal, outing) values('"+ name +"', '"+ position + "', 0" + ", 0" +");");
+                // view => 0:삭제 1:휴먼 2:정상
+                sqLiteHelper.queryDate("insert into player(name, position, goal, outing, del) values('"+ name +"', '"+ position + "', 0" + ", 0" +", 2" + ");");
 
                 sqLiteHelper.queryDate("update position set "+ position +" = "+ position +" + 1, total = total + 1");
 

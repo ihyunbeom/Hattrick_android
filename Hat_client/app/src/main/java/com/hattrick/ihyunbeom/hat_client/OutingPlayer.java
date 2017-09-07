@@ -34,7 +34,7 @@ public class OutingPlayer extends AppCompatActivity {
         sqLiteHelper= new SQLiteHelper(this,"TeamDB.sqlite", null,1);
 
         final Intent intent = getIntent(); // 보내온 Intent를 얻는다
-        intentId=intent.getIntExtra("id",-1);
+        intentId=intent.getIntExtra("id",0);
 
         //System.out.println("OutingPlayer Intent ID : " + intentId);
 
@@ -53,6 +53,7 @@ public class OutingPlayer extends AppCompatActivity {
         // 2017.8.14 // 출전 선수 리스트 (한명 선택 => [+]버튼 => 해당선수 디비 수정, 해당경기 디비 수정, 스코어 비디 수정
         final Cursor cursorList =OutingPlayer.sqLiteHelper.getData("SELECT * FROM list where gameid = "+intentId);
         while(cursorList.moveToNext()) {
+            int listid = cursorList.getInt(0);
             int gameid = cursorList.getInt(1);
             int playerid = cursorList.getInt(2);
 
@@ -65,10 +66,11 @@ public class OutingPlayer extends AppCompatActivity {
                 String position = cursorPlayer.getString(2);
                 int goal = cursorPlayer.getInt(3);
                 int outing = cursorPlayer.getInt(4);
+                int del = cursorPlayer.getInt(5);
 
-                playerArray.add(new Player(id,name, position, goal, outing));
+                playerArray.add(new Player(id, name, position, goal, outing));
+                items.add(position + "    " + name);
 
-                items.add(position + "    "+ name);
 
             }
         }
@@ -137,7 +139,7 @@ public class OutingPlayer extends AppCompatActivity {
         int goal;
         int outing;
 
-        public Player(int id, String name, String position, int goal, int outing ) {
+        public Player(int id, String name, String position, int goal, int outing) {
             super();
             this.id = id;
             this.name = name;
