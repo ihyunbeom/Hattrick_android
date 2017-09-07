@@ -60,14 +60,14 @@ public class MainActivity extends AppCompatActivity
                 "lose integer);");
 
         if (isFirstTime()) {
-            //sqLiteHelper.queryDate("insert into position(fw, mf, df, gk, total) values(0,0,0,0,0);");
-            sqLiteHelper.queryDate("insert into position(fw, mf, df, gk, total) values(3,10,6,3,22);");
+            sqLiteHelper.queryDate("insert into position(fw, mf, df, gk, total) values(0,0,0,0,0);");
+            //sqLiteHelper.queryDate("insert into position(fw, mf, df, gk, total) values(3,10,6,3,22);");
             sqLiteHelper.queryDate("insert into score(games, goals, lost, win, draw, lose) values(0,0,0,0,0,0);");
             sqLiteHelper.queryDate("insert into team_info(team, manager, created) values('팀명을 설정하세요','매니저 이름을 설정하세요','1993.12.24');");
 
             // 선수등록 테스트
 
-
+            /*
             sqLiteHelper.queryDate("insert into player(name, position, goal, outing, del) values('이동국','FW',0,0,2);");
             sqLiteHelper.queryDate("insert into player(name, position, goal, outing, del) values('김신욱','FW',0,0,2);");
             sqLiteHelper.queryDate("insert into player(name, position, goal, outing, del) values('황희찬','FW',0,0,2);");
@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity
             sqLiteHelper.queryDate("insert into player(name, position, goal, outing, del) values('김승규','GK',0,0,2);");
             sqLiteHelper.queryDate("insert into player(name, position, goal, outing, del) values('김진현','GK',0,0,2);");
             sqLiteHelper.queryDate("insert into player(name, position, goal, outing, del) values('김영권','GK',0,0,2);");
+            */
 
 
 
