@@ -4,15 +4,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import org.xmlpull.v1.XmlPullParser;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -25,7 +22,11 @@ public class FindFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private TextView text;
+    private TextView txt;
+    private EditText find;
+    private Button btnSearch;
+
+    String search = "";
 
 
     // TODO: Rename and change types of parameters
@@ -68,19 +69,41 @@ public class FindFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_find,container,false);
+        txt = (TextView) view.findViewById(R.id.text);
+        find = (EditText) view.findViewById(R.id.find);
+        btnSearch = (Button) view.findViewById(R.id.btnSearch);
 
-        new Thread() {
-            @Override
-            public void run() {
-                String naverHtml = getXmlData();
-                System.out.println(naverHtml);
-                text= (TextView) view.findViewById(R.id.text);
-                text.setText("asdkjfhasdf");
+        btnSearch.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+
+                search = find.getText().toString();
+
+                new Thread() {
+                    @Override
+                    public void run() {
+                        String naverHtml = getXmlData();
+                        Bundle bun = new Bundle();
+                        bun.putString("DATA", naverHtml);
+                        Message msg = handler.obtainMessage();
+                        msg.setData(bun);
+                        handler.sendMessage(msg);
+
+                    }
+                }.start();
+
             }
-        }.start();
+        }) ;
 
-        return inflater.inflate(R.layout.fragment_find, container, false);
+        return view;
     }
+
+    Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            Bundle bun = msg.getData();
+            String naverHtml = bun.getString("DATA");
+            txt.setText(naverHtml);
+        }
+    };
 
     private String getXmlData(){
         String clientId = "mje_VlnhHGxjGD0Ut783";//애플리케이션 클라이언트 아이디값";
@@ -89,7 +112,7 @@ public class FindFragment extends Fragment {
         String data = "";
 
         try {
-            String text = URLEncoder.encode("풋살장 수원시", "UTF-8");
+            String text = URLEncoder.encode(search, "UTF-8");
             String apiURL = "https://openapi.naver.com/v1/search/local?query="+ text; // json 결과
             //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml 결과
             URL url = new URL(apiURL);
@@ -107,10 +130,11 @@ public class FindFragment extends Fragment {
             String inputLine;
             StringBuffer response = new StringBuffer();
             while ((inputLine = br.readLine()) != null) {
+                data += inputLine + "\n";
                 response.append(inputLine);
             }
             br.close();
-            data = response.toString();
+            //data = response.toString();
             //System.out.println(data);
         } catch (Exception e) {
             System.out.println(e);
