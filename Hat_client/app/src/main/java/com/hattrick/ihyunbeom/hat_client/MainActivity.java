@@ -29,27 +29,6 @@ public class MainActivity extends AppCompatActivity
 
         sqLiteHelper= new SQLiteHelper(this,"TeamDB.sqlite", null,1);
 
-
-        //포지션당 인원 수
-        /*
-        sqLiteHelper.queryDate("create table if not exists position(" +
-                "FW integer, " +
-                "MF integer, " +
-                "DF integer, " +
-                "GK integer, " +
-                "total integer);");
-         */
-        //전적
-        /*
-        sqLiteHelper.queryDate("create table if not exists score( " +
-                "games integer, " +
-                "goals integer, " +
-                "lost integer, " +
-                "win integer, " +
-                "draw integer, " +
-                "lose integer);");
-         */
-
         //팀 정보
         sqLiteHelper.queryDate("create table if not exists team_info( " +
                 "team text, " +
@@ -217,6 +196,18 @@ public class MainActivity extends AppCompatActivity
                     R.id.relativelayout_for_fragment,
                     feeFragment,
                     feeFragment.getTag()
+            ).commit();
+
+        } else if (id == R.id.nav_find) {
+            //Toast.makeText(this, "구장 찾기", Toast.LENGTH_SHORT).show();
+            FindFragment findFragment = FindFragment.newInstance("some1","some2");
+            fragment = new FindFragment();
+            title = "구장 찾기";
+            FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction().replace(
+                    R.id.relativelayout_for_fragment,
+                    findFragment,
+                    findFragment.getTag()
             ).commit();
 
         }
