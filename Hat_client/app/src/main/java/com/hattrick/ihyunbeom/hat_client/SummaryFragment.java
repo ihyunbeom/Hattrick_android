@@ -45,6 +45,19 @@ public class SummaryFragment extends Fragment {
     private TextView txtscoreDraw;
     private TextView txtscoreLose;
 
+    int scoreGame = 0;
+    int scoreGoals = 0;
+    int scoreLost = 0;
+    int scoreWin = 0;
+    int scoreDraw = 0;
+    int scoreLose = 0;
+
+    int count_fw = 0;
+    int count_mf = 0;
+    int count_df = 0;
+    int count_gk = 0;
+    int count_total = 0;
+
 
 
     public SummaryFragment() {
@@ -89,9 +102,20 @@ public class SummaryFragment extends Fragment {
         txtManager = (TextView) view.findViewById(R.id.managerName);
         txtCreated = (TextView) view.findViewById(R.id.created);
 
+        txtplayerFW = (TextView) view.findViewById(R.id.playerFW);
+        txtplayerMF = (TextView) view.findViewById(R.id.playerMF);
+        txtplayerDF = (TextView) view.findViewById(R.id.playerDF);
+        txtplayerGK = (TextView) view.findViewById(R.id.playerGK);
+        txtplayerTotal = (TextView) view.findViewById(R.id.playerTotal);
+
+        txtscoreGame = (TextView) view.findViewById(R.id.scoreGame);
+        txtscoreGoals = (TextView) view.findViewById(R.id.scoreGoals);
+        txtscoreLost = (TextView) view.findViewById(R.id.scoreLost);
+        txtscoreWin = (TextView) view.findViewById(R.id.scoreWin);
+        txtscoreDraw = (TextView) view.findViewById(R.id.scoreDraw);
+        txtscoreLose = (TextView) view.findViewById(R.id.scoreLose);
+
         teamSetting = (Button) view.findViewById(R.id.team_info_setting); // activity 호출 버튼(팝업창)
-
-
 
         teamSetting.setOnClickListener(new View.OnClickListener(){
 
@@ -102,82 +126,69 @@ public class SummaryFragment extends Fragment {
             }
         });
 
-        Cursor cursor =MainActivity.sqLiteHelper.getData("SELECT * FROM team_info");
+        final Cursor cursor =MainActivity.sqLiteHelper.getData("SELECT * FROM team_info");
+        final Cursor cursorGames =MainActivity.sqLiteHelper.getData("SELECT * FROM games");
+        final Cursor cursorPlayer =MainActivity.sqLiteHelper.getData("SELECT * FROM player");
 
         while(cursor.moveToNext()){
             String teamName = cursor.getString(0);
             String managerName = cursor.getString(1);
             String created =cursor.getString(2);
 
-            //System.out.println("팀명 : " + teamName);
-            //System.out.println("매니저 : " + managerName);
-            //System.out.println("창단일 : " + created);
-
             txtTeamName.setText(teamName);
             txtManager.setText(managerName);
             txtCreated.setText(created);
 
-            //System.out.println("팀정보 입력 완료");
         }
 
-        Cursor cursorPosition =MainActivity.sqLiteHelper.getData("SELECT * FROM position");
+        while(cursorGames.moveToNext()) {
+            int myscore = cursorGames.getInt(5);
+            int oppscore = cursorGames.getInt(6);
+            int result = cursorGames.getInt(7);
 
-        txtplayerFW = (TextView) view.findViewById(R.id.playerFW);
-        txtplayerMF = (TextView) view.findViewById(R.id.playerMF);
-        txtplayerDF = (TextView) view.findViewById(R.id.playerDF);
-        txtplayerGK = (TextView) view.findViewById(R.id.playerGK);
-        txtplayerTotal = (TextView) view.findViewById(R.id.playerTotal);
+            scoreGame++;
+            scoreGoals += myscore;
+            scoreLost += oppscore;
 
-        while(cursorPosition.moveToNext()){
-            int playerFW = cursorPosition.getInt(0);
-            int playerMF = cursorPosition.getInt(1);
-            int playerDF = cursorPosition.getInt(2);
-            int playerGK = cursorPosition.getInt(3);
-            int playerTotal = cursorPosition.getInt(4);
-
-            //System.out.println("FW : " + playerFW + " MF : " + playerMF + " CF : " + playerDF + " GK : " + playerGK + "total : " + playerTotal);
-
-            txtplayerFW.setText(Integer.toString(playerFW));
-            txtplayerMF.setText(Integer.toString(playerMF));
-            txtplayerDF.setText(Integer.toString(playerDF));
-            txtplayerGK.setText(Integer.toString(playerGK));
-            txtplayerTotal.setText(Integer.toString(playerTotal));
-
+            if (result == 0) {
+                scoreLose++;
+            } else if (result == 2) {
+                scoreWin++;
+            } else if (result == 1) {
+                scoreDraw++;
+            }
         }
 
-        Cursor cursorScore =MainActivity.sqLiteHelper.getData("SELECT * FROM score");
 
-        //games, goals, lost, win, draw, lose
+        while(cursorPlayer.moveToNext()){
+            String position = cursorPlayer.getString(2);
+            int state = cursorPlayer.getInt(5);
 
-        txtscoreGame = (TextView) view.findViewById(R.id.scoreGame);
-        txtscoreGoals = (TextView) view.findViewById(R.id.scoreGoals);
-        txtscoreLost = (TextView) view.findViewById(R.id.scoreLost);
-        txtscoreWin = (TextView) view.findViewById(R.id.scoreWin);
-        txtscoreDraw = (TextView) view.findViewById(R.id.scoreDraw);
-        txtscoreLose = (TextView) view.findViewById(R.id.scoreLose);
-
-
-        while(cursorScore.moveToNext()){
-            int scoreGame = cursorScore.getInt(0);
-            int scoreGoals = cursorScore.getInt(1);
-            int scoreLost = cursorScore.getInt(2);
-            int scoreWin = cursorScore.getInt(3);
-            int scoreDraw = cursorScore.getInt(4);
-            int scoreLose = cursorScore.getInt(5);
-
-
-            //System.out.println("Games : " + scoreGame + " Goals : " + scoreGoals + " Lost : " + scoreLost + " Win : " + scoreWin + " Draw : " + scoreDraw + " Lose : " + scoreLose );
-
-            txtscoreGame.setText(Integer.toString(scoreGame));
-            txtscoreGoals.setText(Integer.toString(scoreGoals));
-            txtscoreLost.setText(Integer.toString(scoreLost));
-            txtscoreWin.setText(Integer.toString(scoreWin));
-            txtscoreDraw.setText(Integer.toString(scoreDraw));
-            txtscoreLose.setText(Integer.toString(scoreLose));
-
-
+            if(state == 2) {
+                count_total++;
+                if(position.equals("FW")){
+                    count_fw++;
+                }else if(position.equals("MF")){
+                    count_mf++;
+                }else if(position.equals("DF")){
+                    count_df++;
+                }else if(position.equals("GK")){
+                    count_gk++;
+                }
+            }
         }
+        txtplayerFW.setText(Integer.toString(count_fw));
+        txtplayerMF.setText(Integer.toString(count_mf));
+        txtplayerDF.setText(Integer.toString(count_df));
+        txtplayerGK.setText(Integer.toString(count_gk));
+        txtplayerTotal.setText(Integer.toString(count_total));
 
+        txtscoreGame.setText(Integer.toString(scoreGame));
+        txtscoreGoals.setText(Integer.toString(scoreGoals));
+        txtscoreLost.setText(Integer.toString(scoreLost));
+        txtscoreWin.setText(Integer.toString(scoreWin));
+        txtscoreDraw.setText(Integer.toString(scoreDraw));
+        txtscoreLose.setText(Integer.toString(scoreLose));
 
         return view;
     }

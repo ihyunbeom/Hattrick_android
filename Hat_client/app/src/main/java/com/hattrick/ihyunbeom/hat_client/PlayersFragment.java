@@ -40,6 +40,13 @@ public class PlayersFragment extends Fragment {
 
     private ListViewAdapter adapter;
 
+    int count_fw = 0;
+    int count_mf = 0;
+    int count_df = 0;
+    int count_gk = 0;
+    int count_total = 0;
+
+
     ArrayList<PlayersFragment.Player> playerArray = new ArrayList<Player>();
 
 
@@ -77,9 +84,10 @@ public class PlayersFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         final View view = inflater.inflate(R.layout.fragment_players,container,false);
+        final Cursor cursorPlayer =MainActivity.sqLiteHelper.getData("SELECT * FROM player");
+        ListView listView = (ListView) view.findViewById(R.id.playerList);
 
         adapter = new ListViewAdapter();
 
@@ -91,8 +99,6 @@ public class PlayersFragment extends Fragment {
 
         addPlayer = (Button) view.findViewById(R.id.addPlayer); // activity 호출 버튼(팝업창)
 
-        Cursor cursor =MainActivity.sqLiteHelper.getData("SELECT * FROM position");
-
         addPlayer.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -102,38 +108,28 @@ public class PlayersFragment extends Fragment {
             }
         });
 
-
-        while(cursor.moveToNext()){
-            int playerFW = cursor.getInt(0);
-            int playerMF = cursor.getInt(1);
-            int playerDF = cursor.getInt(2);
-            int playerGK = cursor.getInt(3);
-            int playerTotal = cursor.getInt(4);
-
-            //System.out.println("FW : " + playerFW + " MF : " + playerMF + " DF : " + playerDF + " GK : " + playerGK + "total : " + playerTotal);
-
-            txtplayerFW.setText(Integer.toString(playerFW));
-            txtplayerMF.setText(Integer.toString(playerMF));
-            txtplayerDF.setText(Integer.toString(playerDF));
-            txtplayerGK.setText(Integer.toString(playerGK));
-            txtplayerTotal.setText(Integer.toString(playerTotal));
-
-        }
-
-        Cursor cursorPlayer =MainActivity.sqLiteHelper.getData("SELECT * FROM player");
-        ListView listView = (ListView) view.findViewById(R.id.playerList);
-
         while(cursorPlayer.moveToNext()){
             int id = cursorPlayer.getInt(0);
             String name = cursorPlayer.getString(1);
             String position = cursorPlayer.getString(2);
             int goal = cursorPlayer.getInt(3);
             int outing = cursorPlayer.getInt(4);
-            int del = cursorPlayer.getInt(5);
+            int state = cursorPlayer.getInt(5);
 
-            if(del == 2) {
+            if(state == 2) {
                 String txtGoal = Integer.toString(goal);
                 String txtOuting = Integer.toString(outing);
+
+                count_total++;
+                if(position.equals("FW")){
+                    count_fw++;
+                }else if(position.equals("MF")){
+                    count_mf++;
+                }else if(position.equals("DF")){
+                    count_df++;
+                }else if(position.equals("GK")){
+                    count_gk++;
+                }
 
                 //System.out.println("ID :"+ id +" 이름 : " + name + " 포지션 : " + position + " 득점 : " + txtGoal + " 출전 : " + txtOuting);
 
@@ -141,22 +137,22 @@ public class PlayersFragment extends Fragment {
                 playerArray.add(new Player(id, name, position, goal, outing));
             }
         }
+        txtplayerFW.setText(Integer.toString(count_fw));
+        txtplayerMF.setText(Integer.toString(count_mf));
+        txtplayerDF.setText(Integer.toString(count_df));
+        txtplayerGK.setText(Integer.toString(count_gk));
+        txtplayerTotal.setText(Integer.toString(count_total));
+
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                // 상세정보 화면으로 이동하기(인텐트 날리기)
-                // 1. 다음화면을 만든다
-                // 2. AndroidManifest.xml 에 화면을 등록한다
-                // 3. Intent 객체를 생성하여 날린다
+
                 Intent intent = new Intent(
                         getActivity(), // 현재화면의 제어권자
                         PlayerDetailActivity.class); // 다음넘어갈 화면
-
-                // intent 객체에 데이터를 실어서 보내기
-                // 리스트뷰 클릭시 인텐트 (Intent) 생성하고 position 값을 이용하여 인텐트로 넘길값들을 넘긴다
                 intent.putExtra("id", playerArray.get(position).id);
 
                 startActivity(intent);
@@ -166,14 +162,6 @@ public class PlayersFragment extends Fragment {
 
         return view;
     }
-
-    /*
-    "id integer PRIMARY KEY autoincrement, " +
-                "name text, " +
-                "position text, " +
-                "goal integer, " +
-                "outing integer);");
-     */
 
     class Player { // 경기리스트
 
@@ -191,9 +179,5 @@ public class PlayersFragment extends Fragment {
             this.goal = goal;
             this.outing = outing;
         }
-
-        public Player() {
-        }
     }
-
 }

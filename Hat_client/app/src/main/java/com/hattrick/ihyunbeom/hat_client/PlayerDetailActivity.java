@@ -51,15 +51,8 @@ public class PlayerDetailActivity extends AppCompatActivity {
         listview = (ListView)findViewById(R.id.outingList);
         adapter = new ListViewAdapter();
 
-        Cursor playerCursor = PlayerDetailActivity.sqLiteHelper.getData("SELECT * FROM player where id = "+intentId);
-
-        /*
-        "id integer PRIMARY KEY autoincrement, " +
-                "name text, " +
-                "position text, " +
-                "goal integer, " +
-                "outing integer);");
-         */
+        final Cursor playerCursor = PlayerDetailActivity.sqLiteHelper.getData("SELECT * FROM player where id = "+intentId);
+        final Cursor cursorList =PlayerDetailActivity.sqLiteHelper.getData("SELECT * FROM list where playerid = "+intentId);
 
         while(playerCursor.moveToNext()){
             String name = playerCursor.getString(1);
@@ -69,7 +62,7 @@ public class PlayerDetailActivity extends AppCompatActivity {
             String avg;
 
             if(outing>0 && goal>0) {
-                avg = String.format("%.1f", goal / outing);
+                avg = String.format("%.2f", goal / outing);
             }else{
                 avg = "0";
             }
@@ -91,13 +84,11 @@ public class PlayerDetailActivity extends AppCompatActivity {
 
         }
 
-        final Cursor cursorList =PlayerDetailActivity.sqLiteHelper.getData("SELECT * FROM list where playerid = "+intentId);
         while(cursorList.moveToNext()) {
             int gameid = cursorList.getInt(1);
             int count=0;
 
-            Cursor cursorGames =MainActivity.sqLiteHelper.getData("SELECT * FROM games where id = " +gameid);
-
+            final Cursor cursorGames =MainActivity.sqLiteHelper.getData("SELECT * FROM games where id = " +gameid);
             while(cursorGames.moveToNext()){
                 int id = cursorGames.getInt(0);
                 int year = cursorGames.getInt(1);
@@ -108,19 +99,27 @@ public class PlayerDetailActivity extends AppCompatActivity {
                 int oppscore = cursorGames.getInt(6);
                 int result = cursorGames.getInt(7);
 
+                String txtResult = "";
+
                 String txtDate = Integer.toString(year) +"/"+ Integer.toString(month) +"/"+ Integer.toString(day);
 
                 String txtScore = Integer.toString(myscore) + " : " + Integer.toString(oppscore);
-                if(result == 0)
+                if(result == 0) {
                     txtScore = Integer.toString(myscore) + " : " + Integer.toString(oppscore);
-                else if(result == 2)
+                    txtResult = "패";
+                }else if(result == 2) {
                     txtScore = Integer.toString(myscore) + " : " + Integer.toString(oppscore);
-                else if(result == 1)
+                    txtResult = "승";
+                }else if(result == 1) {
                     txtScore = Integer.toString(myscore) + " : " + Integer.toString(oppscore);
-                else if(result == -1)
+                    txtResult = "무";
+                }else if(result == -1) {
                     txtScore = "미정";
+                    txtResult = "미정";
+                }
 
-                Cursor cursorGoals =MainActivity.sqLiteHelper.getData("SELECT * FROM goals where gameid = " +gameid);
+
+                final Cursor cursorGoals =MainActivity.sqLiteHelper.getData("SELECT * FROM goals where gameid = " +gameid);
                 while(cursorGoals.moveToNext()){
                     int playerid = cursorGoals.getInt(2);
 
@@ -130,7 +129,7 @@ public class PlayerDetailActivity extends AppCompatActivity {
                 }
                 String txtGoal = Integer.toString(count);
 
-                adapter.addItem2(txtDate, opponent, txtScore, txtGoal);
+                adapter.addItem3(txtDate, opponent, txtScore, txtResult, txtGoal);
                 gameArray.add(new Game(id,txtDate, opponent, txtScore, txtGoal));
             }
             listview.setAdapter(adapter);
@@ -139,14 +138,11 @@ public class PlayerDetailActivity extends AppCompatActivity {
         adding = (Button)findViewById(R.id.adding);
         adding.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-
                 sqLiteHelper.queryDate("update player set name = '" + tname.getText().toString() + "' where id = "+ intentId +";");
 
                 Intent notiIconClickIntent = new Intent(PlayerDetailActivity.this, MainActivity.class);
                 notiIconClickIntent.putExtra("fragment", "player");
                 PlayerDetailActivity.this.startActivity(notiIconClickIntent);
-
-
             }
         }) ;
 
@@ -154,11 +150,6 @@ public class PlayerDetailActivity extends AppCompatActivity {
         delete.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
 
-                // 선수 기록은 남기고 선수 리스트에서 보이지 않게 만들기(휴먼상태)
-                // position에서 해당 선수 제거
-                // 휴먼상태의 선수는 참여된 경기가 사라지면 삭제한다.
-
-                Cursor playerCursor = PlayerDetailActivity.sqLiteHelper.getData("SELECT * FROM player where id = "+intentId);
                 while(playerCursor.moveToNext()) {
                     String position = playerCursor.getString(2);
 
@@ -166,16 +157,11 @@ public class PlayerDetailActivity extends AppCompatActivity {
                     sqLiteHelper.queryDate("update position set total = total - 1 ;");
                 }
 
-                sqLiteHelper.queryDate("update player set del = 1 where id = "+ intentId +";");
-
-
-
-
+                sqLiteHelper.queryDate("update player set state = 1 where id = "+ intentId +";");
 
                 Intent notiIconClickIntent = new Intent(PlayerDetailActivity.this, MainActivity.class);
                 notiIconClickIntent.putExtra("fragment", "player");
                 PlayerDetailActivity.this.startActivity(notiIconClickIntent);
-
 
             }
         }) ;
@@ -204,9 +190,5 @@ public class PlayerDetailActivity extends AppCompatActivity {
             this.score = score;
             this.goal = goal;
         }
-
-        public Game() {
-        }
-
     }
 }

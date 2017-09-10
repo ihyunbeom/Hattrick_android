@@ -41,14 +41,9 @@ public class PlayerSettingActivity extends AppCompatActivity {
 
                 //System.out.println("선수 등록 전");
                 // view => 0:삭제 1:휴먼 2:정상
-                sqLiteHelper.queryDate("insert into player(name, position, goal, outing, del) values('"+ name +"', '"+ position + "', 0" + ", 0" +", 2" + ");");
-
-                sqLiteHelper.queryDate("update position set "+ position +" = "+ position +" + 1, total = total + 1");
+                sqLiteHelper.queryDate("insert into player(name, position, goal, outing, state) values('"+ name +"', '"+ position + "', 0" + ", 0" +", 2" + ");");
 
                 //System.out.println("선수 등록 완료");
-
-                //Intent next = new Intent(PlayerSettingActivity.this, MainActivity.class);
-                //PlayerSettingActivity.this.startActivity(next);
 
                 Intent notiIconClickIntent = new Intent(PlayerSettingActivity.this, MainActivity.class);
                 notiIconClickIntent.putExtra("fragment", "player");

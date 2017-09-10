@@ -31,26 +31,6 @@ public class TeamSettingActivity extends AppCompatActivity {
 
         sqLiteHelper= new SQLiteHelper(this,"TeamDB.sqlite", null,1);
 
-        Cursor cursor =MainActivity.sqLiteHelper.getData("SELECT * FROM team_info");
-
-        while(cursor.moveToNext()){
-            String teamName = cursor.getString(0);
-            String managerName = cursor.getString(1);
-            String created =cursor.getString(2);
-
-            //System.out.println("팀명 : " + teamName);
-            //System.out.println("매니저 : " + managerName);
-            //System.out.println("창단일 : " + created);
-
-            teamSetting.setText(teamName);
-            managerSetting.setText(managerName);
-            createdSetting.setText(created);
-
-            //System.out.println("팀정보 입력 완료");
-        }
-
-
-
 
         setting.setOnClickListener(new View.OnClickListener(){
 
@@ -74,5 +54,11 @@ public class TeamSettingActivity extends AppCompatActivity {
 
             }
         });
+    }
+    @Override public void onBackPressed() {
+
+        Intent notiIconClickIntent = new Intent(TeamSettingActivity.this, MainActivity.class);
+        notiIconClickIntent.putExtra("fragment", "summary");
+        TeamSettingActivity.this.startActivity(notiIconClickIntent);
     }
 }

@@ -4,7 +4,6 @@
     android:id="@+id/activity_game_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
     android:background="#eeeeee"
     tools:context="com.hattrick.ihyunbeom.hat_client.GameDetailActivity">
 
@@ -18,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="10"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal">
             <Button
                 android:id="@+id/delete"
@@ -25,10 +25,9 @@
                 android:textStyle="bold"
                 android:textColor="#ffffff"
                 android:layout_width="80dp"
-                android:layout_height="20dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
                 android:background="#ff7c7c"
                 android:text="기 록 삭 제"/>
 
@@ -41,8 +40,6 @@
                 android:layout_width="80dp"
                 android:layout_height="40dp"
                 android:layout_weight="9"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
                 android:background="@color/colorPrimary"
                 android:text="수 정 완 료"/>
         </LinearLayout>
@@ -72,42 +69,36 @@
                         android:id="@+id/teamName"
                         android:text="My team"
                         android:textSize="18dp"
-                        android:padding="10dp"
                         android:gravity="center_horizontal"
                         android:textColor="#000000"/>
                     <TextView
                         android:text="VS"
                         android:textSize="18dp"
-                        android:padding="10dp"
                         android:gravity="center_horizontal"/>
                     <TextView
                         android:id="@+id/oppName"
                         android:text="Opponant"
                         android:textSize="18dp"
-                        android:padding="10dp"
                         android:gravity="center_horizontal"
                         android:textColor="#000000"/>
                 </TableRow>
 
                 <TableRow>
                     <TextView
-                        android:text="5"
+                        android:text="99"
                         android:textColor="#3f59ff"
                         android:id="@+id/myScore"
-                        android:textSize="30dp"
-                        android:padding="10dp"
+                        android:textSize="50dp"
                         android:gravity="center_horizontal"/>
                     <TextView
-                        android:textSize="30dp"
+                        android:textSize="50dp"
                         android:textColor="#3f59ff"
-                        android:padding="10dp"
                         android:gravity="center_horizontal"/>
                     <TextView
-                        android:text="3"
+                        android:text="99"
                         android:textColor="#ff3f3f"
                         android:id="@+id/oppScore"
-                        android:textSize="30dp"
-                        android:padding="10dp"
+                        android:textSize="50dp"
                         android:gravity="center_horizontal"/>
                 </TableRow>
 
@@ -120,37 +111,37 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="right"
-            android:layout_marginBottom="10dp"
-            android:paddingRight="5dp"
-            android:background="#ffffff">
+
+            android:background="#eeeeee">
 
 
             <Button
                 android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:textColor="#ffffff"
-                android:background="#8ebcb9"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="10dp"
-                android:text="+"
+                android:layout_height="25dp"
+                android:textColor="#555555"
+                android:textSize="15dp"
+                android:background="#cccccc"
+                android:layout_marginRight="5dp"
+                android:text="+1"
                 android:id="@+id/addOppGoal"/>
 
             <Button
                 android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:textColor="#ffffff"
-                android:background="#ffa8a8"
-                android:layout_marginBottom="10dp"
-                android:text="-"
+                android:layout_height="25dp"
+                android:textColor="#555555"
+                android:textSize="15dp"
+                android:background="#cccccc"
+                android:text="-1"
                 android:id="@+id/deleteOppGoal"/>
 
         </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#ffffff"
-            android:paddingBottom="10dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -164,22 +155,17 @@
                 android:layout_height="30dp"
                 android:textColor="#ffffff"
                 android:background="#8ebcb9"
-                android:text="득 점 !"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
+                android:text="득 점 추 가 !"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
                 android:layout_weight="2"
                 android:id="@+id/addMyGoal"/>
 
             <Button
-                android:layout_width="30dp"
+                android:layout_width="15dp"
                 android:layout_height="30dp"
                 android:textColor="#ffffff"
                 android:background="#ffa8a8"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:text="취 소"
                 android:id="@+id/deleteMyGoal"/>

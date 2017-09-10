@@ -18,7 +18,8 @@ public class ListViewAdapter extends BaseAdapter {
 
     private static final int ITEM_VIEW_TYPE_PLAYER = 0;
     private static final int ITEM_VIEW_TYPE_GAMES = 1;
-    private static final int ITEM_VIEW_TYPE_MAX = 2;
+    private static final int ITEM_VIEW_TYPE_PLAYER_GOAL = 2;
+    private static final int ITEM_VIEW_TYPE_MAX = 3;
 
 
     private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>() ;
@@ -85,12 +86,41 @@ public class ListViewAdapter extends BaseAdapter {
                     TextView dateTextView = (TextView)convertView.findViewById(R.id.textDate);
                     TextView oppTextView = (TextView)convertView.findViewById(R.id.textOpp);
                     TextView scoreTextView = (TextView)convertView.findViewById(R.id.textScore);
-                    TextView resultTextView = (TextView)convertView.findViewById(R.id.textResult);
+
+                    if(listViewItem.getGameResult().equals("패"))
+                        scoreTextView.setTextColor(Color.rgb(231,76,60));
+                    else if(listViewItem.getGameResult().equals("승"))
+                        scoreTextView.setTextColor(Color.rgb(41,128,185));
+                    else if(listViewItem.getGameResult().equals("무"))
+                        scoreTextView.setTextColor(Color.rgb(86,86,86));
+                    else if(listViewItem.getGameResult().equals("미정"))
+                        scoreTextView.setTextColor(Color.rgb(255,255,255));
 
                     dateTextView.setText(listViewItem.getGameDate());
                     oppTextView.setText(listViewItem.getGameOpp());
                     scoreTextView.setText(listViewItem.getGameScore());
-                    resultTextView.setText(listViewItem.getGameResult());
+                    break;
+                case ITEM_VIEW_TYPE_PLAYER_GOAL:
+                    convertView= inflater.inflate(R.layout.listview_item_outing, parent, false);
+
+                    dateTextView = (TextView)convertView.findViewById(R.id.textDate);
+                    oppTextView = (TextView)convertView.findViewById(R.id.textOpp);
+                    scoreTextView = (TextView)convertView.findViewById(R.id.textScore);
+                    goalTextView = (TextView)convertView.findViewById(R.id.textGoal);
+
+                    if(listViewItem.getGameResult().equals("패"))
+                        scoreTextView.setTextColor(Color.rgb(231,76,60));
+                    else if(listViewItem.getGameResult().equals("승"))
+                        scoreTextView.setTextColor(Color.rgb(41,128,185));
+                    else if(listViewItem.getGameResult().equals("무"))
+                        scoreTextView.setTextColor(Color.rgb(86,86,86));
+                    else if(listViewItem.getGameResult().equals("미정"))
+                        scoreTextView.setTextColor(Color.rgb(255,255,255));
+
+                    dateTextView.setText(listViewItem.getGameDate());
+                    oppTextView.setText(listViewItem.getGameOpp());
+                    scoreTextView.setText(listViewItem.getGameScore());
+                    goalTextView.setText(listViewItem.getPlayerGoal());
                     break;
             }
 
@@ -134,6 +164,21 @@ public class ListViewAdapter extends BaseAdapter {
         item.setGameOpp(opp);
         item.setGameScore(score);
         item.setGameResult(result);
+        //result => 0:패 1:무 2:승
+
+        listViewItemList.add(item);
+    }
+
+    public void addItem3(String date, String opp, String score, String result, String goal) {
+        ListViewItem item = new ListViewItem();
+
+        item.setType(ITEM_VIEW_TYPE_PLAYER_GOAL) ;
+        item.setGameDate(date);
+        item.setGameOpp(opp);
+        item.setGameScore(score);
+        item.setGameResult(result);
+        item.setPlayerGoal(goal);
+
         //result => 0:패 1:무 2:승
 
         listViewItemList.add(item);

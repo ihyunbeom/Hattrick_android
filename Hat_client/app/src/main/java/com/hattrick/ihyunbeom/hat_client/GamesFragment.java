@@ -38,6 +38,13 @@ public class GamesFragment extends Fragment {
     private TextView txtscoreDraw;
     private TextView txtscoreLose;
 
+    int scoreGame = 0;
+    int scoreGoals = 0;
+    int scoreLost = 0;
+    int scoreWin = 0;
+    int scoreDraw = 0;
+    int scoreLose = 0;
+
     ArrayList<Game> gameArray = new ArrayList<Game>();
 
     // TODO: Rename and change types of parameters
@@ -85,6 +92,13 @@ public class GamesFragment extends Fragment {
 
         adapter = new ListViewAdapter();
 
+        txtscoreGame = (TextView) view.findViewById(R.id.scoreGame);
+        txtscoreGoals = (TextView) view.findViewById(R.id.scoreGoals);
+        txtscoreLost = (TextView) view.findViewById(R.id.scoreLost);
+        txtscoreWin = (TextView) view.findViewById(R.id.scoreWin);
+        txtscoreDraw = (TextView) view.findViewById(R.id.scoreDraw);
+        txtscoreLose = (TextView) view.findViewById(R.id.scoreLose);
+
         addGame = (Button) view.findViewById(R.id.addGame); // activity 호출 버튼(팝업창)
 
         Cursor cursorGames =MainActivity.sqLiteHelper.getData("SELECT * FROM games");
@@ -104,38 +118,49 @@ public class GamesFragment extends Fragment {
 
             String txtDate = Integer.toString(year) +"/"+ Integer.toString(month) +"/"+ Integer.toString(day);
             String txtResult = "";
-            if(result == 0)
+
+            scoreGame++;
+            scoreGoals += myscore;
+            scoreLost += oppscore;
+
+            if(result == 0) {
                 txtResult = "패";
-            else if(result == 2)
+                scoreLose++;
+            }else if(result == 2) {
                 txtResult = "승";
-            else if(result == 1)
+                scoreWin++;
+            }else if(result == 1) {
                 txtResult = "무";
-            else if(result == -1)
+                scoreDraw++;
+            }else if(result == -1) {
                 txtResult = "미정";
+            }
 
             String txtScore = Integer.toString(myscore) + " : " + Integer.toString(oppscore);
-
             //System.out.println("ID :"+ id +" 날짜 :"+ txtDate +" 상대팀 : " + opponent + " 점수 : " + txtScore + " 결과 : " + txtResult);
 
             adapter.addItem2(txtDate, opponent, txtScore, txtResult);
             gameArray.add(new Game(id,txtDate, opponent, txtScore, txtResult));
         }
+
+        txtscoreGame.setText(Integer.toString(scoreGame));
+        txtscoreGoals.setText(Integer.toString(scoreGoals));
+        txtscoreLost.setText(Integer.toString(scoreLost));
+        txtscoreWin.setText(Integer.toString(scoreWin));
+        txtscoreDraw.setText(Integer.toString(scoreDraw));
+        txtscoreLose.setText(Integer.toString(scoreLose));
+
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                // 상세정보 화면으로 이동하기(인텐트 날리기)
-                // 1. 다음화면을 만든다
-                // 2. AndroidManifest.xml 에 화면을 등록한다
-                // 3. Intent 객체를 생성하여 날린다
+
                 Intent intent = new Intent(
                         getActivity(), // 현재화면의 제어권자
                         GameDetailActivity.class); // 다음넘어갈 화면
 
-                // intent 객체에 데이터를 실어서 보내기
-                // 리스트뷰 클릭시 인텐트 (Intent) 생성하고 position 값을 이용하여 인텐트로 넘길값들을 넘긴다
                 intent.putExtra("id", gameArray.get(position).id);
 
                 startActivity(intent);
@@ -151,40 +176,6 @@ public class GamesFragment extends Fragment {
                 getActivity().startActivity(adding);
             }
         });
-
-        Cursor cursorScore =MainActivity.sqLiteHelper.getData("SELECT * FROM score");
-
-        //games, goals, lost, win, draw, lose
-
-        txtscoreGame = (TextView) view.findViewById(R.id.scoreGame);
-        txtscoreGoals = (TextView) view.findViewById(R.id.scoreGoals);
-        txtscoreLost = (TextView) view.findViewById(R.id.scoreLost);
-        txtscoreWin = (TextView) view.findViewById(R.id.scoreWin);
-        txtscoreDraw = (TextView) view.findViewById(R.id.scoreDraw);
-        txtscoreLose = (TextView) view.findViewById(R.id.scoreLose);
-
-
-        while(cursorScore.moveToNext()){
-            int scoreGame = cursorScore.getInt(0);
-            int scoreGoals = cursorScore.getInt(1);
-            int scoreLost = cursorScore.getInt(2);
-            int scoreWin = cursorScore.getInt(3);
-            int scoreDraw = cursorScore.getInt(4);
-            int scoreLose = cursorScore.getInt(5);
-
-
-            //System.out.println("Games : " + scoreGame + " Goals : " + scoreGoals + " Lost : " + scoreLost + " Win : " + scoreWin + " Draw : " + scoreDraw + " Lose : " + scoreLose );
-
-            txtscoreGame.setText(Integer.toString(scoreGame));
-            txtscoreGoals.setText(Integer.toString(scoreGoals));
-            txtscoreLost.setText(Integer.toString(scoreLost));
-            txtscoreWin.setText(Integer.toString(scoreWin));
-            txtscoreDraw.setText(Integer.toString(scoreDraw));
-            txtscoreLose.setText(Integer.toString(scoreLose));
-
-
-        }
-
         return view;
     }
 
@@ -206,11 +197,5 @@ public class GamesFragment extends Fragment {
             this.score = score;
             this.result = result;
         }
-
-        public Game() {
-        }
-
     }
-
-
 }

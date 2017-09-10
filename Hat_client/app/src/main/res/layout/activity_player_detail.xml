@@ -4,7 +4,6 @@
     android:id="@+id/activity_player_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
     android:background="#eeeeee"
     tools:context="com.hattrick.ihyunbeom.hat_client.PlayerDetailActivity">
 
@@ -16,18 +15,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="10"
+            android:weightSum="12"
             android:orientation="horizontal">
             <Button
                 android:id="@+id/delete"
                 android:textSize="12dp"
                 android:textStyle="bold"
                 android:textColor="#ffffff"
-                android:layout_width="80dp"
-                android:layout_height="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
                 android:layout_weight="1"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
                 android:background="#ff7c7c"
                 android:text="선 수 삭 제"/>
 
@@ -37,11 +36,10 @@
                 android:textSize="12dp"
                 android:textStyle="bold"
                 android:textColor="#ffffff"
-                android:layout_width="80dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_weight="9"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_weight="11"
+                android:layout_marginTop="5dp"
                 android:background="@color/colorPrimary"
                 android:text="수 정 완 료"/>
         </LinearLayout>
@@ -88,9 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
                 android:stretchColumns="*">
 
                 <TableRow>
@@ -152,7 +148,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="20dp"
             android:background="#ffffff">
 
             <TextView
@@ -168,9 +163,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
                 android:weightSum="4"
                 >
                 <LinearLayout
@@ -202,7 +194,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="80dp"
+                    android:layout_width="50dp"
                     android:layout_height="25dp"
                     android:gravity="center"
                     android:layout_weight="1"
@@ -216,7 +208,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="50dp"
+                    android:layout_width="40dp"
                     android:layout_height="25dp"
                     android:gravity="center"
                     android:layout_weight="1"

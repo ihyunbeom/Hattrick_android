@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
-    android:background="#eeeeee"
+    android:background="#ffffff"
     tools:context="com.hattrick.ihyunbeom.hat_client.GamesFragment">
 
     <LinearLayout
@@ -16,25 +15,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginBottom="10dp"
             android:background="#ffffff">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="현재 전적"
-                android:textSize="18dp"
+                android:textSize="14dp"
                 android:gravity="center"
                 android:textColor="#000000"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
 
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
                 android:stretchColumns="*">
 
                 <TableRow>
@@ -135,13 +130,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginBottom="5dp"
-            android:paddingBottom="10dp"
             android:background="#ffffff">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="10dp"
                 android:gravity="center">
                 <Button
                     android:id="@+id/addGame"
@@ -152,8 +145,7 @@
                     android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="#8ebcb9"
                     android:text="등 록"/>
                 <LinearLayout
@@ -163,14 +155,14 @@
 
                     android:layout_marginRight="5dp"
                     android:layout_marginLeft="5dp"
-                    android:weightSum="4"
+                    android:weightSum="3"
                     >
                     <LinearLayout
                         android:layout_width="90dp"
-                        android:layout_height="25dp"
+                        android:layout_height="20dp"
                         android:gravity="center"
                         android:layout_weight="1"
-                        android:background="@drawable/border2">
+                        android:background="#eeeeee">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -181,10 +173,10 @@
 
                     <LinearLayout
                         android:layout_width="90dp"
-                        android:layout_height="25dp"
+                        android:layout_height="20dp"
                         android:gravity="center"
                         android:layout_weight="1"
-                        android:background="@drawable/border2">
+                        android:background="#eeeeee">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -195,10 +187,10 @@
 
                     <LinearLayout
                         android:layout_width="80dp"
-                        android:layout_height="25dp"
+                        android:layout_height="20dp"
                         android:gravity="center"
                         android:layout_weight="1"
-                        android:background="@drawable/border2">
+                        android:background="#eeeeee">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -207,19 +199,6 @@
                             android:textColor="#000000"/>
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="50dp"
-                        android:layout_height="25dp"
-                        android:gravity="center"
-                        android:layout_weight="1"
-                        android:background="@drawable/border2">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="결 과"
-                            android:textSize="12dp"
-                            android:textColor="#000000"/>
-                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>

@@ -51,6 +51,8 @@ public class GameAddingActivity extends AppCompatActivity {
         // ArrayAdapter 생성. 아이템 View를 선택(multiple choice)가능하도록.
         final ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_multiple_choice, items) ;
 
+        final Cursor cursorGames =GameAddingActivity.sqLiteHelper.getData("SELECT * FROM games");
+        final Cursor cursorPlayer =GameAddingActivity.sqLiteHelper.getData("SELECT * FROM player");
 
         listview = (ListView)findViewById(R.id.selectPlayerList);
         listview.setAdapter(arrayAdapter);
@@ -65,37 +67,15 @@ public class GameAddingActivity extends AppCompatActivity {
         dateText.setText(syear + "년 " + smonth + "월 " + sday +"일");
 
         dialog = new DatePickerDialog(this, listener, syear, smonth-1, sday);
-
         datepicker = (Button)findViewById(R.id.datepicker);
         datepicker.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 dialog.show();
             }
         }) ;
-        /*
-        gDate.init(gDate.getYear(),gDate.getMonth(),gDate.getDayOfMonth(),
-                    new DatePicker.OnDateChangedListener(){
-
-                        @Override
-                        public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                            dateText.setText(String.format("%d년%d월%d일",year,monthOfYear+1,dayOfMonth));
-                            syear = year;
-                            smonth = monthOfYear+1;
-                            sday = dayOfMonth;
-                        }
-                    });
-        */
-
-        //dateText = (TextView)findViewById(R.id.dateText);
-        //gDate = (DatePicker)findViewById(R.id.datePicker);
-
-
         oppName = (EditText) findViewById(R.id.oppName);
 
-
         int cnt=0;
-        Cursor cursorPlayer =GameAddingActivity.sqLiteHelper.getData("SELECT * FROM player");
-
         while(cursorPlayer.moveToNext()){
             int id = cursorPlayer.getInt(0);
             String name = cursorPlayer.getString(1);
@@ -112,23 +92,16 @@ public class GameAddingActivity extends AppCompatActivity {
 
         }
 
-
-        final Cursor cursorGames =GameAddingActivity.sqLiteHelper.getData("SELECT * FROM games");
-
         adding = (Button)findViewById(R.id.adding);
         adding.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
 
                 String opp = oppName.getText().toString();
+                int gameid = 0;
 
                 //System.out.println("경기 등록 전");
                 sqLiteHelper.queryDate("insert into games(year, month, day, opponent, myscore, oppscore, result) " +
                         "values("+syear+", "+smonth+", "+sday+", '"+opp+"', 0, 0, -1);");
-                //sqLiteHelper.queryDate("insert into games(year, month, day, opponent, myscore, oppscore, result) values(2017, 8, 12, 'opp1', 0, 0, 0);");
-                // listid 값 추가
-                //sqLiteHelper.queryDate("update score set games = games + 1");
-
-                int gameid = 0;
 
                 while(cursorGames.moveToNext()) {
                     gameid = cursorGames.getInt(0);
@@ -146,25 +119,13 @@ public class GameAddingActivity extends AppCompatActivity {
                     }
                 }
 
-                sqLiteHelper.queryDate("update score set games = games + 1;");
-
-                //sqLiteHelper.queryDate("insert into list(gameid, playerid)" +
-                //        "values(" + gameid + "," + i+1 + ");");
-
-                //시즌별 경기전적 테이블 생성 또는 수정
-                //저장된 시즌 정보 table 생성
-
                 //System.out.println("날짜 : " + syear + "." + smonth + "." + sday + " 상대팀 : " + oppName);
                 //System.out.println("경기 등록 완료");
-
-                //Intent next = new Intent(GameAddingActivity.this, MainActivity.class);
-                //GameAddingActivity.this.startActivity(next);
 
                 Intent notiIconClickIntent = new Intent(GameAddingActivity.this, MainActivity.class);
                 notiIconClickIntent.putExtra("fragment", "games");
                 GameAddingActivity.this.startActivity(notiIconClickIntent);
                 overridePendingTransition(0, 0);
-
 
             }
         }) ;
@@ -187,9 +148,6 @@ public class GameAddingActivity extends AppCompatActivity {
             this.goal = goal;
             this.outing = outing;
             this.list = list;
-        }
-
-        public Player() {
         }
 
     }
