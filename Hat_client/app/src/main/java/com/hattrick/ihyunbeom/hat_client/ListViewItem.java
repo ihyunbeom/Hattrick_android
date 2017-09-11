@@ -18,6 +18,11 @@ public class ListViewItem {
     private String gameScore;
     private String gameResult;
 
+    private String stadTitle;
+    private String stadTelephone;
+    private String stadAddres;
+    private String stadRoad;
+
     public ListViewItem() {
     }
 
@@ -81,6 +86,29 @@ public class ListViewItem {
         return this.gameResult;
     }
 
+    /////
+    public void setStadTitle(String stadTitle) {
+        this.stadTitle = stadTitle ;
+    }
+    public void setStadTelephone(String stadTelephone) {
+        this.stadTelephone = stadTelephone ;
+    }
+    public void setStadAddres(String stadAddres) { this.stadAddres = stadAddres ; }
+    public void setStadRoad(String stadRoad) { this.stadRoad = stadRoad ; }
+
+    public String getStadTitle() {
+        return this.stadTitle;
+    }
+    public String getStadTelephone() {
+        return this.stadTelephone;
+    }
+    public String getStadAddres() {
+        return this.stadAddres;
+    }
+    public String getStadRoad() {
+        return this.stadRoad;
+    }
+    /////
 
 
 

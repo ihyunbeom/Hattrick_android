@@ -1,4 +1,4 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,50 +7,69 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="5dp"
-            android:background="#ffffff">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="10dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="검 색 : "
-                            android:textSize="18dp"/>
-                        <EditText
-                            android:id="@+id/find"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="5dp"
+                    android:background="#ffffff">
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textPersonName" />
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:layout_margin="10dp">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="실제 정보와 다소 차이가 있을 수 있습니다."
+                                    android:textSize="12dp"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:weightSum="4"
+                            android:layout_margin="10dp">
+
+                                <Spinner
+                                    android:id="@+id/pos1"
+                                    android:layout_weight="1"
+                                    android:layout_marginRight="20dp"
+                                    android:spinnerMode="dialog"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"></Spinner>
+
+                                <Spinner
+                                    android:id="@+id/pos2"
+                                    android:layout_weight="1"
+                                    android:spinnerMode="dialog"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"></Spinner>
+                        </LinearLayout>
+                        <Button
+                            android:id="@+id/btnSearch"
+                            android:textSize="16dp"
+                            android:textStyle="bold"
+                            android:textColor="#ffffff"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:background="#8ebcb9"
+                            android:text="구 장 찾 기"/>
+
                 </LinearLayout>
-                <Button
-                    android:id="@+id/btnSearch"
-                    android:textSize="12dp"
-                    android:textStyle="bold"
-                    android:textColor="#ffffff"
+                <ListView
+                    android:id="@+id/stadiumList"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:background="#8ebcb9"
-                    android:text="구 장 찾 기"/>
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:textColor="#444444"
-                    android:text="Real Madrid"
-                    android:id="@+id/text"/>
-
-
+                </ListView>
         </LinearLayout>
 
 
-</ScrollView>
+</RelativeLayout>

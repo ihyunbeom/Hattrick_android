@@ -19,7 +19,10 @@ public class ListViewAdapter extends BaseAdapter {
     private static final int ITEM_VIEW_TYPE_PLAYER = 0;
     private static final int ITEM_VIEW_TYPE_GAMES = 1;
     private static final int ITEM_VIEW_TYPE_PLAYER_GOAL = 2;
-    private static final int ITEM_VIEW_TYPE_MAX = 3;
+    private static final int ITEM_VIEW_TYPE_STADIUM = 3;
+    private static final int ITEM_VIEW_TYPE_MAX = 4;
+
+
 
 
     private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>() ;
@@ -66,6 +69,11 @@ public class ListViewAdapter extends BaseAdapter {
                     TextView positionTextView = (TextView) convertView.findViewById(R.id.textPosition) ;
                     TextView goalTextView = (TextView) convertView.findViewById(R.id.textGoal) ;
                     TextView outingTextView = (TextView) convertView.findViewById(R.id.textOuting) ;
+
+                    TextView titleTextView = (TextView) convertView.findViewById(R.id.textTitle) ;
+                    TextView telephoneTextView = (TextView) convertView.findViewById(R.id.textTelephone) ;
+                    TextView addressTextView = (TextView) convertView.findViewById(R.id.textAddress) ;
+                    TextView RoadTextView = (TextView) convertView.findViewById(R.id.textRoad) ;
 
                     nameTextView.setText(listViewItem.getPlayerName());
                     positionTextView.setText(listViewItem.getPlayerPosition());
@@ -121,6 +129,28 @@ public class ListViewAdapter extends BaseAdapter {
                     oppTextView.setText(listViewItem.getGameOpp());
                     scoreTextView.setText(listViewItem.getGameScore());
                     goalTextView.setText(listViewItem.getPlayerGoal());
+                    break;
+                case ITEM_VIEW_TYPE_STADIUM:
+                    convertView= inflater.inflate(R.layout.listview_item_stadium, parent, false);
+
+                    titleTextView = (TextView) convertView.findViewById(R.id.textTitle) ;
+                    telephoneTextView = (TextView) convertView.findViewById(R.id.textTelephone) ;
+                    addressTextView = (TextView) convertView.findViewById(R.id.textAddress) ;
+                    RoadTextView = (TextView) convertView.findViewById(R.id.textRoad) ;
+
+
+                    titleTextView.setText(listViewItem.getStadTitle());
+
+                    if(listViewItem.getStadTelephone().equals(""))
+                        telephoneTextView.setTextSize(0);
+                    else
+                        telephoneTextView.setText(listViewItem.getStadTelephone());
+
+                    if(listViewItem.getStadAddres().equals(""))
+                        RoadTextView.setText(listViewItem.getStadRoad());
+                    else
+                        addressTextView.setText(listViewItem.getStadAddres());
+
                     break;
             }
 
@@ -180,6 +210,18 @@ public class ListViewAdapter extends BaseAdapter {
         item.setPlayerGoal(goal);
 
         //result => 0:패 1:무 2:승
+
+        listViewItemList.add(item);
+    }
+
+    public void addItem4(String title, String telephone, String address, String roadAddress) {
+        ListViewItem item = new ListViewItem();
+
+        item.setType(ITEM_VIEW_TYPE_STADIUM) ;
+        item.setStadTitle(title);
+        item.setStadTelephone(telephone);
+        item.setStadAddres(address);
+        item.setStadRoad(roadAddress);
 
         listViewItemList.add(item);
     }

@@ -107,12 +107,22 @@ public class MainActivity extends AppCompatActivity
             }else if(str.equals("summary")) {
                 SummaryFragment summaryFragment = SummaryFragment.newInstance("some1","some2");
                 fragment = new SummaryFragment();
-                title = "팀정보";
+                title = "팀 정보";
                 FragmentManager manager = getSupportFragmentManager();
                 manager.beginTransaction().replace(
                         R.id.relativelayout_for_fragment,
                         summaryFragment,
                         summaryFragment.getTag()
+                ).commit();
+            }else if(str.equals("find")) {
+                FindFragment findFragment = FindFragment.newInstance("some1","some2");
+                fragment = new FindFragment();
+                title = "구장 찾기";
+                FragmentManager manager = getSupportFragmentManager();
+                manager.beginTransaction().replace(
+                        R.id.relativelayout_for_fragment,
+                        findFragment,
+                        findFragment.getTag()
                 ).commit();
             }
         }else{
@@ -155,7 +165,7 @@ public class MainActivity extends AppCompatActivity
             //Toast.makeText(this, "팀정보", Toast.LENGTH_SHORT).show();
             SummaryFragment summaryFragment = SummaryFragment.newInstance("some1","some2");
             fragment = new SummaryFragment();
-            title = "팀정보";
+            title = "팀 정보";
             FragmentManager manager = getSupportFragmentManager();
             manager.beginTransaction().replace(
                     R.id.relativelayout_for_fragment,

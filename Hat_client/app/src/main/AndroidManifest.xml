@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hattrick.ihyunbeom.hat_client">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="풋살 매니저"
+        android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -36,8 +36,11 @@
         <activity
             android:name=".OutingPlayer"
             android:theme="@style/PopupTheme" />
-        <activity android:name=".PlayerDetailActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity
+            android:name=".PlayerDetailActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".MapView"
+            android:theme="@style/PopupTheme" ></activity>
     </application>
 
 </manifest>
