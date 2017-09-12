@@ -266,6 +266,14 @@ public class FindFragment extends Fragment {
                     System.out.println("mapx : " + stadArray.get(position).mapx);
                     System.out.println("mapy : " + stadArray.get(position).mapy);
 
+                    Intent myIntent =new Intent(getActivity(), StadiumDetail.class);
+                    myIntent.putExtra("name", stadArray.get(position).title);
+                    myIntent.putExtra("tele", stadArray.get(position).telephone);
+                    myIntent.putExtra("address", stadArray.get(position).address);
+                    myIntent.putExtra("mapx", stadArray.get(position).mapx);
+                    myIntent.putExtra("mapy", stadArray.get(position).mapy);
+                    startActivity(myIntent);
+
                 }
 
             });

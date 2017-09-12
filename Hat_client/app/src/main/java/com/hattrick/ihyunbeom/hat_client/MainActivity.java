@@ -1,5 +1,6 @@
 package com.hattrick.ihyunbeom.hat_client;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static SQLiteHelper sqLiteHelper;
+    private BackPressCloseSystem backPressCloseSystem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        backPressCloseSystem = new BackPressCloseSystem(this);
+        // 뒤로 가기 버튼 이벤트
 
         sqLiteHelper= new SQLiteHelper(this,"TeamDB.sqlite", null,1);
 
@@ -67,7 +71,7 @@ public class MainActivity extends AppCompatActivity
                 "playerid  integer);"); // 해당 경기 득점 선수 (순서대로 출력)
 
         if (isFirstTime()) {
-            sqLiteHelper.queryDate("insert into team_info(team, manager, created) values('팀명을 설정하세요','매니저 이름을 설정하세요','창단일을 설정하세요');");
+            sqLiteHelper.queryDate("insert into team_info(team, manager, created) values('','','');");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -133,14 +137,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        /*
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-        */
+        backPressCloseSystem.onBackPressed();
     }
 
     @Override
@@ -195,7 +192,7 @@ public class MainActivity extends AppCompatActivity
                     gamesFragment,
                     gamesFragment.getTag()
             ).commit();
-
+        /*
         } else if (id == R.id.nav_fee) {
             //Toast.makeText(this, "회비 관리", Toast.LENGTH_SHORT).show();
             FeeFragment feeFragment = FeeFragment.newInstance("some1","some2");
@@ -207,7 +204,7 @@ public class MainActivity extends AppCompatActivity
                     feeFragment,
                     feeFragment.getTag()
             ).commit();
-
+        */
         } else if (id == R.id.nav_find) {
             //Toast.makeText(this, "구장 찾기", Toast.LENGTH_SHORT).show();
             FindFragment findFragment = FindFragment.newInstance("some1","some2");
@@ -247,5 +244,54 @@ public class MainActivity extends AppCompatActivity
             editor.commit();
         }
         return !ranBefore;
+    }
+
+    public class BackPressCloseSystem {
+
+        private long backKeyPressedTime = 0;
+        private Toast toast;
+
+        private Activity activity;
+
+        public BackPressCloseSystem(Activity activity) {
+            this.activity = activity;
+        }
+
+        public void onBackPressed() {
+
+            if (isAfter2Seconds()) {
+                backKeyPressedTime = System.currentTimeMillis();
+                // 현재시간을 다시 초기화
+
+                toast = Toast.makeText(activity,
+                        "\'뒤로\'버튼을 한번 더 누르시면 종료됩니다.",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+
+                return;
+            }
+
+            if (isBefore2Seconds()) {
+                programShutdown();
+                toast.cancel();
+            }
+        }
+
+        private Boolean isAfter2Seconds() {
+            return System.currentTimeMillis() > backKeyPressedTime + 2000;
+            // 2초 지났을 경우
+        }
+
+        private Boolean isBefore2Seconds() {
+            return System.currentTimeMillis() <= backKeyPressedTime + 2000;
+            // 2초가 지나지 않았을 경우
+        }
+
+        private void programShutdown() {
+            activity .moveTaskToBack(true);
+            activity .finish();
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(0);
+        }
     }
 }

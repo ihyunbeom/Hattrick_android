@@ -135,10 +135,18 @@ public class SummaryFragment extends Fragment {
             String managerName = cursor.getString(1);
             String created =cursor.getString(2);
 
-            txtTeamName.setText(teamName);
-            txtManager.setText(managerName);
-            txtCreated.setText(created);
-
+            if(teamName.equals(""))
+                txtTeamName.setText("팀명을 설정하세요");
+            else
+                txtTeamName.setText(teamName);
+            if(managerName.equals(""))
+                txtManager.setText("매니저 이름을 설정하세요");
+            else
+                txtManager.setText(managerName);
+            if(created.equals(""))
+                txtCreated.setText("창단일을 설정하세요");
+            else
+                txtCreated.setText(created);
         }
 
         while(cursorGames.moveToNext()) {
