@@ -12,7 +12,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25dp"
-            android:text="준비중"
+            android:text="준비중 :)"
             android:textColor="#8ebcb9"
             android:id="@+id/wait"
             />

@@ -25,8 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_margin="3dp"
                 android:background="#ff7c7c"
                 android:text="삭 제"/>
 
@@ -39,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_weight="11"
-                android:layout_marginTop="5dp"
+                android:layout_margin="3dp"
                 android:background="@color/colorPrimary"
                 android:text="완 료"/>
         </LinearLayout>
@@ -170,7 +169,7 @@
                     android:layout_height="25dp"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:background="@drawable/border2">
+                    android:background="#eeeeee">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -184,7 +183,7 @@
                     android:layout_height="25dp"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:background="@drawable/border2">
+                    android:background="#eeeeee">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -198,7 +197,7 @@
                     android:layout_height="25dp"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:background="@drawable/border2">
+                    android:background="#eeeeee">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -212,7 +211,7 @@
                     android:layout_height="25dp"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:background="@drawable/border2">
+                    android:background="#eeeeee">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

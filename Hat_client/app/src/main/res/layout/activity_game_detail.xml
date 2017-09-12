@@ -27,7 +27,7 @@
                 android:layout_width="80dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:layout_marginRight="5dp"
+                android:layout_margin="3dp"
                 android:background="#ff7c7c"
                 android:text="삭 제"/>
 
@@ -39,6 +39,7 @@
                 android:textColor="#ffffff"
                 android:layout_width="80dp"
                 android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight="9"
                 android:background="@color/colorPrimary"
                 android:text="완 료"/>
@@ -121,7 +122,7 @@
                 android:textColor="#555555"
                 android:textSize="15dp"
                 android:background="#cccccc"
-                android:layout_marginRight="5dp"
+                android:layout_margin="3dp"
                 android:text="+1"
                 android:id="@+id/addOppGoal"/>
 
@@ -131,6 +132,7 @@
                 android:textColor="#555555"
                 android:textSize="15dp"
                 android:background="#cccccc"
+                android:layout_margin="3dp"
                 android:text="-1"
                 android:id="@+id/deleteOppGoal"/>
 
@@ -155,8 +157,8 @@
                 android:layout_height="30dp"
                 android:textColor="#ffffff"
                 android:background="#8ebcb9"
+                android:layout_margin="3dp"
                 android:text="득 점 추 가 !"
-                android:layout_marginTop="10dp"
                 android:layout_weight="2"
                 android:id="@+id/addMyGoal"/>
 
@@ -165,7 +167,7 @@
                 android:layout_height="30dp"
                 android:textColor="#ffffff"
                 android:background="#ffa8a8"
-                android:layout_marginTop="10dp"
+                android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:text="취 소"
                 android:id="@+id/deleteMyGoal"/>

@@ -6,6 +6,9 @@
     <LinearLayout
         android:orientation="horizontal"
         android:gravity="center"
+        android:background="@drawable/border"
+        android:layout_marginTop="3dp"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="3">
@@ -20,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:text="Date"
                 android:id="@+id/textDate"
-                android:textSize="14dp"
+                android:textSize="16dp"
                 android:textColor="#222222"/>
         </LinearLayout>
 
@@ -34,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:text="Opp"
                 android:id="@+id/textOpp"
-                android:textSize="14dp"
+                android:textSize="16dp"
                 android:textColor="#000000"/>
         </LinearLayout>
 
@@ -48,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:text="Score"
                 android:id="@+id/textScore"
-                android:textSize="14dp"
+                android:textSize="16dp"
                 android:textColor="#000000"/>
         </LinearLayout>
 

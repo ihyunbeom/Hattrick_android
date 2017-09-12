@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="#eeeeee"
     tools:context="com.hattrick.ihyunbeom.hat_client.PlayersFragment">
 
     <LinearLayout
@@ -39,35 +39,35 @@
                         android:textColor="#ff3f3f"
                         android:padding="5dp"
                         android:gravity="center_horizontal"
-                        android:background="@drawable/border2"/>
+                        android:background="#eeeeee"/>
                     <TextView
                         android:text="MF"
                         android:textSize="14dp"
                         android:textColor="#3f59ff"
                         android:padding="5dp"
                         android:gravity="center_horizontal"
-                        android:background="@drawable/border2"/>
+                        android:background="#eeeeee"/>
                     <TextView
                         android:text="DF"
                         android:textSize="14dp"
                         android:textColor="#60c130"
                         android:padding="5dp"
                         android:gravity="center_horizontal"
-                        android:background="@drawable/border2"/>
+                        android:background="#eeeeee"/>
                     <TextView
                         android:text="GK"
                         android:textSize="14dp"
                         android:textColor="#8c8600"
                         android:padding="5dp"
                         android:gravity="center_horizontal"
-                        android:background="@drawable/border2"/>
+                        android:background="#eeeeee"/>
                     <TextView
                         android:text="Total"
                         android:textSize="14dp"
                         android:textColor="#000000"
                         android:padding="5dp"
                         android:gravity="center_horizontal"
-                        android:background="@drawable/border2"/>
+                        android:background="#eeeeee"/>
                 </TableRow>
 
                 <TableRow>
@@ -76,36 +76,31 @@
                         android:textSize="14dp"
                         android:textColor="#000000"
                         android:padding="5dp"
-                        android:gravity="center_horizontal"
-                        android:background="@drawable/border"/>
+                        android:gravity="center_horizontal"/>
                     <TextView
                         android:id="@+id/playerMF"
                         android:textSize="14dp"
                         android:textColor="#000000"
                         android:padding="5dp"
-                        android:gravity="center_horizontal"
-                        android:background="@drawable/border"/>
+                        android:gravity="center_horizontal"/>
                     <TextView
                         android:id="@+id/playerDF"
                         android:textSize="14dp"
                         android:textColor="#000000"
                         android:padding="5dp"
-                        android:gravity="center_horizontal"
-                        android:background="@drawable/border"/>
+                        android:gravity="center_horizontal"/>
                     <TextView
                         android:id="@+id/playerGK"
                         android:textSize="14dp"
                         android:textColor="#000000"
                         android:padding="5dp"
-                        android:gravity="center_horizontal"
-                        android:background="@drawable/border"/>
+                        android:gravity="center_horizontal"/>
                     <TextView
                         android:id="@+id/playerTotal"
                         android:textSize="14dp"
                         android:textColor="#000000"
                         android:padding="5dp"
-                        android:gravity="center_horizontal"
-                        android:background="@drawable/border"/>
+                        android:gravity="center_horizontal"/>
                 </TableRow>
 
             </TableLayout>
@@ -131,6 +126,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:background="#8ebcb9"
@@ -139,6 +136,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
                 android:weightSum="7"
                 >
                 <LinearLayout

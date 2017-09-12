@@ -101,12 +101,16 @@ public class ListViewAdapter extends BaseAdapter {
                         scoreTextView.setTextColor(Color.rgb(41,128,185));
                     else if(listViewItem.getGameResult().equals("무"))
                         scoreTextView.setTextColor(Color.rgb(86,86,86));
-                    else if(listViewItem.getGameResult().equals("미정"))
-                        scoreTextView.setTextColor(Color.rgb(255,255,255));
+                    if(listViewItem.getGameResult().equals("미정")) {
+                        scoreTextView.setTextColor(Color.rgb(0, 0, 0));
+                        scoreTextView.setTextSize(10);
+                        scoreTextView.setText("점수를 입력하세요");
+                    }else
+                        scoreTextView.setText(listViewItem.getGameScore());
 
                     dateTextView.setText(listViewItem.getGameDate());
                     oppTextView.setText(listViewItem.getGameOpp());
-                    scoreTextView.setText(listViewItem.getGameScore());
+
                     break;
                 case ITEM_VIEW_TYPE_PLAYER_GOAL:
                     convertView= inflater.inflate(R.layout.listview_item_outing, parent, false);

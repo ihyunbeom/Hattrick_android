@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="#eeeeee"
     tools:context="com.hattrick.ihyunbeom.hat_client.FindFragment">
 
         <LinearLayout
@@ -57,10 +57,13 @@
                             android:textStyle="bold"
                             android:textColor="#ffffff"
                             android:layout_width="match_parent"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:layout_marginBottom="7dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
                             android:background="#8ebcb9"
-                            android:text="구 장 찾 기"/>
+                            android:text="구 장 검 색"/>
 
                 </LinearLayout>
                 <ListView
