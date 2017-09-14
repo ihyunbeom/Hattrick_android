@@ -185,6 +185,7 @@ public class GameDetailActivity extends AppCompatActivity {
             }
         });
 
+        /*
         adding = (Button)findViewById(R.id.adding);
         adding.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
@@ -203,10 +204,10 @@ public class GameDetailActivity extends AppCompatActivity {
                 Intent notiIconClickIntent = new Intent(GameDetailActivity.this, MainActivity.class);
                 notiIconClickIntent.putExtra("fragment", "games");
                 GameDetailActivity.this.startActivity(notiIconClickIntent);
-
-
             }
         }) ;
+        */
+
         delete = (Button)findViewById(R.id.delete);
         delete.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {

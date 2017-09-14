@@ -1,6 +1,7 @@
 package com.hattrick.ihyunbeom.hat_client;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -259,6 +260,7 @@ public class MainActivity extends AppCompatActivity
 
         public void onBackPressed() {
 
+
             if (isAfter2Seconds()) {
                 backKeyPressedTime = System.currentTimeMillis();
                 // 현재시간을 다시 초기화
@@ -275,6 +277,8 @@ public class MainActivity extends AppCompatActivity
                 programShutdown();
                 toast.cancel();
             }
+            
+
         }
 
         private Boolean isAfter2Seconds() {

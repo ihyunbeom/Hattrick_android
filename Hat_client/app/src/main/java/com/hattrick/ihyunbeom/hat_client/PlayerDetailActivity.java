@@ -1,8 +1,11 @@
 package com.hattrick.ihyunbeom.hat_client;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.preference.DialogPreference;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -135,6 +138,7 @@ public class PlayerDetailActivity extends AppCompatActivity {
             listview.setAdapter(adapter);
         }
 
+        /*
         adding = (Button)findViewById(R.id.adding);
         adding.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
@@ -145,6 +149,7 @@ public class PlayerDetailActivity extends AppCompatActivity {
                 PlayerDetailActivity.this.startActivity(notiIconClickIntent);
             }
         }) ;
+        */
 
         delete = (Button)findViewById(R.id.delete);
         delete.setOnClickListener(new Button.OnClickListener() {
@@ -167,11 +172,32 @@ public class PlayerDetailActivity extends AppCompatActivity {
         }) ;
     }
     @Override public void onBackPressed() {
-        sqLiteHelper.queryDate("update player set name = '" + tname.getText().toString() + "' where id = "+ intentId +";");
 
-        Intent notiIconClickIntent = new Intent(PlayerDetailActivity.this, MainActivity.class);
-        notiIconClickIntent.putExtra("fragment", "player");
-        PlayerDetailActivity.this.startActivity(notiIconClickIntent);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(PlayerDetailActivity.this);
+        dialog.setTitle("풋살 매니저")
+                .setMessage("저장하시겟습니까?")
+                .setPositiveButton("저장", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                sqLiteHelper.queryDate("update player set name = '" + tname.getText().toString() + "' where id = "+ intentId +";");
+                                Intent notiIconClickIntent = new Intent(PlayerDetailActivity.this, MainActivity.class);
+                                notiIconClickIntent.putExtra("fragment", "player");
+                                PlayerDetailActivity.this.startActivity(notiIconClickIntent);
+                            }
+                        })
+                .setNeutralButton("취소", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        }).setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent notiIconClickIntent = new Intent(PlayerDetailActivity.this, MainActivity.class);
+                notiIconClickIntent.putExtra("fragment", "player");
+                PlayerDetailActivity.this.startActivity(notiIconClickIntent);
+            }
+        }).create().show();
     }
 
     class Game { // 경기리스트
