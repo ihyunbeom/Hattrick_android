@@ -138,18 +138,38 @@ public class PlayerDetailActivity extends AppCompatActivity {
             listview.setAdapter(adapter);
         }
 
-        /*
+
         adding = (Button)findViewById(R.id.adding);
         adding.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                sqLiteHelper.queryDate("update player set name = '" + tname.getText().toString() + "' where id = "+ intentId +";");
+                AlertDialog.Builder dialog = new AlertDialog.Builder(PlayerDetailActivity.this);
+                dialog.setTitle("풋살 매니저")
+                        .setMessage("저장하시겟습니까?")
+                        .setPositiveButton("저장", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                sqLiteHelper.queryDate("update player set name = '" + tname.getText().toString() + "' where id = "+ intentId +";");
+                                Intent notiIconClickIntent = new Intent(PlayerDetailActivity.this, MainActivity.class);
+                                notiIconClickIntent.putExtra("fragment", "player");
+                                PlayerDetailActivity.this.startActivity(notiIconClickIntent);
+                            }
+                        })
+                        .setNeutralButton("취소", new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-                Intent notiIconClickIntent = new Intent(PlayerDetailActivity.this, MainActivity.class);
-                notiIconClickIntent.putExtra("fragment", "player");
-                PlayerDetailActivity.this.startActivity(notiIconClickIntent);
+                            }
+                        }).setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent notiIconClickIntent = new Intent(PlayerDetailActivity.this, MainActivity.class);
+                        notiIconClickIntent.putExtra("fragment", "player");
+                        PlayerDetailActivity.this.startActivity(notiIconClickIntent);
+                    }
+                }).create().show();
             }
         }) ;
-        */
+
 
         delete = (Button)findViewById(R.id.delete);
         delete.setOnClickListener(new Button.OnClickListener() {
@@ -173,31 +193,11 @@ public class PlayerDetailActivity extends AppCompatActivity {
     }
     @Override public void onBackPressed() {
 
-        AlertDialog.Builder dialog = new AlertDialog.Builder(PlayerDetailActivity.this);
-        dialog.setTitle("풋살 매니저")
-                .setMessage("저장하시겟습니까?")
-                .setPositiveButton("저장", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                sqLiteHelper.queryDate("update player set name = '" + tname.getText().toString() + "' where id = "+ intentId +";");
-                                Intent notiIconClickIntent = new Intent(PlayerDetailActivity.this, MainActivity.class);
-                                notiIconClickIntent.putExtra("fragment", "player");
-                                PlayerDetailActivity.this.startActivity(notiIconClickIntent);
-                            }
-                        })
-                .setNeutralButton("취소", new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
 
-            }
-        }).setNegativeButton("아니요", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent notiIconClickIntent = new Intent(PlayerDetailActivity.this, MainActivity.class);
-                notiIconClickIntent.putExtra("fragment", "player");
-                PlayerDetailActivity.this.startActivity(notiIconClickIntent);
-            }
-        }).create().show();
+
+        Intent notiIconClickIntent = new Intent(PlayerDetailActivity.this, MainActivity.class);
+        notiIconClickIntent.putExtra("fragment", "player");
+        PlayerDetailActivity.this.startActivity(notiIconClickIntent);
     }
 
     class Game { // 경기리스트
