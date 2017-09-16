@@ -81,7 +81,7 @@ public class GameDetailActivity extends AppCompatActivity {
         listview.setAdapter(arrayAdapter);
         listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         //System.out.println("(detail)listview setup end " );
-
+        int cnt=0;
         Cursor cursorList = GameDetailActivity.sqLiteHelper.getData("SELECT * FROM goals where gameid = "+intentId);
         while(cursorList.moveToNext()) {
             int order = cursorList.getInt(0);
@@ -90,14 +90,15 @@ public class GameDetailActivity extends AppCompatActivity {
             //System.out.println("Goal playerid = " + playerid);
             Cursor cursorPlayer = GameDetailActivity.sqLiteHelper.getData("SELECT * FROM player where id = "+playerid);
 
+
             while(cursorPlayer.moveToNext()){
                 int id = cursorPlayer.getInt(0);
                 String name = cursorPlayer.getString(1);
                 String position = cursorPlayer.getString(2);
-
+                cnt++;
                 playerArray.add(new Player(id,name,position,order));
 
-                items.add(position + "    "+ name);
+                items.add("     "+cnt+"     "+position + "    "+ name + "    득점");
 
             }
         }

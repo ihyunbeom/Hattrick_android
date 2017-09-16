@@ -30,87 +30,88 @@
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:stretchColumns="*">
 
                 <TableRow>
                     <TextView
                         android:text="경기"
                         android:textSize="14dp"
-                        android:textColor="#ff3f3f"
+                        android:textColor="#ffffff"
                         android:padding="5dp"
                         android:gravity="center_horizontal"
-                        android:background="#eeeeee"/>
+                        android:background="#8ebcb9"/>
                     <TextView
                         android:text="승"
                         android:textSize="14dp"
                         android:textColor="#3f59ff"
                         android:padding="5dp"
                         android:gravity="center_horizontal"
-                        android:background="#eeeeee"/>
+                        android:background="#8ebcb9"/>
                     <TextView
                         android:text="무"
                         android:textSize="14dp"
-                        android:textColor="#60c130"
+                        android:textColor="#ffffff"
                         android:padding="5dp"
                         android:gravity="center_horizontal"
-                        android:background="#eeeeee"/>
+                        android:background="#8ebcb9"/>
                     <TextView
                         android:text="패"
                         android:textSize="14dp"
-                        android:textColor="#8c8600"
+                        android:textColor="#ff3f3f"
                         android:padding="5dp"
                         android:gravity="center_horizontal"
-                        android:background="#eeeeee"/>
+                        android:background="#8ebcb9"/>
                     <TextView
-                        android:text="득"
+                        android:text="득점"
                         android:textSize="14dp"
-                        android:textColor="#000000"
+                        android:textColor="#ffffff"
                         android:padding="5dp"
                         android:gravity="center_horizontal"
-                        android:background="#eeeeee"/>
+                        android:background="#8ebcb9"/>
                     <TextView
-                        android:text="실"
+                        android:text="실점"
                         android:textSize="14dp"
-                        android:textColor="#000000"
+                        android:textColor="#ffffff"
                         android:padding="5dp"
                         android:gravity="center_horizontal"
-                        android:background="#eeeeee"/>
+                        android:background="#8ebcb9"/>
                 </TableRow>
 
                 <TableRow>
                     <TextView
                         android:id="@+id/scoreGame"
-                        android:textSize="14dp"
+                        android:textSize="18dp"
                         android:textColor="#000000"
                         android:padding="5dp"
                         android:gravity="center_horizontal"/>
                     <TextView
                         android:id="@+id/scoreWin"
-                        android:textSize="14dp"
-                        android:textColor="#000000"
+                        android:textSize="18dp"
+                        android:textColor="#3f59ff"
                         android:padding="5dp"
                         android:gravity="center_horizontal"/>
                     <TextView
                         android:id="@+id/scoreDraw"
-                        android:textSize="14dp"
+                        android:textSize="18dp"
                         android:textColor="#000000"
                         android:padding="5dp"
                         android:gravity="center_horizontal"/>
                     <TextView
                         android:id="@+id/scoreLose"
-                        android:textSize="14dp"
-                        android:textColor="#000000"
+                        android:textSize="18dp"
+                        android:textColor="#ff3f3f"
                         android:padding="5dp"
                         android:gravity="center_horizontal"/>
                     <TextView
                         android:id="@+id/scoreGoals"
-                        android:textSize="14dp"
+                        android:textSize="18dp"
                         android:textColor="#000000"
                         android:padding="5dp"
                         android:gravity="center_horizontal"/>
                     <TextView
                         android:id="@+id/scoreLost"
-                        android:textSize="14dp"
+                        android:textSize="18dp"
                         android:textColor="#000000"
                         android:padding="5dp"
                         android:gravity="center_horizontal"/>
@@ -132,18 +133,18 @@
                 android:gravity="center">
                 <Button
                     android:id="@+id/addGame"
-                    android:textSize="12dp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     android:textColor="#ffffff"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="7dp"
                     android:layout_marginRight="7dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
-                    android:background="#8ebcb9"
-                    android:text="등 록"/>
+                    android:background="@color/colorPrimary"
+                    android:text="경 기 추 가"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -158,13 +159,13 @@
                         android:layout_height="20dp"
                         android:gravity="center"
                         android:layout_weight="1"
-                        android:background="#eeeeee">
+                        android:background="#8ebcb9">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="날 짜"
                             android:textSize="12dp"
-                            android:textColor="#000000"/>
+                            android:textColor="#ffffff"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -172,13 +173,13 @@
                         android:layout_height="20dp"
                         android:gravity="center"
                         android:layout_weight="1"
-                        android:background="#eeeeee">
+                        android:background="#8ebcb9">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="상대팀"
                             android:textSize="12dp"
-                            android:textColor="#000000"/>
+                            android:textColor="#ffffff"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -186,13 +187,13 @@
                         android:layout_height="20dp"
                         android:gravity="center"
                         android:layout_weight="1"
-                        android:background="#eeeeee">
+                        android:background="#8ebcb9">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="점 수"
                             android:textSize="12dp"
-                            android:textColor="#000000"/>
+                            android:textColor="#ffffff"/>
                     </LinearLayout>
 
                 </LinearLayout>

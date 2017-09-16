@@ -35,6 +35,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="Name"
+                android:gravity="center"
                 android:id="@+id/textName"
                 android:textSize="16dp"
                 android:textColor="#222222"/>
@@ -52,8 +53,8 @@
                 android:layout_height="wrap_content"
                 android:text="goal"
                 android:id="@+id/textGoal"
-                android:textSize="16dp"
-                android:textColor="#000000"/>
+                android:textSize="18dp"
+                android:textColor="#3f59ff"/>
         </LinearLayout>
 
         <LinearLayout
@@ -66,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:text="outing"
                 android:id="@+id/textOuting"
-                android:textSize="16dp"
+                android:textSize="18dp"
                 android:textColor="#000000"/>
         </LinearLayout>
 
