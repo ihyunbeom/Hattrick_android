@@ -35,14 +35,11 @@ public class OutingPlayer extends AppCompatActivity {
 
         final Intent intent = getIntent(); // 보내온 Intent를 얻는다
         intentId=intent.getIntExtra("id",0);
-
         //System.out.println("OutingPlayer Intent ID : " + intentId);
 
         final ArrayList<String> items = new ArrayList<String>() ;
         // ArrayAdapter 생성. 아이템 View를 선택(multiple choice)가능하도록.
         final ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, items) ;
-        //simple_list_item_multiple_choice
-
         //System.out.println("listview setup start " );
 
         listview = (ListView)findViewById(R.id.goalPlayerList);
@@ -50,13 +47,11 @@ public class OutingPlayer extends AppCompatActivity {
         listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         //System.out.println("listview setup end " );
 
-        // 2017.8.14 // 출전 선수 리스트 (한명 선택 => [+]버튼 => 해당선수 디비 수정, 해당경기 디비 수정, 스코어 비디 수정
         final Cursor cursorList =OutingPlayer.sqLiteHelper.getData("SELECT * FROM list where gameid = "+intentId);
         while(cursorList.moveToNext()) {
             int listid = cursorList.getInt(0);
             int gameid = cursorList.getInt(1);
             int playerid = cursorList.getInt(2);
-
             //System.out.println("Outing playerid = " + playerid);
 
             final Cursor cursorPlayer =OutingPlayer.sqLiteHelper.getData("SELECT * FROM player where id = "+playerid);
@@ -70,7 +65,6 @@ public class OutingPlayer extends AppCompatActivity {
 
                 playerArray.add(new Player(id, name, position, goal, outing));
                 items.add(position + "    " + name);
-
 
             }
         }

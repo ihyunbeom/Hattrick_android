@@ -66,8 +66,6 @@ public class FindFragment extends Fragment {
     ArrayList<String> gungnam =  new ArrayList<String>(Arrays.asList("창원시","진주시","통영시", "사천시","김해시","밀양시", "거제시","양산시","의령군", "함안군","창녕군","고성군", "산청군","함양군","거창군", "남해군","하동군","합천군"));
     ArrayList<String> jeju =  new ArrayList<String>(Arrays.asList("제주시"));
 
-
-
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -200,21 +198,7 @@ public class FindFragment extends Fragment {
             }
         });
 
-        /*
-        Spinner s = (Spinner) findViewById(R.id.spinner1);
-        ArrayList<String> items =  new ArrayList<String>(Arrays.asList("List Item A", "List Item B"));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, items);
-        adapter.add("List Item C");
-        adapter.notifyDataSetChanged();
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        s.setAdapter(adapter);
-        */
-
         btnSearch = (Button) view.findViewById(R.id.btnSearch);
-
-
-
         btnSearch.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
 

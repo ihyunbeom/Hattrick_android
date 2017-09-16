@@ -107,36 +107,6 @@ public class StadiumDetail extends NMapActivity implements NMapView.OnMapStateCh
         mMapView.setOnMapStateChangeListener(this);
         MapContainer.addView(mMapView);
 
-        /*
-        GeoTransPoint in_pt = new GeoTransPoint(mapx, mapy);
-        System.out.println("geo in : xGeo="  + in_pt.getX() + ", yGeo=" + in_pt.getY());
-
-        GeoTransPoint tm_pt = GeoTrans.convert(GeoTrans.GEO, GeoTrans.TM, in_pt);
-        System.out.println("tm : xTM=" + tm_pt.getX() + ", yTM=" + tm_pt.getY());
-
-        GeoTransPoint katec_pt = GeoTrans.convert(GeoTrans.TM, GeoTrans.KATEC, tm_pt);
-        System.out.println("katec : xKATEC=" + katec_pt.getX() + ", yKATEC=" + katec_pt.getY());
-
-        GeoTransPoint out_pt = GeoTrans.convert(GeoTrans.KATEC, GeoTrans.GEO, tm_pt);
-        System.out.println("geo out : xGeo=" + out_pt.getX() + ", yGeo=" + out_pt.getY());
-
-        geox = out_pt.getX();
-        geoy = out_pt.getY();
-        mMapController.setMapCenter(new NGeoPoint(geox, geoy), 11);
-
-        GeoTransPoint in2_pt = new GeoTransPoint(mapx, mapy);
-        System.out.println("geo distance between (127,38) and (128,38) =" + GeoTrans.getDistancebyGeo(in_pt, in2_pt) + "km");
-
-        */
-
-        /*
-        GeoTransPoint   in_pt   = new GeoTransPoint(mapx,mapy);
-        GeoTransPoint tm_pt = GeoTrans.convert(GeoTrans.TM, GeoTrans.GEO, in_pt);
-        geox = tm_pt.getX();
-        geoy = tm_pt.getY();
-        System.out.println("geox = " + geox + " geoy : = " + geoy);
-        */
-
         GeoTransPoint oKA = new GeoTransPoint(mapx,mapy);
         GeoTransPoint oGeo = GeoTrans.convert(GeoTrans.KATEC, GeoTrans.GEO, oKA);
         Double lat = oGeo.getY();

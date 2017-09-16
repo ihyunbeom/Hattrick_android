@@ -126,7 +126,6 @@ public class GameAddingActivity extends AppCompatActivity {
                 notiIconClickIntent.putExtra("fragment", "games");
                 GameAddingActivity.this.startActivity(notiIconClickIntent);
                 overridePendingTransition(0, 0);
-
             }
         }) ;
     }

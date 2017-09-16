@@ -121,7 +121,6 @@ public class PlayerDetailActivity extends AppCompatActivity {
                     txtResult = "미정";
                 }
 
-
                 final Cursor cursorGoals =MainActivity.sqLiteHelper.getData("SELECT * FROM goals where gameid = " +gameid);
                 while(cursorGoals.moveToNext()){
                     int playerid = cursorGoals.getInt(2);
