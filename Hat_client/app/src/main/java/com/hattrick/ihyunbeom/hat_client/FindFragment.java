@@ -237,7 +237,13 @@ public class FindFragment extends Fragment {
 
             for (int i = 0; i < count; i++) {
                 adapter.addItem4(stadArray.get(i).title, stadArray.get(i).telephone, stadArray.get(i).address, stadArray.get(i).roadAddress);
-                //System.out.println(stadArray.get(i).id+stadArray.get(i).title+stadArray.get(i).telephone+stadArray.get(i).address+stadArray.get(i).roadAddress);
+                System.out.println(
+                        "{\nid :    "+stadArray.get(i).id+"\n"+
+                                "title :    "+stadArray.get(i).title+"\n"+
+                                "telephone :    "+stadArray.get(i).telephone+"\n"+
+                                "address1 :     "+stadArray.get(i).address+"\n"+
+                                "address2 :     "+stadArray.get(i).roadAddress+"\n"+
+                                "mapx, mapy :   " + stadArray.get(i).mapx+", "+stadArray.get(i).mapy+ "}\n");
             }
 
             listView.setAdapter(adapter);

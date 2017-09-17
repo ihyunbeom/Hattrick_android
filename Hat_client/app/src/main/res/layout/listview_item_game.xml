@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:text="Date"
                 android:id="@+id/textDate"
-                android:textSize="16dp"
+                android:textSize="14dp"
                 android:textColor="#222222"/>
         </LinearLayout>
 

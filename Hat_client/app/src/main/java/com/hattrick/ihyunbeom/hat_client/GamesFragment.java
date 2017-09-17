@@ -116,7 +116,7 @@ public class GamesFragment extends Fragment {
             int oppscore = cursorGames.getInt(6);
             int result = cursorGames.getInt(7);
 
-            String txtDate = Integer.toString(year) +"년 "+ Integer.toString(month) +"월 "+ Integer.toString(day) +"일";
+            String txtDate = Integer.toString(year) +"/"+ Integer.toString(month) +"/"+ Integer.toString(day) +"";
             String txtResult = "";
 
             scoreGame++;
