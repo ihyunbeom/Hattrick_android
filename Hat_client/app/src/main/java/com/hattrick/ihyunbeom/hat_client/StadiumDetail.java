@@ -111,9 +111,11 @@ public class StadiumDetail extends NMapActivity implements NMapView.OnMapStateCh
         GeoTransPoint oGeo = GeoTrans.convert(GeoTrans.KATEC, GeoTrans.GEO, oKA);
         Double lat = oGeo.getY();
         Double lng = oGeo.getX();
+        /*
         System.out.println(
                 "mapx = " + mapx +"   >>>    "+"LAT = " + lat +"\n"+
                         "mapy = " + mapy +"   >>>    "+"LNG : = " + lng +"\n");
+        */
         mMapController.setMapCenter(new NGeoPoint(lng, lat), 11);
 
     }

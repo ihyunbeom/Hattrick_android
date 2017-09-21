@@ -237,6 +237,7 @@ public class FindFragment extends Fragment {
 
             for (int i = 0; i < count; i++) {
                 adapter.addItem4(stadArray.get(i).title, stadArray.get(i).telephone, stadArray.get(i).address, stadArray.get(i).roadAddress);
+                /*
                 System.out.println(
                         "{\nid :    "+stadArray.get(i).id+"\n"+
                                 "title :    "+stadArray.get(i).title+"\n"+
@@ -244,6 +245,7 @@ public class FindFragment extends Fragment {
                                 "address1 :     "+stadArray.get(i).address+"\n"+
                                 "address2 :     "+stadArray.get(i).roadAddress+"\n"+
                                 "mapx, mapy :   " + stadArray.get(i).mapx+", "+stadArray.get(i).mapy+ "}\n");
+                 */
             }
 
             listView.setAdapter(adapter);
@@ -252,9 +254,11 @@ public class FindFragment extends Fragment {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
 
+                    /*
                     System.out.println(stadArray.get(position).id+stadArray.get(position).title+stadArray.get(position).telephone+stadArray.get(position).address+stadArray.get(position).roadAddress);
                     System.out.println("mapx : " + stadArray.get(position).mapx);
                     System.out.println("mapy : " + stadArray.get(position).mapy);
+                    */
 
                     Intent myIntent =new Intent(getActivity(), StadiumDetail.class);
                     myIntent.putExtra("name", stadArray.get(position).title);
